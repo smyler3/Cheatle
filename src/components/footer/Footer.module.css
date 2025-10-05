@@ -1,0 +1,19 @@
+.footer {
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+
+    border-top: 1px solid black;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 44px;
+    min-height: 44px;
+
+    color: inherit;
+}

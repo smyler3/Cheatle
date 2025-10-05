@@ -1,25 +1,25 @@
-import "./header.css"
+import styles from "./Header.module.css"
 
 const Header = () => {
     return (
         <header
-            className="header"
+            className={styles.header}
         >
             <div
-                className="header-content-container"
+                className={styles.contentContainer}
             >
                 <h1
-                    className="title"
+                    className={styles.title}
                 >
                     Cheatle
                 </h1>
                 <button
-                    className="button"
+                    className={styles.button}
                 >
                     <img
-                        src="/infoIcon"
+                        src="/infoIcon.svg"
                         alt=""
-                        className="icon"
+                        className={styles.icon}
                     />
                 </button>
             </div>

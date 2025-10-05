@@ -1,22 +1,19 @@
-import "./footer.css";
+import styles from "./Footer.module.css";
 
 const Footer = () => {
     return (
         <footer
-            className="footer"
+            className={styles.footer}
         >
-            <div className="footer-content-container">
+            <div className={styles.contentContainer}>
                 <a
-                    href=""
-                    className="link"
+                    href="https://www.talymmyler.com/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    className={styles.link}
                 >
-                    <img
-                        src="/gitHub.svg"
-                        alt=""
-                        className="icon"
-                    />
+                    Talym Myler
                 </a>
-                <p>Talym Myler 2025</p>
             </div>
         </footer>
     )

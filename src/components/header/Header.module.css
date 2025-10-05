@@ -3,7 +3,7 @@
     border-bottom: 1px solid black;
 }
 
-.header-content-container {
+.contentContainer {
     justify-self: center;
     display: flex;
     justify-content: space-between;
@@ -28,4 +28,5 @@
 
 .icon {
     height: 24px;
+    width: 24px;
 }
