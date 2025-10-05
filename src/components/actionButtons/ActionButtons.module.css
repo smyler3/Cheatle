@@ -1,0 +1,30 @@
+
+
+.button {
+    min-width: 44px;
+    min-height: 44px;
+
+    padding: 8px 16px;
+
+    font: inherit;
+
+    border-radius: 100px;
+    border: 1px solid var(--grey-800);
+}
+
+.hintButton {
+    position: relative;
+    composes: button;
+    color: var(--grey-900);
+}
+
+.hintProgressIndicator {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    min-height: 44px;
+
+    border-radius: 100px;
+    background-color: var(--grey-800);
+}

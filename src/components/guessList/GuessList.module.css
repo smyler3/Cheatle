@@ -1,0 +1,41 @@
+.listHeading {
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 1.4rem;
+
+    border-bottom: 1px solid var(--grey-1000);
+}
+
+.wordList {
+    display: flex;
+    flex-direction: column;
+
+    color: var(--grey-900);
+}
+
+.wordList li:nth-child(-n+5) {
+    background-color: var(--blue-100);
+    color: var(--grey-1000);
+}
+
+.guess {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    padding: 4px 12px;
+}
+
+.word {
+    font-family: "Figtree", sans-serif;
+    font-size: 20px;
+}
+
+.star {
+    padding-left: 4px;
+}
+
+.score {
+    font-size: 20px;
+}

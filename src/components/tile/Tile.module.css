@@ -1,0 +1,26 @@
+.tile {
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    background-color: var(--grey-700);
+}
+
+.text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    width: 100%;
+
+    font-family: "Figtree", sans-serif;
+    font-size: 2.4rem;
+}
+
+.value {
+    position: absolute;
+    bottom: 0;
+    right: 8px;
+}
