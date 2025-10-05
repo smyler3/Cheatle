@@ -1,0 +1,31 @@
+.header {
+    padding: 12px 0;
+    border-bottom: 1px solid black;
+}
+
+.header-content-container {
+    justify-self: center;
+    display: flex;
+    justify-content: space-between;
+
+    max-width: 500px;
+    width: 100%;
+    padding: 0 12px;
+}
+
+.title {
+    font-size: 2rem;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 40px;
+    min-height: 40px;
+}
+
+.icon {
+    height: 24px;
+}

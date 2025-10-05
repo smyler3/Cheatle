@@ -1,0 +1,29 @@
+.footer {
+    padding: 12px 0;
+    border-top: 1px solid black;
+}
+
+.footer-content-container {
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    max-width: 500px;
+    width: 100%;
+    padding: 0 12px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.icon {
+  height: 24px;
+  width: 24px;
+}
