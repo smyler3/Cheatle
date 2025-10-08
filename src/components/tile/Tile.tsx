@@ -1,11 +1,23 @@
-import { TILE_VALUE_COLOURS } from "../../constants/dice";
+
+import { TILE_VALUE_COLOURS } from "../../constants/tiles";
 import styles from "./Tile.module.css";
 
-const Tile = ({ key, tile }) => {
+type TileProps = {
+    tile: Tile,
+    position: tileValue,
+    handleClick: (tile: Tile, position: TileValue) => void;
+};
+
+const Tile = ({ 
+    tile, 
+    position, 
+    handleClick
+}: TileProps) => {
     return (
         <span
             className={styles.tile}
             style={{ backgroundColor: TILE_VALUE_COLOURS[tile.value] }}
+            onClick={() => handleClick(tile, position)}
         >
             <div
                 className={styles.text}

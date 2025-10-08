@@ -16,7 +16,7 @@ const GuessList = ({ guesses }) => {
                 {guesses.map((guess, index) => {
                         return (
                             <li 
-                                id={index}
+                                key={index}
                                 className={styles.guess}
                             >
                                 <p
