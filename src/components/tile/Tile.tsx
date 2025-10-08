@@ -1,10 +1,11 @@
+import { TILE_VALUE_COLOURS } from "../../constants/dice";
 import styles from "./Tile.module.css";
 
 const Tile = ({ key, tile }) => {
     return (
         <span
             className={styles.tile}
-            style={{ backgroundColor: 'var(--purple)' }}
+            style={{ backgroundColor: TILE_VALUE_COLOURS[tile.value] }}
         >
             <div
                 className={styles.text}

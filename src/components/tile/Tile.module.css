@@ -4,7 +4,7 @@
     width: 100%;
     aspect-ratio: 1 / 1;
 
-    background-color: var(--grey-700);
+    border: 2px solid var(--grey-1000);
 }
 
 .text {

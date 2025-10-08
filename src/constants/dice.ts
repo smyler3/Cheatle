@@ -1,0 +1,61 @@
+const TILES = {
+    "A": { text: "A", value: 1 },
+    "B": {text: "B", value: 4 },
+    "C": { text: "C", value: 4 },
+    "D": { text: "D", value: 3 },
+    "E": { text: "E", value: 1 },
+    "F": { text: "F", value: 4 },
+    "G": { text: "G", value: 4 },
+    "H": { text: "H", value: 2 },
+    "I": { text: "I", value: 1 },
+    "J": { text: "J", value: 5 },
+    "K": { text: "K", value: 5 },
+    "L": { text: "L", value: 2 },
+    "M": { text: "M", value: 4 },
+    "N": { text: "N", value: 1 },
+    "O": { text: "O", value: 1 },
+    "P": { text: "P", value: 4 },
+    "Qu": { text: "Qu", value: 5 },
+    "R": { text: "R", value: 2 },
+    "S": { text: "S", value: 1 },
+    "T": { text: "T", value: 1 },
+    "U": { text: "U", value: 3 },
+    "V": { text: "V", value: 4 },
+    "W": { text: "W", value: 3 },
+    "X": { text: "X", value: 5 },
+    "Y": { text: "Y", value: 3 },
+    "Z": { text: "Z", value: 5 },
+};
+
+const DICE = [
+    [TILES.A, TILES.A, TILES.E, TILES.E, TILES.G, TILES.N],
+    [TILES.A, TILES.B, TILES.B, TILES.J, TILES.O, TILES.O],
+    [TILES.A, TILES.C, TILES.H, TILES.O, TILES.P, TILES.S],
+    [TILES.A, TILES.F, TILES.F, TILES.K, TILES.P, TILES.S],
+    [TILES.A, TILES.O, TILES.O, TILES.T, TILES.T, TILES.W],
+    [TILES.C, TILES.I, TILES.M, TILES.O, TILES.T, TILES.U],
+    [TILES.D, TILES.E, TILES.I, TILES.L, TILES.R, TILES.X],
+    [TILES.D, TILES.E, TILES.L, TILES.R, TILES.V, TILES.Y],
+    [TILES.D, TILES.I, TILES.S, TILES.T, TILES.T, TILES.Y],
+    [TILES.E, TILES.E, TILES.G, TILES.H, TILES.N, TILES.W],
+    [TILES.E, TILES.E, TILES.I, TILES.N, TILES.S, TILES.U],
+    [TILES.E, TILES.H, TILES.R, TILES.T, TILES.V, TILES.W],
+    [TILES.E, TILES.I, TILES.O, TILES.S, TILES.S, TILES.T],
+    [TILES.E, TILES.L, TILES.R, TILES.T, TILES.T, TILES.Y],
+    [TILES.H, TILES.I, TILES.M, TILES.N, TILES.U, TILES.Qu],
+    [TILES.H, TILES.L, TILES.N, TILES.N, TILES.R, TILES.Z],
+];
+
+const TILE_VALUE_COLOURS = {
+    1: "var(--grey-700)",
+    2: "var(--green)",
+    3: "var(--blue)",
+    4: "var(--purple)",
+    5: "var(--red)",
+}
+
+export {
+    TILES, 
+    DICE,
+    TILE_VALUE_COLOURS,
+};

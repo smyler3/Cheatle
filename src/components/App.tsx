@@ -1,3 +1,4 @@
+import { DICE } from '../constants/dice';
 import ActionButtons from './actionButtons/ActionButtons';
 import './App.css';
 import Clock from './clock/Clock';
@@ -10,25 +11,6 @@ import LiveGuessDisplay from './liveGuessDisplay/LiveGuessDisplay';
 import SubmitButton from './submitButton/SubmitButton';
 import Tile from './tile/Tile';
 
-const TILES = [
-    { text: "F", value: 4 },
-    { text: "F", value: 4 },
-    { text: "F", value: 4 },
-    { text: "F", value: 4 },
-    { text: "F", value: 4 },
-    { text: "F", value: 4 },
-    { text: "F", value: 4 },
-    { text: "F", value: 4 },
-    { text: "F", value: 4 },
-    { text: "F", value: 4 },
-    { text: "F", value: 4 },
-    { text: "F", value: 4 },
-    { text: "F", value: 4 },
-    { text: "F", value: 4 },
-    { text: "F", value: 4 },
-    { text: "F", value: 4 },
-];
-
 const GUESSES = [
     { word: "FFFFF", score: 14 },
     { word: "FFFFF", score: 14 },
@@ -39,14 +21,26 @@ const GUESSES = [
     { word: "FFFFF", score: 14 },
 ];
 
+const extractTilesFromDice = (dice) => {
+    const selected = [];
+
+    for (let i = 0; i < 16; i += 1) {
+        selected[i] = dice[i][0]
+    };
+
+    return selected;
+};
+
 function App() {
+    const diceValues = extractTilesFromDice(DICE);
+
     return (
         <>
             <Header />
             <main>
                 <Clock />
                 <GameBoard>
-                    {TILES.map((tile, index) => {
+                    {diceValues.map((tile, index) => {
                         return (
                             <Tile key={index} tile={tile} />
                         )
