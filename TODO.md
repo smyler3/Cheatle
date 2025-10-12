@@ -1,17 +1,14 @@
-Add logic to collect list of guesses and display them + their scores
-
-combine totalScore and PreviousGuesses together?
-
-use BinaryInsertion to add guesses to the guessesList
-
-rename prevGuesses to correctGuesses
-
+Add hint increment logic
 Make this increment a hint score or have a hint value derived from length of guesses / 10
 
 Add timer logic
 
 Make currentGuess overflow move text to the left
 
+combine totalScore and PreviousGuesses together?
+
 make dice selection actually random
+
+use Game component to run everything else?
 
 add styling to tiles for selected, correct, incorrect, etc

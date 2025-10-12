@@ -12,6 +12,7 @@ import SubmitButton from './submitButton/SubmitButton';
 import Tile from './tile/Tile';
 import DICE from '../constants/dice';
 import ADJACENT_LIST from '../constants/adjacentList';
+import { binaryInsertion } from '../utils/utils';
 
 const extractTilesFromDice = (dice: Tile[][]) => {
     const selected = [];
@@ -32,7 +33,7 @@ type CurrentGuessProps = {
 
 function App() {
     const [totalScore, setTotalScore] = useState(0);
-    const [prevGuesses, setPrevGuesses] = useState<Word[] | []>([]);
+    const [correctGuesses, setcorrectGuesses] = useState<Word[] | []>([]);
     const [currentGuess, setCurrentGuess] = useState<CurrentGuessProps>(
         {
             text: "",
@@ -49,12 +50,12 @@ function App() {
         const currentWord = currentGuess.text;
 
         if (currentGuess.mostRecentTilePosition === position) {
-            const isRepeat = prevGuesses.filter(guess => guess.text === currentWord).length > 0;
+            const isRepeat = correctGuesses.filter(guess => guess.text === currentWord).length > 0;
 
             // Add check that word is valid (probs just look in the array of words)
             
             if (!isRepeat) {
-                setPrevGuesses(prev => [...prev, currentGuess]);
+                setcorrectGuesses(prev => binaryInsertion(currentGuess, prev));
                 setTotalScore(prev => prev + currentGuess.value);
             };
 
@@ -105,7 +106,7 @@ function App() {
                     <SubmitButton />
                 </div>
                 <LiveGuessDisplay guess={currentGuess.text} />
-                <GuessList guesses={prevGuesses} score={totalScore} />
+                <GuessList guesses={correctGuesses} score={totalScore} />
             </main>
             <Footer />
         </>
