@@ -1,6 +1,13 @@
 import styles from "./HintButton.module.css";
 
-const HintButton = () => {
+type HintButtonProps = {
+    points: number,
+};
+
+const POINTS_FOR_HINT = 25;
+
+const HintButton = ({ points }: HintButtonProps) => {
+    const hintsAvailable = Math.floor(points / POINTS_FOR_HINT);
 
     return (
         <button
@@ -15,7 +22,7 @@ const HintButton = () => {
             >
                 +1
             </span>
-            Hint
+            Hint {points} {hintsAvailable}
         </button>
     )
 };

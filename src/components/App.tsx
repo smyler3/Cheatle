@@ -34,6 +34,7 @@ type CurrentGuessProps = {
 function App() {
     const [totalScore, setTotalScore] = useState(0);
     const [correctGuesses, setcorrectGuesses] = useState<Word[] | []>([]);
+    const [hintPoints, setHintPoints] = useState(0);
     const [currentGuess, setCurrentGuess] = useState<CurrentGuessProps>(
         {
             text: "",
@@ -57,6 +58,7 @@ function App() {
             if (!isRepeat) {
                 setcorrectGuesses(prev => binaryInsertion(currentGuess, prev));
                 setTotalScore(prev => prev + currentGuess.value);
+                setHintPoints(prev => prev + currentGuess.text.length);
             };
 
             setCurrentGuess(prev => ({
@@ -102,7 +104,7 @@ function App() {
                 <div
                     className="actionButtons"
                 >
-                    <HintButton />
+                    <HintButton points={hintPoints} />
                     <SubmitButton />
                 </div>
                 <LiveGuessDisplay guess={currentGuess.text} />
