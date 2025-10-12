@@ -1,6 +1,10 @@
 import styles from "./LiveGuessDisplay.module.css";
 
-const LiveGuessDisplay = ({ guess }) => {
+type LiveGuessDisplayProps = {
+    guess: string,
+};
+
+const LiveGuessDisplay = ({ guess }: LiveGuessDisplayProps) => {
     return (
         <div
             className={styles.guess}

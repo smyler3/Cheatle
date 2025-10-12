@@ -1,10 +1,10 @@
-Add ability to submit spelled word
-
-type everything made so far and clean up type declerations
-
 Add logic to collect list of guesses and display them + their scores
 
 combine totalScore and PreviousGuesses together?
+
+use BinaryInsertion to add guesses to the guessesList
+
+rename prevGuesses to correctGuesses
 
 Make this increment a hint score or have a hint value derived from length of guesses / 10
 

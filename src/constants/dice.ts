@@ -1,6 +1,6 @@
 import { TILES } from "./tiles";
 
-const DICE: Tile[] = [
+const DICE: Tile[][] = [
     [TILES.A, TILES.A, TILES.E, TILES.E, TILES.G, TILES.N],
     [TILES.A, TILES.B, TILES.B, TILES.J, TILES.O, TILES.O],
     [TILES.A, TILES.C, TILES.H, TILES.O, TILES.P, TILES.S],

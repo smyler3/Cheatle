@@ -1,6 +1,11 @@
+import type { ReactNode } from "react";
 import styles from "./GameBoard.module.css";
 
-const GameBoard = ({ children }) => {
+type GameBoardProps = {
+    children: ReactNode,
+};
+
+const GameBoard = ({ children }: GameBoardProps) => {
     return (
         <div
             className={styles.board}

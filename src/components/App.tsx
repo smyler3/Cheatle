@@ -13,18 +13,7 @@ import Tile from './tile/Tile';
 import DICE from '../constants/dice';
 import ADJACENT_LIST from '../constants/adjacentList';
 
-
-// const GUESSES = [
-//     { word: "FFFFF", score: 14 },
-//     { word: "FFFFF", score: 14 },
-//     { word: "FFFFF", score: 14 },
-//     { word: "FFFFF", score: 14 },
-//     { word: "FFFFF", score: 14 },
-//     { word: "FFFFF", score: 14 },
-//     { word: "FFFFF", score: 14 },
-// ];
-
-const extractTilesFromDice = (dice) => {
+const extractTilesFromDice = (dice: Tile[][]) => {
     const selected = [];
 
     for (let i = 0; i < 16; i += 1) {
@@ -37,13 +26,13 @@ const extractTilesFromDice = (dice) => {
 type CurrentGuessProps = {
     text: string,
     value: number,
-    mostRecentTilePosition: PositionValue | null;
+    mostRecentTilePosition: number | null;
     prevTilePositions: boolean[];
 };
 
 function App() {
     const [totalScore, setTotalScore] = useState(0);
-    const [prevGuesses, setPrevGuesses] = useState<Tile[] | []>([]);
+    const [prevGuesses, setPrevGuesses] = useState<Word[] | []>([]);
     const [currentGuess, setCurrentGuess] = useState<CurrentGuessProps>(
         {
             text: "",
@@ -54,7 +43,8 @@ function App() {
     );
     const diceValues = extractTilesFromDice(DICE);
 
-    const handleTileClick = (tile: Tile, position: PositionValue) => {
+    const handleTileClick = (tile: Tile, position: number) => {
+        console.log(currentGuess);
         const prevPosition = currentGuess.mostRecentTilePosition;
         const currentWord = currentGuess.text;
 
@@ -64,19 +54,15 @@ function App() {
             // Add check that word is valid (probs just look in the array of words)
             
             if (!isRepeat) {
-                setPrevGuesses(prev => ({
-                    ...prev,
-                    currentWord
-                }));
-
+                setPrevGuesses(prev => [...prev, currentGuess]);
                 setTotalScore(prev => prev + currentGuess.value);
             };
 
             setCurrentGuess(prev => ({
-                ...prev, 
                 text: "",
                 value: 0,
                 mostRecentTilePosition: null, 
+                prevTilePositions: Array(16).fill(false),
             }));
         }
 
@@ -85,17 +71,13 @@ function App() {
             // TODO: Add already selected logic
         }
 
-        else if (prevPosition === null || prevPosition !== null && ADJACENT_LIST[prevPosition].includes(position)) {
-            const newText = currentGuess.text + tile.text;
-            const newValue = currentGuess.value + tile.value;
-            const newPrevTilePositions = {...currentGuess.prevTilePositions, [position]: true};
-
-            setCurrentGuess({
-                text: newText,
-                value: newValue,
+        else if (prevPosition === null || ADJACENT_LIST[prevPosition].includes(position)) {
+            setCurrentGuess(prev => ({
+                text: prev.text + tile.text,
+                value: prev.value + tile.value,
                 mostRecentTilePosition: position,
-                prevTilePositions: newPrevTilePositions,
-            });
+                prevTilePositions: {...prev.prevTilePositions, [position]: true},
+            }));
         }
 
         else {
@@ -123,7 +105,7 @@ function App() {
                     <SubmitButton />
                 </div>
                 <LiveGuessDisplay guess={currentGuess.text} />
-                <GuessList guesses={prevGuesses} />
+                <GuessList guesses={prevGuesses} score={totalScore} />
             </main>
             <Footer />
         </>
