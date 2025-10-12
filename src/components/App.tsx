@@ -34,41 +34,42 @@ const extractTilesFromDice = (dice) => {
     return selected;
 };
 
+type CurrentGuessProps = {
+    text: string,
+    value: number,
+    mostRecentTilePosition: PositionValue | null;
+    prevTilePositions: boolean[];
+};
+
 function App() {
-    const [currentGuess, setCurrentGuess] = useState(
+    const [currentGuess, setCurrentGuess] = useState<CurrentGuessProps>(
         {
             text: "",
             value: 0,
             mostRecentTilePosition: null,
-            prevTilePositions: [],
+            prevTilePositions: Array(16).fill(false),
         }
     );
     const diceValues = extractTilesFromDice(DICE);
 
-    const handleTileClick = (tile, position) => {
+    const handleTileClick = (tile: Tile, position: PositionValue) => {
         const prevPosition = currentGuess.mostRecentTilePosition;
-
-        console.log("prev", currentGuess, prevPosition);
-        // console.log(currentGuess.prevTilePositions);
+        console.log(currentGuess.prevTilePositions);
 
         if (currentGuess.mostRecentTilePosition === position) {
             console.log("submit");
             // TODO: Add submit logic
         }
 
-        else if (currentGuess.prevTilePositions.includes(position)) {
+        else if (currentGuess.prevTilePositions[position] === true) {
             console.log("already selected");
             // TODO: Add already selected logic
         }
 
-        // {ADJACENT_LIST}
-        // console.log("looking", ADJACENT_LIST[prevPosition]);
-
         else if (prevPosition === null || prevPosition !== null && ADJACENT_LIST[prevPosition].includes(position)) {
             const newText = currentGuess.text + tile.text;
             const newValue = currentGuess.value + tile.value;
-            const newPrevTilePositions = [...currentGuess.prevTilePositions, position];
-            console.log("adding", newPrevTilePositions);
+            const newPrevTilePositions = {...currentGuess.prevTilePositions, [position]: true};
 
             setCurrentGuess({
                 text: newText,

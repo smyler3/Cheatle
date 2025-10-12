@@ -4,8 +4,8 @@ import styles from "./Tile.module.css";
 
 type TileProps = {
     tile: Tile,
-    position: tileValue,
-    handleClick: (tile: Tile, position: TileValue) => void;
+    position: PositionValue,
+    handleClick: (tile: Tile, position: PositionValue) => void;
 };
 
 const Tile = ({ 

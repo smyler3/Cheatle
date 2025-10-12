@@ -1,7 +1,3 @@
-global types are broken
-
-split previousPositions and currentGuess logic in two?
-clean up update code
 Add ability to submit spelled word
 
 type everything made so far
