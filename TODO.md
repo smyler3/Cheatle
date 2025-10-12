@@ -1,10 +1,11 @@
 Add ability to submit spelled word
 
-type everything made so far
-
+type everything made so far and clean up type declerations
 
 Add logic to collect list of guesses and display them + their scores
-Prevent duplicates
+
+combine totalScore and PreviousGuesses together?
+
 Make this increment a hint score or have a hint value derived from length of guesses / 10
 
 Add timer logic

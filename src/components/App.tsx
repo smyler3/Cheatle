@@ -14,15 +14,15 @@ import DICE from '../constants/dice';
 import ADJACENT_LIST from '../constants/adjacentList';
 
 
-const GUESSES = [
-    { word: "FFFFF", score: 14 },
-    { word: "FFFFF", score: 14 },
-    { word: "FFFFF", score: 14 },
-    { word: "FFFFF", score: 14 },
-    { word: "FFFFF", score: 14 },
-    { word: "FFFFF", score: 14 },
-    { word: "FFFFF", score: 14 },
-];
+// const GUESSES = [
+//     { word: "FFFFF", score: 14 },
+//     { word: "FFFFF", score: 14 },
+//     { word: "FFFFF", score: 14 },
+//     { word: "FFFFF", score: 14 },
+//     { word: "FFFFF", score: 14 },
+//     { word: "FFFFF", score: 14 },
+//     { word: "FFFFF", score: 14 },
+// ];
 
 const extractTilesFromDice = (dice) => {
     const selected = [];
@@ -42,6 +42,8 @@ type CurrentGuessProps = {
 };
 
 function App() {
+    const [totalScore, setTotalScore] = useState(0);
+    const [prevGuesses, setPrevGuesses] = useState<Tile[] | []>([]);
     const [currentGuess, setCurrentGuess] = useState<CurrentGuessProps>(
         {
             text: "",
@@ -54,11 +56,28 @@ function App() {
 
     const handleTileClick = (tile: Tile, position: PositionValue) => {
         const prevPosition = currentGuess.mostRecentTilePosition;
-        console.log(currentGuess.prevTilePositions);
+        const currentWord = currentGuess.text;
 
         if (currentGuess.mostRecentTilePosition === position) {
-            console.log("submit");
-            // TODO: Add submit logic
+            const isRepeat = prevGuesses.filter(guess => guess.text === currentWord).length > 0;
+
+            // Add check that word is valid (probs just look in the array of words)
+            
+            if (!isRepeat) {
+                setPrevGuesses(prev => ({
+                    ...prev,
+                    currentWord
+                }));
+
+                setTotalScore(prev => prev + currentGuess.value);
+            };
+
+            setCurrentGuess(prev => ({
+                ...prev, 
+                text: "",
+                value: 0,
+                mostRecentTilePosition: null, 
+            }));
         }
 
         else if (currentGuess.prevTilePositions[position] === true) {
@@ -104,7 +123,7 @@ function App() {
                     <SubmitButton />
                 </div>
                 <LiveGuessDisplay guess={currentGuess.text} />
-                <GuessList guesses={GUESSES} />
+                <GuessList guesses={prevGuesses} />
             </main>
             <Footer />
         </>
