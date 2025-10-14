@@ -101,12 +101,10 @@ function App() {
                         )
                     })}
                 </GameBoard>
-                <div
-                    className="actionButtons"
-                >
+                <ActionButtons>
                     <HintButton points={hintPoints} />
                     <SubmitButton />
-                </div>
+                </ActionButtons>
                 <LiveGuessDisplay guess={currentGuess.text} />
                 <GuessList guesses={correctGuesses} score={totalScore} />
             </main>

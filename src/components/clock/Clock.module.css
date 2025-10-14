@@ -3,3 +3,11 @@
 
     font-size: 2rem;
 }
+
+.lastThreeMinutes {
+    color: orange;
+}
+
+.lastMinute {
+    color: red;
+}

@@ -5,9 +5,3 @@ main {
 
     padding: 12px 12px 48px;
 }
-
-.actionButtons {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 12px;
-}
