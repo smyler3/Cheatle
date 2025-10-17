@@ -1,5 +1,3 @@
-rename clock to countdownCLock or timer?
-
 create the trie tree
 add the dictionary data
 

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import ActionButtons from './actionButtons/ActionButtons';
 import './App.css';
-import Clock from './clock/Clock';
 import Footer from './footer/Footer';
 import GameBoard from './gameBoard/GameBoard';
 import GuessList from './guessList/GuessList';
@@ -13,6 +12,7 @@ import Tile from './tile/Tile';
 import DICE from '../constants/dice';
 import ADJACENT_LIST from '../constants/adjacentList';
 import { binaryInsertion } from '../utils/utils';
+import CountdownClock from './countdownClock/CountdownClock';
 
 const extractTilesFromDice = (dice: Tile[][]) => {
     const selected = [];
@@ -94,7 +94,7 @@ function App() {
             <Header />
             <main>
                 <div className="contentContainer">
-                    <Clock />
+                    <CountdownClock />
                     <GameBoard>
                         {diceValues.map((tile, index) => {
                             return (
