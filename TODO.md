@@ -1,6 +1,7 @@
-Make currentGuess overflow scroll x and move text to the left
-
 rename clock to countdownCLock or timer?
+
+create the trie tree
+add the dictionary data
 
 combine totalScore and PreviousGuesses together?
 
@@ -18,3 +19,7 @@ add styling to tiles for selected, correct, incorrect, etc
 extrapolate timer logic into hook? 
 
 extrapolate hint system logic into hook?
+
+have fonts locally
+
+change font size on smaller screens

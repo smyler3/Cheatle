@@ -93,20 +93,22 @@ function App() {
         <>
             <Header />
             <main>
-                <Clock />
-                <GameBoard>
-                    {diceValues.map((tile, index) => {
-                        return (
-                            <Tile key={index} tile={tile} position={index} handleClick={handleTileClick} />
-                        )
-                    })}
-                </GameBoard>
-                <ActionButtons>
-                    <HintButton points={hintPoints} />
-                    <SubmitButton />
-                </ActionButtons>
-                <LiveGuessDisplay guess={currentGuess.text} />
-                <GuessList guesses={correctGuesses} score={totalScore} />
+                <div className="contentContainer">
+                    <Clock />
+                    <GameBoard>
+                        {diceValues.map((tile, index) => {
+                            return (
+                                <Tile key={index} tile={tile} position={index} handleClick={handleTileClick} />
+                            )
+                        })}
+                    </GameBoard>
+                    <ActionButtons>
+                        <HintButton points={hintPoints} />
+                        <SubmitButton />
+                    </ActionButtons>
+                    <LiveGuessDisplay guess={currentGuess.text} />
+                    <GuessList guesses={correctGuesses} score={totalScore} />
+                </div>
             </main>
             <Footer />
         </>
