@@ -1,5 +1,4 @@
-create the trie tree
-add the dictionary data
+create the trie tree to find all words in the game
 
 combine totalScore and PreviousGuesses together?
 

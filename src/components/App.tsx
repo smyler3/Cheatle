@@ -13,6 +13,7 @@ import DICE from '../constants/dice';
 import ADJACENT_LIST from '../constants/adjacentList';
 import { binaryInsertion } from '../utils/utils';
 import CountdownClock from './countdownClock/CountdownClock';
+import { VALID_WORD_DICTIONARY } from '../data/dictionary';
 
 const extractTilesFromDice = (dice: Tile[][]) => {
     const selected = [];
@@ -52,21 +53,20 @@ function App() {
 
         if (currentGuess.mostRecentTilePosition === position) {
             const isRepeat = correctGuesses.filter(guess => guess.text === currentWord).length > 0;
-
-            // Add check that word is valid (probs just look in the array of words)
+            const isValid = VALID_WORD_DICTIONARY.some(word => word === currentWord);
             
-            if (!isRepeat) {
+            if (!isRepeat && isValid) {
                 setcorrectGuesses(prev => binaryInsertion(currentGuess, prev));
                 setTotalScore(prev => prev + currentGuess.value);
                 setHintPoints(prev => prev + currentGuess.text.length);
             };
 
-            setCurrentGuess(prev => ({
+            setCurrentGuess({
                 text: "",
                 value: 0,
                 mostRecentTilePosition: null, 
                 prevTilePositions: Array(16).fill(false),
-            }));
+            });
         }
 
         else if (currentGuess.prevTilePositions[position] === true) {
