@@ -1,3 +1,8 @@
+Split repo into frontend and server
+
+Clean trie tree up: magic numbers, function names, private functions, logic
+Create Game class: stores trie tree, rolls dice, getsListOfValidWords and ranks them
+
 create the trie tree to find all words in the game
 
 combine totalScore and PreviousGuesses together?
@@ -20,3 +25,5 @@ extrapolate hint system logic into hook?
 have fonts locally
 
 change font size on smaller screens
+
+use child processes to run python scripts too?
