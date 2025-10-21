@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./CountdownClock.module.css";
-import { FINAL_CLOCK_WARNING_THRESHOLD, INITIAL_CLOCK_WARNING_THRESHOLD, MINUTES_IN_A_GAME, SECONDS_IN_A_MINUTE } from "../../constants/clock";
+import { FINAL_CLOCK_WARNING_THRESHOLD, INITIAL_CLOCK_WARNING_THRESHOLD, MINUTES_IN_A_GAME, SECONDS_IN_A_MINUTE } from "../../../../../shared/clock";
 
 const CountdownClock = () => {
     const [timeRemaining, setTimeRemaining] = useState(SECONDS_IN_A_MINUTE * MINUTES_IN_A_GAME);

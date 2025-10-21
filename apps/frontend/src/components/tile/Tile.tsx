@@ -1,5 +1,5 @@
 
-import { TILE_VALUE_COLOURS } from "../../constants/tiles";
+import { TILE_VALUE_COLOURS } from "../../../../../shared/tiles";
 import styles from "./Tile.module.css";
 
 type TileProps = {

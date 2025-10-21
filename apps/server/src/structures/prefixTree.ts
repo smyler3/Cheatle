@@ -1,8 +1,8 @@
-import ADJACENT_LIST from "../constants/adjacentList.ts";
-import { NUMBER_OF_DICE } from "../constants/constants.ts";
-import DICE from "../constants/dice.ts";
-import { TILES } from "../constants/tiles.ts";
-import { VALID_WORD_DICTIONARY } from "../data/dictionary.ts";
+import ADJACENT_LIST from "@shared/adjacentList.ts";
+import { NUMBER_OF_DICE } from "@shared/constants.ts";
+import DICE from "@shared/dice.ts";
+import { TILES } from "@shared/tiles.ts";
+import { VALID_WORD_DICTIONARY } from "../data/dictionary";
 
 class PrefixTreeNode {
     isTerminal: boolean;

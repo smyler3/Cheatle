@@ -9,11 +9,12 @@ import HintButton from './hintButton/HintButton';
 import LiveGuessDisplay from './liveGuessDisplay/LiveGuessDisplay';
 import SubmitButton from './submitButton/SubmitButton';
 import Tile from './tile/Tile';
-import DICE from '../constants/dice';
-import ADJACENT_LIST from '../constants/adjacentList';
+import DICE from '../../../../shared/dice';
+import ADJACENT_LIST from '../../../../shared/adjacentList';
 import { binaryInsertion } from '../utils/utils';
 import CountdownClock from './countdownClock/CountdownClock';
-import { VALID_WORD_DICTIONARY } from '../data/dictionary';
+
+const VALID_WORD_DICTIONARY: string[] = [];
 
 const extractTilesFromDice = (dice: Tile[][]) => {
     const selected = [];
