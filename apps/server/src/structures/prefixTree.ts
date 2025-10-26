@@ -1,8 +1,5 @@
-import ADJACENT_LIST from "@shared/adjacentList.ts";
-import { NUMBER_OF_DICE } from "@shared/constants.ts";
-import DICE from "@shared/dice.ts";
-import { TILES } from "@shared/tiles.ts";
-import { VALID_WORD_DICTIONARY } from "../data/dictionary";
+import { TILES, NUMBER_OF_DICE, ADJACENT_LIST } from "@shared/constants";
+import { Tile, Word } from "@shared/types";
 
 class PrefixTreeNode {
     isTerminal: boolean;
@@ -14,7 +11,7 @@ class PrefixTreeNode {
     }
 }
 
-class PrefixTree {
+export class PrefixTree {
     root: PrefixTreeNode;
 
     constructor() {
@@ -38,40 +35,51 @@ class PrefixTree {
         parent.isTerminal = true;
     };
 
-    getCharacterIndex(character: string) {
+    getCharacterIndex(character: string): number {
         return character.charCodeAt(0) - 'A'.charCodeAt(0);
     };
 
-    depthFirstSearch(node, boggleBoard, visited, tileIndex, runningWord, wordsList) {
+    depthFirstSearch(
+        node: PrefixTreeNode, 
+        board: Tile[], 
+        visited: boolean[], 
+        tileIndex: number, 
+        runningWord: Word,
+        wordsList: Set<Word>,
+    ) {
         visited[tileIndex] = true;
-        const char = boggleBoard[tileIndex];
-        const nextNode = node.children[this.getCharacterIndex(char)];
+
+        const { text, value } = board[tileIndex];
+        const charIndex = this.getCharacterIndex(text);
+        const nextNode = node.children[charIndex];
+
         if (!nextNode) return;
 
-        const { text, value } = TILES[char];
+        // Add text and value to running word
         const newWord = { text: runningWord.text + text, value: runningWord.value + value };
 
         if (nextNode.isTerminal) {
-            wordsList.add(newWord.text);
+            wordsList.add(newWord);
         }
 
         for (const neighbour of ADJACENT_LIST[tileIndex]) {
             if (!visited[neighbour]) {
-                this.depthFirstSearch(nextNode, boggleBoard, [...visited], neighbour, newWord, wordsList);
+                this.depthFirstSearch(nextNode, board, [...visited], neighbour, newWord, wordsList);
             }
         }
     }
 
-    findValidWords(boggleBoard) {
-        const wordsList = new Set();
+    findValidWords(board: Tile[]): Word[] {
+        const wordsList = new Set<Word>();
 
         for (let i = 0; i < NUMBER_OF_DICE; i++) {
-            const char = boggleBoard[i];
-            const childNode = this.root.children[this.getCharacterIndex(char)];
+            const char = board[i];
+            const charIndex = this.getCharacterIndex(char.text);
+            const childNode = this.root.children[charIndex];
             if (childNode) {
                 const runningWord = { text: "", value: 0 };
                 const visited = new Array(NUMBER_OF_DICE).fill(false);
-                this.depthFirstSearch(this.root, boggleBoard, visited, i, runningWord, wordsList);
+                this.depthFirstSearch(this.root, board, visited, i, runningWord, wordsList);
             }
         }
 
@@ -103,22 +111,22 @@ class PrefixTree {
     //         if (visited[tile] === false) {
     //             return;
     //         }
-    //         const neighbourTileIndex = this.getCharacterIndex(boggleBoard[tile]);
+    //         const neighbourTileIndex = this.getCharacterIndex(board[tile]);
     //         this.depthFirstSearch(node[])
     //     })
     // }
 
-    // findValidWords(boggleBoard) {
+    // findValidWords(board) {
     //     const wordsList  = new Set();
     //     const visited = new Array(NUMBER_OF_DICE).fill(false);
     //     let parent = this.root;
     //     let string = "";
 
     //     for (let i = 0; i < NUMBER_OF_DICE; i += 1) {
-    //         const chararacterIndex = this.getCharacterIndex(boggleBoard[i]);
+    //         const chararacterIndex = this.getCharacterIndex(board[i]);
 
     //         if (parent.children[chararacterIndex] !== null) {
-    //             string += boggleBoard[i];
+    //             string += board[i];
     //             // searchWord(pChild.Child[(boggle[i][j]).charCodeAt(0) - 'A'.charCodeAt(0)],
     //             //             boggle, i, j, visited, str);
     //             // str = "";
@@ -126,29 +134,3 @@ class PrefixTree {
     //     }
     // }
 };
-
-const extractTilesFromDice = (dice: Tile[][]) => {
-    const selected = [];
-
-    for (let i = 0; i < 16; i += 1) {
-        selected[i] = dice[i][0]
-    };
-
-    return selected;
-};
-
-const boggleBoard = extractTilesFromDice(DICE);
-
-const tree = new PrefixTree();
-
-for (let i = 0; i < 10; i += 1) {
-    tree.insertString(VALID_WORD_DICTIONARY[i]);
-};
-
-const validWords = tree.findValidWords(boggleBoard);
-
-console.log(validWords)
-
-// console.log(tree.root.children[0]?.children);
-// console.log(tree.root.children[0]?.children[0]?.children);
-// console.log(tree.root.children[0].children[0].children[7]);

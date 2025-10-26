@@ -1,0 +1,21 @@
+{
+  "name": "cheatle-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "shared"
+  ],
+  "scripts": {
+    "build": "tsc --build",
+    "build:server": "tsc --build shared && tsc --build apps/server",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:frontend\""
+  },
+  "devDependencies": {
+    "typescript": "^5.1.6",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "concurrently": "^8.2.0"
+  }
+}

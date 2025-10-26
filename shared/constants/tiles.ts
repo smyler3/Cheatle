@@ -1,4 +1,6 @@
-const TILES: Record<string, Tile> = {
+import { Tile } from "../types";
+
+export const TILES: Record<string, Tile> = {
     "A": { text: "A", value: 1 },
     "B": { text: "B", value: 4 },
     "C": { text: "C", value: 4 },
@@ -27,15 +29,10 @@ const TILES: Record<string, Tile> = {
     "Z": { text: "Z", value: 5 },
 };
 
-const TILE_VALUE_COLOURS: Record<number, string> = {
+export const TILE_VALUE_COLOURS: Record<number, string> = {
     1: "var(--grey-700)",
     2: "var(--green)",
     3: "var(--blue)",
     4: "var(--purple)",
     5: "var(--red)",
-};
-
-export {
-    TILES,
-    TILE_VALUE_COLOURS,
 };

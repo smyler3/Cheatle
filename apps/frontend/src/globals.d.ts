@@ -1,15 +1,9 @@
+import * as sharedTypes from "../shared/types";
+
 export {};
 
 declare global {
-    type TileValue = 1 | 2 | 3 | 4 | 5;
-
-    type Tile = {
-        text: string,
-        value: tileValue,
-    }
-
-    type Word = {
-        text: string,
-        value: number,
-    }
-}
+  type TileValue = sharedTypes.TileValue
+  type Tile = sharedTypes.Tile;
+  type Word = sharedTypes.Word;
+};

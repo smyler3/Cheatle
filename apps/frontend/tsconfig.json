@@ -29,5 +29,8 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "../../shared/adjacentList.ts", "../../shared/clock.ts", "../../shared/constants.ts", "../../shared/dice.ts", "../../shared/tiles.ts"]
+  "references": [
+    { "path": "../../shared" }
+  ],
+  "include": ["src"]
 }
