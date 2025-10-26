@@ -35,17 +35,17 @@ export class PrefixTree {
         parent.isTerminal = true;
     };
 
-    getCharacterIndex(character: string): number {
+    private getCharacterIndex(character: string): number {
         return character.charCodeAt(0) - 'A'.charCodeAt(0);
     };
 
-    depthFirstSearch(
+    private depthFirstSearch(
         node: PrefixTreeNode, 
         board: Tile[], 
         visited: boolean[], 
         tileIndex: number, 
         runningWord: Word,
-        wordsList: Set<Word>,
+        wordsList: Map<string, number>,
     ) {
         visited[tileIndex] = true;
 
@@ -59,7 +59,7 @@ export class PrefixTree {
         const newWord = { text: runningWord.text + text, value: runningWord.value + value };
 
         if (nextNode.isTerminal) {
-            wordsList.add(newWord);
+            wordsList.set(newWord.text, newWord.value);
         }
 
         for (const neighbour of ADJACENT_LIST[tileIndex]) {
@@ -70,7 +70,7 @@ export class PrefixTree {
     }
 
     findValidWords(board: Tile[]): Word[] {
-        const wordsList = new Set<Word>();
+        const wordsList = new Map<string, number>();
 
         for (let i = 0; i < NUMBER_OF_DICE; i++) {
             const char = board[i];
@@ -83,54 +83,6 @@ export class PrefixTree {
             }
         }
 
-        return [...wordsList];
+        return Array.from(wordsList, ([key, value]) => ({ text: key, value: value }));
     }
-
-    
-    // depthFirstSearch(node, visited, tileIndex, characterIndex, runningWord, wordsList) {
-    //     // Add current node to visited array
-    //     visited[tileIndex] = true;
-
-    //     // Add char to string and score value
-    //     const tileLetter = 'A'.charCodeAt(0) + characterIndex;
-    //     const { text, value } = TILES[tileLetter];
-
-    //     runningWord.text += text;
-    //     runningWord.value += value;
-
-    //     // if isTerminal, binary insert into Set/Dict etc
-    //     if (node.isTerminal) {
-    //         wordsList.insert(runningWord);
-    //     }
-
-    //     // get all neighbours
-    //     const neighbourTiles = ADJACENT_LIST[tileIndex];
-
-    //     // for each neighbour, recurrsively call dfs on neighbours
-    //     neighbourTiles.forEach(tile => {
-    //         if (visited[tile] === false) {
-    //             return;
-    //         }
-    //         const neighbourTileIndex = this.getCharacterIndex(board[tile]);
-    //         this.depthFirstSearch(node[])
-    //     })
-    // }
-
-    // findValidWords(board) {
-    //     const wordsList  = new Set();
-    //     const visited = new Array(NUMBER_OF_DICE).fill(false);
-    //     let parent = this.root;
-    //     let string = "";
-
-    //     for (let i = 0; i < NUMBER_OF_DICE; i += 1) {
-    //         const chararacterIndex = this.getCharacterIndex(board[i]);
-
-    //         if (parent.children[chararacterIndex] !== null) {
-    //             string += board[i];
-    //             // searchWord(pChild.Child[(boggle[i][j]).charCodeAt(0) - 'A'.charCodeAt(0)],
-    //             //             boggle, i, j, visited, str);
-    //             // str = "";
-    //         }
-    //     }
-    // }
 };

@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test:Game": "npx ts-node --project tsconfig.json -r tsconfig-paths/register src/structures/Game.ts"
+    "test:game": "npx ts-node --project tsconfig.json -r tsconfig-paths/register src/structures/Game.ts"
   },
   "author": "smyler3",
   "license": "ISC",
