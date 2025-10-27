@@ -1,4 +1,4 @@
-import { TILES, NUMBER_OF_DICE, ADJACENT_LIST } from "@shared/constants";
+import { NUMBER_OF_DICE, ADJACENT_LIST, NUMBER_OF_UNIQUE_TILES } from "@shared/constants";
 import { Tile, Word } from "@shared/types";
 
 class PrefixTreeNode {
@@ -7,7 +7,7 @@ class PrefixTreeNode {
 
     constructor() {
         this.isTerminal = false;
-        this.children = new Array(26).fill(null); 
+        this.children = new Array(NUMBER_OF_UNIQUE_TILES).fill(null); 
     }
 }
 

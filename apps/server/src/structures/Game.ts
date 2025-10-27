@@ -5,76 +5,79 @@ import { Tile, Word } from "@shared/types";
 
 export class Game {
     board: Tile[];
-    tree: PrefixTree;
+    private tree: PrefixTree;
     validWords: Word[];
-    bestWords: Word[];
+    highestScoringWords: Word[];
 
     constructor() {
-        this.board = this.rollDice();
+        this.board = this.createRandomBoard();
         this.tree = new PrefixTree();
         VALID_WORD_DICTIONARY.forEach(word => this.tree.insertString(word));
         this.validWords = this.tree.findValidWords(this.board);
-        this.bestWords = this.findBestWords();
+        this.highestScoringWords = this.findBestWords();
     }
 
-    private rollDice(): Tile[] {
+    private createRandomBoard(): Tile[] {
         // TODO: Add dice rolling logic
         const rolledDice = DICE;
-        const selected = [];
+        const board = [];
     
         // TODO: Add dice rolling logic
         for (let i = 0; i < NUMBER_OF_DICE; i += 1) {
-            selected[i] = rolledDice[i][0]
+            board[i] = rolledDice[i][0]
         };
     
-        return selected;
+        return board;
     };
 
     // TODO: write own quickSelect and compare to heap as potentially much better
     private findBestWords(): Word[] {
-        function quickSelectByIndex(arr: Word[], k: number): number {
-            let left = 0, right = arr.length - 1;
+        function quickSelectByIndex(words: Word[], k: number): number {
+            let left = 0
+            let right = words.length - 1;
+
             while (true) {
-                if (left === right) return arr[left].value;
+                if (left === right) {
+                    return words[left].value;
+                }
 
                 const pivotIndex = left + Math.floor(Math.random() * (right - left + 1));
-                const pivot = arr[pivotIndex].value;
+                const pivot = words[pivotIndex].value;
 
-                [arr[pivotIndex], arr[right]] = [arr[right], arr[pivotIndex]];
+                [words[pivotIndex], words[right]] = [words[right], words[pivotIndex]];
 
                 let storeIndex = left;
-                for (let i = left; i < right; i++) {
-                if (arr[i].value > pivot) { // descending order
-                    [arr[storeIndex], arr[i]] = [arr[i], arr[storeIndex]];
-                    storeIndex++;
-                }
-                }
-                [arr[storeIndex], arr[right]] = [arr[right], arr[storeIndex]];
 
-                if (storeIndex === k) return arr[storeIndex].value;
-                else if (storeIndex > k) right = storeIndex - 1;
-                else left = storeIndex + 1;
+                for (let i = left; i < right; i += 1) {
+                    if (words[i].value > pivot) { // descending order
+                        [words[storeIndex], words[i]] = [words[i], words[storeIndex]];
+                        storeIndex++;
+                    }
+                }
+                [words[storeIndex], words[right]] = [words[right], words[storeIndex]];
+
+                if (storeIndex === k) {
+                    return words[storeIndex].value;
+                }
+                else if (storeIndex > k) {
+                    right = storeIndex - 1;
+                } 
+                else {
+                    left = storeIndex + 1;
+                } 
             }
         }
 
-        // use quickselect to find equal 5th highest score
         const fifthLargestScore = quickSelectByIndex(this.validWords, REQUIRED_TOP_WORDS);
+        const highestScoringWords = this.validWords.filter((word) => word.value >= fifthLargestScore);
+        const sortedHighestScoringWords = highestScoringWords.sort((a, b) => b.value - a.value);
 
-        // Then do a single pass to get all words 5th or highest
-        const bestWords = this.validWords.filter((word) => word.value >= fifthLargestScore);
-
-        // Then sort them
-        const sortedBestWords = bestWords.sort((a, b) => {
-            return b.value - a.value;
-        });
-
-        return sortedBestWords;
+        return sortedHighestScoringWords;
     }
 };
-// Write logic to list all valid words on the given board
 
 const chealte = new Game();
 
 console.log(chealte.validWords);
 console.log("---------------------------------");
-console.log(chealte.bestWords);
+console.log(chealte.highestScoringWords);

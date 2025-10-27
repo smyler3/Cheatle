@@ -29,6 +29,8 @@ export const TILES: Record<string, Tile> = {
     "Z": { text: "Z", value: 5 },
 };
 
+export const NUMBER_OF_UNIQUE_TILES: number = 26;
+
 export const TILE_VALUE_COLOURS: Record<number, string> = {
     1: "var(--grey-700)",
     2: "var(--green)",
