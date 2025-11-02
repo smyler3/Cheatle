@@ -1,11 +1,12 @@
 
-import { TILE_VALUE_COLOURS } from "../../../../../shared/constants/tiles";
+import { TILE_VALUE_COLOURS } from "../../constants";
+import type { TileType } from "../../types/types";
 import styles from "./Tile.module.css";
 
 type TileProps = {
-    tile: Tile,
+    tile: TileType,
     position: number,
-    handleClick: (tile: Tile, position: number) => void;
+    handleClick: (tile: TileType, position: number) => void;
 };
 
 const Tile = ({ 

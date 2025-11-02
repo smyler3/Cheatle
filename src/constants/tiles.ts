@@ -1,6 +1,6 @@
-import { Tile } from "../types";
+import type { TileType } from "../types/types";
 
-export const TILES: Record<string, Tile> = {
+export const TILES: Record<string, TileType> = {
     "A": { text: "A", value: 1 },
     "B": { text: "B", value: 4 },
     "C": { text: "C", value: 4 },

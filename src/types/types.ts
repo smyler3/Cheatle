@@ -1,6 +1,6 @@
 export type TileValue = 1 | 2 | 3 | 4 | 5;
 
-export type Tile = {
+export type TileType = {
     text: string,
     value: TileValue,
 }

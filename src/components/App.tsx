@@ -8,14 +8,15 @@ import Header from './header/Header';
 import HintButton from './hintButton/HintButton';
 import LiveGuessDisplay from './liveGuessDisplay/LiveGuessDisplay';
 import SubmitButton from './submitButton/SubmitButton';
-import Tile from './tile/Tile';
 import { binaryInsertion } from '../utils/utils';
 import CountdownClock from './countdownClock/CountdownClock';
-import { ADJACENT_LIST, DICE } from '@shared/constants';
+import { ADJACENT_LIST, DICE } from '../constants';
+import Tile from './tile/Tile';
+import type { Word, TileType } from '../types/types';
 
 const VALID_WORD_DICTIONARY: string[] = [];
 
-const extractTilesFromDice = (dice: Tile[][]) => {
+const extractTilesFromDice = (dice: TileType[][]) => {
     const selected = [];
 
     for (let i = 0; i < 16; i += 1) {
@@ -46,7 +47,7 @@ function App() {
     );
     const diceValues = extractTilesFromDice(DICE);
 
-    const handleTileClick = (tile: Tile, position: number) => {
+    const handleTileClick = (tile: TileType, position: number) => {
         console.log(currentGuess);
         const prevPosition = currentGuess.mostRecentTilePosition;
         const currentWord = currentGuess.text;

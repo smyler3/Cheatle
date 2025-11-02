@@ -1,7 +1,7 @@
+import type { TileType } from "../types/types";
 import { TILES } from "./tiles";
-import { Tile } from "../types";
 
-export const DICE: Tile[][] = [
+export const DICE: TileType[][] = [
     [TILES.A, TILES.A, TILES.E, TILES.E, TILES.G, TILES.N],
     [TILES.A, TILES.B, TILES.B, TILES.J, TILES.O, TILES.O],
     [TILES.A, TILES.C, TILES.H, TILES.O, TILES.P, TILES.S],
