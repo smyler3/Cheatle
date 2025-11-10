@@ -1,4 +1,4 @@
-import type { TileType, Word } from "../schema/chealteData";
+import type { Word } from "../schema/CheatleSchema";
 
 export const binaryInsertion = (elem: Word, array: Word[]): Word[] => {
     let left = 0, right = array.length;

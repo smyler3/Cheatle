@@ -1,3 +1,4 @@
+import type { Word } from "../../schema/CheatleSchema";
 import styles from "./GuessList.module.css";
 
 type GuessListProps = {

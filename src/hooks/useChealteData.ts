@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { CheatleResponseSchema, type CheatleResponse } from "../schema/chealteData";
+import { CheatleResponseSchema, type CheatleResponse } from "../schema/CheatleSchema";
 
 const fetchCheatleData = async (): Promise<CheatleResponse> => {
     const response = await fetch("/cheatle-api");

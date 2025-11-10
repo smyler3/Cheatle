@@ -1,6 +1,6 @@
 
 import { TILE_VALUE_COLOURS } from "../../constants";
-import type { TileType } from "../../types/types";
+import type { TileType } from "../../schema/CheatleSchema";
 import styles from "./Tile.module.css";
 
 type TileProps = {

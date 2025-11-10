@@ -1,4 +1,4 @@
-import type { TileType } from "../types/types";
+import type { TileType } from "../schema/CheatleSchema";
 
 export const TILES: Record<string, TileType> = {
     "A": { text: "A", value: 1 },

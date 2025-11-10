@@ -1,11 +1,11 @@
 Make tanStack call to backend for data
-- Update all types to use the schema instead
-- Rename the schema file based on best-practices
+
 - Get up running and check it fetches all correctly
 
 create skeleton loader while waiting for request?
 
 Clean up the gameBody function
+
 - Create a context provider to pass all globally needed state through the app
 - Use a custom hook to have a useReducer for handleTileClick
 
@@ -22,7 +22,7 @@ use Game component to run everything else?
 
 add styling to tiles for selected, correct, incorrect, etc
 
-extrapolate timer logic into hook? 
+extrapolate timer logic into hook?
 
 extrapolate hint system logic into hook?
 

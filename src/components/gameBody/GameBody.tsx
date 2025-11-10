@@ -11,7 +11,7 @@ import CountdownClock from '../countdownClock/CountdownClock';
 import { ADJACENT_LIST } from '../../constants';
 import Tile from '../tile/Tile';
 import { useChealteData } from '../../hooks/useChealteData';
-import type { Word, TileType } from '../../schema/chealteData';
+import type { Word, TileType } from '../../schema/CheatleSchema';
 
 type CurrentGuessProps = {
     text: string,

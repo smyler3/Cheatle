@@ -1,4 +1,4 @@
-import type { TileType } from "../types/types";
+import type { TileType } from "../schema/CheatleSchema";
 import { TILES } from "./tiles";
 
 export const DICE: TileType[][] = [
