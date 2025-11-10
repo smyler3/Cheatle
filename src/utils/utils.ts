@@ -1,4 +1,6 @@
-const binaryInsertion = (elem: Word, array: Word[]): Word[] => {
+import type { TileType, Word } from "../schema/chealteData";
+
+export const binaryInsertion = (elem: Word, array: Word[]): Word[] => {
     let left = 0, right = array.length;
 
     // Binary search for insert position
@@ -10,7 +12,3 @@ const binaryInsertion = (elem: Word, array: Word[]): Word[] => {
 
     return [...array.slice(0, left), elem, ...array.slice(left)];
 };
-
-export {
-    binaryInsertion,
-}
