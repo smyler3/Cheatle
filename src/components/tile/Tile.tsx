@@ -15,7 +15,7 @@ const Tile = ({
     handleClick
 }: TileProps) => {
     return (
-        <span
+        <button
             className={styles.tile}
             style={{ backgroundColor: TILE_VALUE_COLOURS[tile.value] }}
             onClick={() => handleClick(tile, position)}
@@ -30,7 +30,7 @@ const Tile = ({
             >
                 {tile.value}
             </div>
-        </span>
+        </button>
     )
 };
 

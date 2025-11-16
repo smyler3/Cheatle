@@ -17,7 +17,7 @@ import type { Guess } from '../../types/types';
 type CurrentGuessProps = {
     text: string,
     value: number,
-    mostRecentTilePosition: number | null;
+    prevTileOrder: number[];
     prevTilePositions: boolean[];
 };
 
@@ -31,7 +31,7 @@ export default function GameBody() {
         {
             text: "",
             value: 0,
-            mostRecentTilePosition: null,
+            prevTileOrder: [],
             prevTilePositions: Array(16).fill(false),
         }
     );
@@ -52,7 +52,7 @@ export default function GameBody() {
 
     const handleTileSelect = (tile: TileType, selectedPosition: number) => {
         console.log(currentGuess);
-        const prevPosition = currentGuess.mostRecentTilePosition;
+        const prevPosition = currentGuess.prevTileOrder.at(-1) || null;
         const currentWord = currentGuess.text;
 
         const addToCorrectGuesses = (): void => {
@@ -60,7 +60,8 @@ export default function GameBody() {
             setCorrectGuesses(prev => binaryInsertion({...currentGuess, "isTopWord": isTopWord }, prev));
         }
 
-        if (currentGuess.mostRecentTilePosition === selectedPosition) {
+        // Submitting guess
+        if (currentGuess.prevTilePositions[selectedPosition] === true) {
             const isRepeat = correctGuesses.filter(guess => guess.text === currentWord).length > 0;
             const isValid = validWords.some(word => word.text === currentWord);
             
@@ -73,25 +74,23 @@ export default function GameBody() {
             setCurrentGuess({
                 text: "",
                 value: 0,
-                mostRecentTilePosition: null, 
+                prevTileOrder: [],
                 prevTilePositions: Array(16).fill(false),
             });
         }
 
-        else if (currentGuess.prevTilePositions[selectedPosition] === true) {
-            console.log("already selected");
-            // TODO: Add already selected logic
-        }
-
+        // Adding to guess
         else if (prevPosition === null || ADJACENT_LIST[prevPosition].includes(selectedPosition)) {
             setCurrentGuess(prev => ({
                 text: prev.text + tile.text,
                 value: prev.value + tile.value,
-                mostRecentTilePosition: selectedPosition,
+                // mostRecentTilePosition: selectedPosition,
+                prevTileOrder: [...prev.prevTileOrder, selectedPosition],
                 prevTilePositions: {...prev.prevTilePositions, [selectedPosition]: true},
             }));
         }
 
+        // Invalid tile selected
         else {
             console.log("invalid selection");
             // TODO: add invalid selected logic
