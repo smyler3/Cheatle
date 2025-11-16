@@ -16,19 +16,19 @@ const GuessList = ({ guesses, score }: GuessListProps) => {
                 <p>{score}/54</p>
             </div>
             <ol className={styles.wordList}>
-                {guesses.map((guess, index) => {
+                {guesses.map(guess => {
                         return (
                             <li 
-                                key={index}
+                                key={guess.text}
                                 className={styles.guess}
                             >
                                 <p
                                     className={styles.word}
                                 >
                                     {guess.text}
-                                    {index === 0 && <img src="/starIcon.svg" className={styles.star} />}
+                                    {/* {index === 0 && <img src="/starIcon.svg" className={styles.star} />}
                                     {index === 1 && <img src="/halfStarIcon.svg" className={styles.star} />}
-                                    {index === 2 && <img src="/halfStarIcon.svg" className={styles.star} />}
+                                    {index === 2 && <img src="/halfStarIcon.svg" className={styles.star} />} */}
                                 </p>
                                 <p
                                     className={styles.score}

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ActionButtons from '../actionButtons/ActionButtons';
-import './GameBody.css';
+import './GameBody.module.css';
 import GameBoard from '../gameBoard/GameBoard';
 import GuessList from '../guessList/GuessList';
 import HintButton from '../hintButton/HintButton';
@@ -21,7 +21,8 @@ type CurrentGuessProps = {
 };
 
 export default function GameBody() {
-    const {data, isLoading, isError} = useChealteData();
+    const {data, isLoading, isError, error} = useChealteData();
+    console.log('error', error);
     const [totalScore, setTotalScore] = useState(0);
     const [correctGuesses, setcorrectGuesses] = useState<Word[]>([]);
     const [hintPoints, setHintPoints] = useState(0);
