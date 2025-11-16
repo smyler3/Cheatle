@@ -1,7 +1,5 @@
 ### Code logic ###
 
-Accept render star logic from backend and show stars on guesses
-
 Clean up the gameBody function
 - Create a context provider to pass all globally needed state through the app
 - Use a custom hook to have a useReducer for handleTileClick
@@ -15,7 +13,14 @@ extrapolate timer logic into hook?
 
 extrapolate hint system logic into hook?
 
-have fonts locally
+have fonts locally 
+
+Use new react view to have two seperate modals
+- Write hints modal
+- Write end of game modal
+- Write start of game modal
+
+Add half stars
 
 ### Code styling ###
 
@@ -23,6 +28,8 @@ Fix css to render app properly, app is min full screen, with header always at to
 - remove contentContainer divs and use margin auto instead?
 
 create skeleton loader while waiting for request?
+
+create error page for when things go wrong?
 
 keep previous submitted word greyed out and fix overflow logic
 

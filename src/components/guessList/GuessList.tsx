@@ -1,8 +1,8 @@
-import type { Word } from "../../schema/CheatleSchema";
+import type { Guess } from "../../types/types";
 import styles from "./GuessList.module.css";
 
 type GuessListProps = {
-    guesses: Word[],
+    guesses: Guess[],
     score: number,
 };
 
@@ -26,9 +26,8 @@ const GuessList = ({ guesses, score }: GuessListProps) => {
                                     className={styles.word}
                                 >
                                     {guess.text}
-                                    {/* {index === 0 && <img src="/starIcon.svg" className={styles.star} />}
-                                    {index === 1 && <img src="/halfStarIcon.svg" className={styles.star} />}
-                                    {index === 2 && <img src="/halfStarIcon.svg" className={styles.star} />} */}
+                                    {/* TODO: Add half star logic */}
+                                    {guess.isTopWord && <img src="/starIcon.svg" className={styles.star} />}
                                 </p>
                                 <p
                                     className={styles.score}

@@ -11,7 +11,8 @@ import CountdownClock from '../countdownClock/CountdownClock';
 import { ADJACENT_LIST } from '../../constants';
 import Tile from '../tile/Tile';
 import { useChealteData } from '../../hooks/useChealteData';
-import type { Word, TileType } from '../../schema/CheatleSchema';
+import type { TileType } from '../../schema/CheatleSchema';
+import type { Guess } from '../../types/types';
 
 type CurrentGuessProps = {
     text: string,
@@ -24,7 +25,7 @@ export default function GameBody() {
     const {data, isLoading, isError, error} = useChealteData();
     console.log('error', error);
     const [totalScore, setTotalScore] = useState(0);
-    const [correctGuesses, setcorrectGuesses] = useState<Word[]>([]);
+    const [correctGuesses, setCorrectGuesses] = useState<Guess[]>([]);
     const [hintPoints, setHintPoints] = useState(0);
     const [currentGuess, setCurrentGuess] = useState<CurrentGuessProps>(
         {
@@ -49,17 +50,22 @@ export default function GameBody() {
 
     const {board, validWords, highestScoringWords} = data;
 
-    const handleTileClick = (tile: TileType, position: number) => {
+    const handleTileSelect = (tile: TileType, selectedPosition: number) => {
         console.log(currentGuess);
         const prevPosition = currentGuess.mostRecentTilePosition;
         const currentWord = currentGuess.text;
 
-        if (currentGuess.mostRecentTilePosition === position) {
+        const addToCorrectGuesses = (): void => {
+            const isTopWord = highestScoringWords.some(word => word.text === currentWord);
+            setCorrectGuesses(prev => binaryInsertion({...currentGuess, "isTopWord": isTopWord }, prev));
+        }
+
+        if (currentGuess.mostRecentTilePosition === selectedPosition) {
             const isRepeat = correctGuesses.filter(guess => guess.text === currentWord).length > 0;
             const isValid = validWords.some(word => word.text === currentWord);
             
             if (!isRepeat && isValid) {
-                setcorrectGuesses(prev => binaryInsertion(currentGuess, prev));
+                addToCorrectGuesses();
                 setTotalScore(prev => prev + currentGuess.value);
                 setHintPoints(prev => prev + currentGuess.text.length);
             };
@@ -72,17 +78,17 @@ export default function GameBody() {
             });
         }
 
-        else if (currentGuess.prevTilePositions[position] === true) {
+        else if (currentGuess.prevTilePositions[selectedPosition] === true) {
             console.log("already selected");
             // TODO: Add already selected logic
         }
 
-        else if (prevPosition === null || ADJACENT_LIST[prevPosition].includes(position)) {
+        else if (prevPosition === null || ADJACENT_LIST[prevPosition].includes(selectedPosition)) {
             setCurrentGuess(prev => ({
                 text: prev.text + tile.text,
                 value: prev.value + tile.value,
-                mostRecentTilePosition: position,
-                prevTilePositions: {...prev.prevTilePositions, [position]: true},
+                mostRecentTilePosition: selectedPosition,
+                prevTilePositions: {...prev.prevTilePositions, [selectedPosition]: true},
             }));
         }
 
@@ -99,7 +105,7 @@ export default function GameBody() {
                 <GameBoard>
                     {board.map((tile, index) => {
                         return (
-                            <Tile key={index} tile={tile} position={index} handleClick={handleTileClick} />
+                            <Tile key={index} tile={tile} position={index} handleClick={handleTileSelect} />
                         )
                     })}
                 </GameBoard>

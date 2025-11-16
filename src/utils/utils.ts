@@ -1,6 +1,6 @@
-import type { Word } from "../schema/CheatleSchema";
+import type { Guess } from "../types/types";
 
-export const binaryInsertion = (elem: Word, array: Word[]): Word[] => {
+export const binaryInsertion = (elem: Guess, array: Guess[]): Guess[] => {
     let left = 0, right = array.length;
 
     // Binary search for insert position
