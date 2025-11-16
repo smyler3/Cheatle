@@ -1,13 +1,13 @@
 ### Code logic ###
+Use Activity + Portals to create a modal manager
+https://medium.com/@KiranMohan27/simplifying-modals-in-react-with-portals-4c528eb32139
+https://react.dev/reference/react-dom/createPortal
 
-Clean up the gameBody function
-- Create a context provider to pass all globally needed state through the app
-- Use a custom hook to have a useReducer for handleTileClick
+Use new react view to have two seperate modals
+- Write hints modal
+- Write end of game modal
+- Write start of game modal
 
-combine totalScore and PreviousGuesses together?
-
-maybe timer should use Dates and keep current date in local storage?
-move ActionButtons to it's own containers directory or move all gameRendering to GameBody or fix clock causing rerenders
 
 extrapolate timer logic into hook?
 
@@ -15,12 +15,14 @@ extrapolate hint system logic into hook?
 
 have fonts locally 
 
-Use new react view to have two seperate modals
-- Write hints modal
-- Write end of game modal
-- Write start of game modal
+Add half stars logic
 
-Add half stars
+use localstoreage for current guesses and reset every midnight/every board
+maybe timer should use Dates and keep current date in local storage?
+
+Clean up the gameBody function
+- Create a context provider to pass all globally needed state through the app
+- Use a custom hook to have a useReducer for handleTileClick
 
 ### Code styling ###
 

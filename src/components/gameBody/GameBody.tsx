@@ -84,7 +84,6 @@ export default function GameBody() {
             setCurrentGuess(prev => ({
                 text: prev.text + tile.text,
                 value: prev.value + tile.value,
-                // mostRecentTilePosition: selectedPosition,
                 prevTileOrder: [...prev.prevTileOrder, selectedPosition],
                 prevTilePositions: {...prev.prevTilePositions, [selectedPosition]: true},
             }));
