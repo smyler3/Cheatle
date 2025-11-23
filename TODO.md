@@ -1,12 +1,11 @@
 ### Code logic ###
-Use Activity + Portals to create a modal manager
-https://medium.com/@KiranMohan27/simplifying-modals-in-react-with-portals-4c528eb32139
-https://react.dev/reference/react-dom/createPortal
-
-Use new react view to have two seperate modals
+Add modal content
+- Write start of game modal
 - Write hints modal
 - Write end of game modal
-- Write start of game modal
+
+- Use enum for modalToShow?
+- Add buttons to setModalToShow
 
 
 extrapolate timer logic into hook?

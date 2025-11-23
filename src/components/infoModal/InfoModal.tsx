@@ -1,7 +1,7 @@
 export default function InfoModal() {
     return (
-        <div>
-            This is an info modal
-        </div>
+        <>
+            <h2>How to play</h2>
+        </>
     )
 };
