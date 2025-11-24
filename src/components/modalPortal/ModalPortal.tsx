@@ -19,7 +19,7 @@ export default function ModalPortal({ modalInfo, handleCloseModal }: ModalPortal
 
     return (
         <div className={styles.modalBackground}>
-            <dialog>
+            <dialog className={styles.modalContainer}>
                     <Activity mode={shouldShowInfoModal ? "visible" : "hidden"} >
                         <InfoModal />
                     </Activity>

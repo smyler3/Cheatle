@@ -10,7 +10,7 @@ import ModalPortal from './modalPortal/ModalPortal';
 const queryClient = new QueryClient();
 
 export default function App () {
-    const [modalInfo, setModalInfo] = useState({ shouldShowModal: false, modalToShow: null });
+    const [modalInfo, setModalInfo] = useState<{ shouldShowModal: boolean, modalToShow: string | null}>({ shouldShowModal: false, modalToShow: "infoModal" });
 
     const closeModal = () => {
         setModalInfo({ shouldShowModal: false, modalToShow: null });

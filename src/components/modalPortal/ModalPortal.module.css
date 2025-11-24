@@ -11,6 +11,7 @@
     height: 100%;
 
     background-color: #00000025;
+    z-index: 2;
 }
 
 .modalContainer {
@@ -20,6 +21,7 @@
     justify-content: center;
 
     padding: 2rem;
+    margin: auto
 }
 
 .closeButton {
