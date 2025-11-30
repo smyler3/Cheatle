@@ -1,12 +1,14 @@
 ### Code logic ###
-- Move modals into App/GameBody
 -- Pass required info to results modal
-- Create hook for modal stuff?
 
 - Use enum for modalToShow?
 - Add buttons to setModalToShow
 - Make info button load the how to play modal
 - Pass data into results modal
+
+
+Change resultsModal to resultModal
+Change modalPortal to modalManager
 
 
 extrapolate timer logic into hook?

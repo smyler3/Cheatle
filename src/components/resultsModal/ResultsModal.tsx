@@ -1,3 +1,4 @@
+import { useModal } from "../../hooks/modal/useModal";
 import type { Guess } from "../../types/types";
 import GuessList from "../guessList/GuessList";
 import styles from "./ResultsModal.module.css";
@@ -9,7 +10,6 @@ type ResultsModalProps = {
     hintsUsed: number,
     guesses: Guess[],
     // highestScoringWords: Word[],
-    handleCloseButton: () => void,
 }
 
 export default function ResultsModal({
@@ -26,10 +26,10 @@ export default function ResultsModal({
         { value: 12, text: "WORD", isTopWord: false },
     ],
     // highestScoringWords = [],
-    handleCloseButton,
 }: ResultsModalProps) {
-
+    const { closeModal } = useModal();
     const topGuesses = guesses.slice(0, 5);
+
     return (
         <div className={styles.resultsModal}>
             <h2 className={styles.modalHeading}>Results</h2>
@@ -75,7 +75,7 @@ export default function ResultsModal({
             </div>
             <button 
                 className={styles.closeButton}
-                onClick={handleCloseButton}
+                onClick={closeModal}
             >
                 Close
             </button>

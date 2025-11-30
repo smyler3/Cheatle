@@ -3,31 +3,18 @@ import Footer from './footer/Footer';
 import Header from './header/Header';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import GameBody from './gameBody/GameBody';
-import { useState } from 'react';
-import { createPortal } from 'react-dom';
-import ModalPortal from './modalPortal/ModalPortal';
+import { ModalProvider } from '../hooks/modal/ModalProvider';
 
 const queryClient = new QueryClient();
 
-export default function App () {
-    const [modalInfo, setModalInfo] = useState<{ shouldShowModal: boolean, modalToShow: string | null}>({ shouldShowModal: true, modalToShow: "resultsModal" });
-
-    const closeModal = () => {
-        setModalInfo({ shouldShowModal: false, modalToShow: null });
-    };
-
+export default function App() {
     return (
         <QueryClientProvider client={queryClient}>
-            {createPortal(
-                <ModalPortal
-                    modalInfo={modalInfo} 
-                    handleCloseModal={closeModal}
-                />,
-                document.body
-            )}
-            <Header />
-            <GameBody />
-            <Footer />
+            <ModalProvider>
+                <Header />
+                <GameBody />
+                <Footer />
+            </ModalProvider>
         </QueryClientProvider>
     )
 }

@@ -1,12 +1,9 @@
+import { useModal } from "../../hooks/modal/useModal";
 import styles from "./HintModal.module.css";
 
-type hintModalProps = {
-    handleCloseButton: () => void,
-};
+export default function HintModal() {
+    const { closeModal } = useModal();
 
-export default function HintModal({
-    handleCloseButton
-}: hintModalProps) {
     return (
         <div className={styles.hintModal}>
             <h2>Hints</h2>
@@ -61,7 +58,7 @@ export default function HintModal({
             </section>
             <button 
                 className={styles.closeButton}
-                onClick={handleCloseButton}
+                onClick={closeModal}
             >
                 Close
             </button>

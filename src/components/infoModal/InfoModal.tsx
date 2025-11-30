@@ -1,10 +1,8 @@
+import { useModal } from "../../hooks/modal/useModal";
 import styles from "./InfoModal.module.css";
 
-type InfoModalProps = {
-    handlePlayButton: () => void,
-};
-
-export default function InfoModal({ handlePlayButton: handlePlayButton}: InfoModalProps) {
+export default function InfoModal() {
+    const { closeModal } = useModal(); 
     return (
         <div className={styles.infoModal}>
             <h2 className={styles.modalHeading}>How to play</h2>
@@ -38,7 +36,7 @@ export default function InfoModal({ handlePlayButton: handlePlayButton}: InfoMod
             </section>
             <button 
                 className={styles.playButton}
-                onClick={handlePlayButton}
+                onClick={closeModal}
             >
                 Play
             </button>

@@ -13,6 +13,8 @@ import Tile from '../tile/Tile';
 import { useChealteData } from '../../hooks/useChealteData';
 import type { TileType } from '../../schema/CheatleSchema';
 import type { Guess } from '../../types/types';
+import { createPortal } from 'react-dom';
+import ModalPortal from '../modalPortal/ModalPortal';
 
 type CurrentGuessProps = {
     text: string,
@@ -36,15 +38,24 @@ export default function GameBody() {
         }
     );
 
+    const modalPortal = createPortal(<ModalPortal />, document.body);
+
     if (isError) {
         return (
-            <div>Something went wrong</div>
+            <>
+                {modalPortal}
+                <div>Something went wrong</div>
+            </>
+            
         );
     };
 
     if (isLoading || !data) {
         return (
-            <div>...Loading</div>
+            <>
+                {modalPortal}
+                <div>...Loading</div>
+            </>
         );
     };
 
@@ -98,6 +109,7 @@ export default function GameBody() {
 
     return (
         <main>
+            {modalPortal}
             <div className="contentContainer">
                 <CountdownClock />
                 <GameBoard>

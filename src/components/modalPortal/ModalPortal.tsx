@@ -4,16 +4,10 @@ import InfoModal from "../infoModal/InfoModal";
 import ResultsModal from "../resultsModal/ResultsModal";
 import styles from "./ModalPortal.module.css";
 import closeIcon from "/closeIcon.svg";
+import { useModal } from "../../hooks/modal/useModal";
 
-interface ModalPortalProps {
-    modalInfo: { 
-        shouldShowModal: boolean;
-        modalToShow: string | null;
-    },
-    handleCloseModal: () => void;
-};
-
-export default function ModalPortal({ modalInfo, handleCloseModal }: ModalPortalProps) {
+export default function ModalPortal() {
+    const { modalInfo, closeModal } = useModal();
     const shouldShowInfoModal = modalInfo.modalToShow === "infoModal";
     const shouldShowHintModal = modalInfo.modalToShow === "hintModal";
     const shouldShowResultsModal = modalInfo.modalToShow === "resultsModal";
@@ -22,19 +16,17 @@ export default function ModalPortal({ modalInfo, handleCloseModal }: ModalPortal
         modalInfo.shouldShowModal && (
         <div className={styles.modalBackground}>
             <dialog className={styles.modalContainer}>
-                <button className={styles.closeButton} onClick={handleCloseModal}>
+                <button className={styles.closeButton} onClick={closeModal}>
                     <img src={closeIcon} alt="" />
                 </button>
                 <Activity mode={shouldShowInfoModal ? "visible" : "hidden"} >
-                    <InfoModal handlePlayButton={handleCloseModal} />
+                    <InfoModal />
                 </Activity>
                 <Activity mode={shouldShowHintModal ? "visible" : "hidden"} >
-                    <HintModal handleCloseButton={handleCloseModal} />
+                    <HintModal />
                 </Activity>
                 <Activity mode={shouldShowResultsModal ? "visible" : "hidden"} >
-                    <ResultsModal 
-                        handleCloseButton={handleCloseModal}
-                    />
+                    <ResultsModal />
                 </Activity>
             </dialog>
         </div>
