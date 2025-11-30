@@ -1,6 +1,8 @@
+import { useModal } from "../../hooks/modal/useModal";
 import styles from "./Header.module.css"
 
 const Header = () => {
+    const { openInfoModal } = useModal();
     return (
         <header
             className={styles.header}
@@ -15,6 +17,7 @@ const Header = () => {
                 </h1>
                 <button
                     className={styles.button}
+                    onClick={openInfoModal}
                 >
                     <img
                         src="/infoIcon.svg"

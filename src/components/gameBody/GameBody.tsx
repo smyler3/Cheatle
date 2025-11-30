@@ -38,6 +38,27 @@ export default function GameBody() {
         }
     );
 
+        const modalPortal = createPortal(<ModalPortal />, document.body);
+
+    if (isError) {
+        return (
+            <>
+                {modalPortal}
+                <div>Something went wrong</div>
+            </>
+            
+        );
+    };
+
+    if (isLoading || !data) {
+        return (
+            <>
+                {modalPortal}
+                <div>...Loading</div>
+            </>
+        );
+    };
+
     const {board, validWords, highestScoringWords} = data;
 
     const handleTileSelect = (tile: TileType, selectedPosition: number) => {
@@ -84,27 +105,6 @@ export default function GameBody() {
             console.log("invalid selection");
             // TODO: add invalid selected logic
         }
-    };
-
-    const modalPortal = createPortal(<ModalPortal />, document.body);
-
-    if (isError) {
-        return (
-            <>
-                {modalPortal}
-                <div>Something went wrong</div>
-            </>
-            
-        );
-    };
-
-    if (isLoading || !data) {
-        return (
-            <>
-                {modalPortal}
-                <div>...Loading</div>
-            </>
-        );
     };
 
     return (

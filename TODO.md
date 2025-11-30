@@ -1,38 +1,31 @@
 ### Code logic ###
--- Pass required info to results modal
-
-- Make info button load the how to play modal
-- Make hint button load the hints modal
-- Make finish button load the finish modal
-- Pass data into results modal
-
-
 Change resultsModal to resultModal
 Change modalPortal to modalManager
 
-
 extrapolate timer logic into hook?
-
-have fonts locally 
-
 
 Add hints logic
 
-pass required info to the hints modal
-
 extrapolate hint system logic into hook?
 
-Redesign hints available/points for the hints modal
-Shoulds the best words be randomised? Or just ordered top to bottom with no points showing dividers? or lock each tier behind completing the last?
-
 Add half stars logic
-
-use localstoreage for current guesses and reset every midnight/every board
-maybe timer should use Dates and keep current date in local storage?
 
 Clean up the gameBody function
 - Create a context provider to pass all globally needed state through the app
 - Use a custom hook to have a useReducer for handleTileClick
+
+Redesign hints available/points for the hints modal
+Shoulds the best words be randomised? Or just ordered top to bottom with no points showing dividers? or lock each tier behind completing the last?
+
+- Add ability to pause game starting until play button clicked
+- Add ability for the game to end by timer finish
+- Add ability for game to end by finish button being clicked
+- Pass data into results modal to display on end screen
+
+use localstoreage for current guesses and reset every midnight/every board
+maybe timer should use Dates and keep current date in local storage?
+
+have fonts locally 
 
 ### Code styling ###
 

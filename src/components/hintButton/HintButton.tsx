@@ -1,3 +1,4 @@
+import { useModal } from "../../hooks/modal/useModal";
 import styles from "./HintButton.module.css";
 
 type HintButtonProps = {
@@ -7,11 +8,13 @@ type HintButtonProps = {
 const POINTS_FOR_HINT = 25;
 
 const HintButton = ({ points }: HintButtonProps) => {
+    const { openHintModal } = useModal();
     const hintsAvailable = Math.floor(points / POINTS_FOR_HINT);
 
     return (
         <button
             className={styles.button}
+            onClick={openHintModal}
         >
             <span 
                 className={styles.hintProgressIndicator}
