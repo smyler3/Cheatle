@@ -32,7 +32,9 @@ export default function ModalPortal({ modalInfo, handleCloseModal }: ModalPortal
                     <HintModal />
                 </Activity>
                 <Activity mode={shouldShowResultsModal ? "visible" : "hidden"} >
-                    <ResultsModal />
+                    <ResultsModal 
+                        handleCloseModal={handleCloseModal}
+                    />
                 </Activity>
             </dialog>
         </div>

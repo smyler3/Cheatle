@@ -20,10 +20,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
+    
     max-width: 400px;
     max-height: 90%;
-    padding: 2rem 0 2rem 1.4rem;
+    padding: 2rem 1.4rem;
     margin: auto;
 }
 

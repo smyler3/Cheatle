@@ -1,11 +1,11 @@
 ### Code logic ###
 Add modal content
-- Write start of game modal
 - Write hints modal
-- Write end of game modal
 
 - Use enum for modalToShow?
 - Add buttons to setModalToShow
+- Make info button load the how to play modal
+- Pass data into results modal
 
 
 extrapolate timer logic into hook?

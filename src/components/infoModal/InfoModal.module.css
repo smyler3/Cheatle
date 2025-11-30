@@ -3,9 +3,7 @@
     flex-direction: column;
     align-items: center;
     max-height: 100%;
-    overflow-y: scroll;
-
-    padding-right: 1.4rem;
+    overflow-y: auto;
 }
 
 .modalHeading {
@@ -13,7 +11,7 @@
 }
 
 .tagline {
-    margin: 0.6rem 0 2rem;
+    margin: 0.6rem 0 1.6rem;
 
     font-size: 1.1rem;
     font-weight: 600;
@@ -23,11 +21,12 @@
     display: flex;
     flex-direction: column;
 
+    width: 100%;
     margin-top: 20px;
 }
 
 .hintList {
-    list-style: inside disc ;
+    list-style: inside disc;
 }
 
 .hintList > li {

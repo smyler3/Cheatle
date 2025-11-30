@@ -29,13 +29,13 @@
 
 .word {
     font-family: "Figtree", sans-serif;
-    font-size: 20px;
 }
 
 .star {
     padding-left: 4px;
+    height: 12px;
 }
 
 .score {
-    font-size: 20px;
+    font-family: "Lilita One";
 }

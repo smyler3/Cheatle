@@ -3,18 +3,20 @@ import styles from "./GuessList.module.css";
 
 type GuessListProps = {
     guesses: Guess[],
-    score: number,
+    score?: number,
 };
 
 const GuessList = ({ guesses, score }: GuessListProps) => {
     return (
         <div>
-            <div 
-                className={styles.listHeading}
-            >
-                <p>Your guesses</p>
-                <p>{score}/54</p>
-            </div>
+            {score && 
+                <div 
+                    className={styles.listHeading}
+                >
+                    <p>Your guesses</p>
+                    <p>{score}/54</p>
+                </div>
+            }
             <ol className={styles.wordList}>
                 {guesses.map(guess => {
                         return (
@@ -31,7 +33,9 @@ const GuessList = ({ guesses, score }: GuessListProps) => {
                                 </p>
                                 <p
                                     className={styles.score}
-                                >{guess.value}</p>
+                                >
+                                    {guess.value}
+                                </p>
                             </li>
                         )
                     })}
