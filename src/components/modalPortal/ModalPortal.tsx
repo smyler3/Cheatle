@@ -29,11 +29,11 @@ export default function ModalPortal({ modalInfo, handleCloseModal }: ModalPortal
                     <InfoModal handlePlayButton={handleCloseModal} />
                 </Activity>
                 <Activity mode={shouldShowHintModal ? "visible" : "hidden"} >
-                    <HintModal />
+                    <HintModal handleCloseButton={handleCloseModal} />
                 </Activity>
                 <Activity mode={shouldShowResultsModal ? "visible" : "hidden"} >
                     <ResultsModal 
-                        handleCloseModal={handleCloseModal}
+                        handleCloseButton={handleCloseModal}
                     />
                 </Activity>
             </dialog>

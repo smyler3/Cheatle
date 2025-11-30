@@ -1,6 +1,7 @@
 ### Code logic ###
-Add modal content
-- Write hints modal
+- Move modals into App/GameBody
+-- Pass required info to results modal
+- Create hook for modal stuff?
 
 - Use enum for modalToShow?
 - Add buttons to setModalToShow
@@ -10,9 +11,17 @@ Add modal content
 
 extrapolate timer logic into hook?
 
+have fonts locally 
+
+
+Add hints logic
+
+pass required info to the hints modal
+
 extrapolate hint system logic into hook?
 
-have fonts locally 
+Redesign hints available/points for the hints modal
+Shoulds the best words be randomised? Or just ordered top to bottom with no points showing dividers? or lock each tier behind completing the last?
 
 Add half stars logic
 

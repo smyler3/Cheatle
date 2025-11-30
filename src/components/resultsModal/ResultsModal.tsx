@@ -9,7 +9,7 @@ type ResultsModalProps = {
     hintsUsed: number,
     guesses: Guess[],
     // highestScoringWords: Word[],
-    handleCloseModal: () => void,
+    handleCloseButton: () => void,
 }
 
 export default function ResultsModal({
@@ -26,7 +26,7 @@ export default function ResultsModal({
         { value: 12, text: "WORD", isTopWord: false },
     ],
     // highestScoringWords = [],
-    handleCloseModal,
+    handleCloseButton,
 }: ResultsModalProps) {
 
     const topGuesses = guesses.slice(0, 5);
@@ -75,7 +75,7 @@ export default function ResultsModal({
             </div>
             <button 
                 className={styles.closeButton}
-                onClick={handleCloseModal}
+                onClick={handleCloseButton}
             >
                 Close
             </button>

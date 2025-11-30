@@ -1,0 +1,66 @@
+.hintModal {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    min-width: 280px;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+.hintPointsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    padding-bottom: 4px;
+
+    font-family: "Lilita One";
+    font-size: 20px;
+
+    border-bottom: 1px solid;
+}
+
+.hintsList {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    padding-left: 8px;
+}
+
+.hintItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.hintItem::marker {
+    content: "•";
+    margin-right: 6px;
+}
+
+.hintButton {
+    min-height: 32px;
+    padding: .4rem 1.2rem;
+
+    color: white;
+    font-family: "Lilita One";
+    font-size: 16px;
+
+    background-color: #0090FF;
+    border-radius: 100px;
+}
+
+.closeButton {
+    align-self: center;
+    padding: .6rem 3rem;
+    margin-top: 2rem;
+
+    color: black;
+    font-family: "Lilita One";
+    font-size: 20px;
+
+    background-color: #D9D9D9;
+    border-radius: 100px;
+}
