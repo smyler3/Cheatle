@@ -1,9 +1,9 @@
 import { useModal } from "../../hooks/modal/useModal";
 import type { Guess } from "../../types/types";
 import GuessList from "../guessList/GuessList";
-import styles from "./ResultsModal.module.css";
+import styles from "./ResultModal.module.css";
 
-type ResultsModalProps = {
+type ResultModalProps = {
     score: number,
     maxPossibleScore: number,
     timeUsed: string,
@@ -12,7 +12,7 @@ type ResultsModalProps = {
     // highestScoringWords: Word[],
 }
 
-export default function ResultsModal({
+export default function ResultModal({
     score = 46,
     maxPossibleScore = 54,
     timeUsed = "10:00",
@@ -26,12 +26,12 @@ export default function ResultsModal({
         { value: 12, text: "WORD", isTopWord: false },
     ],
     // highestScoringWords = [],
-}: ResultsModalProps) {
+}: ResultModalProps) {
     const { closeModal } = useModal();
     const topGuesses = guesses.slice(0, 5);
 
     return (
-        <div className={styles.resultsModal}>
+        <div className={styles.resultModal}>
             <h2 className={styles.modalHeading}>Results</h2>
             <div className={styles.statsContainer}>
                 <span className={styles.statContainer}>

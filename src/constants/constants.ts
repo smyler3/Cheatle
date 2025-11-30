@@ -13,5 +13,5 @@ export const FINAL_CLOCK_WARNING_THRESHOLD: number = 60;
 export const ModalName = {
   InfoModal: "infoModal",
   HintModal: "hintModal",
-  ResultsModal: "resultsModal",
+  ResultModal: "resultModal",
 };

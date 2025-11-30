@@ -8,7 +8,7 @@ type ModalContextType = {
   };
   openInfoModal: () => void;
   openHintModal: () => void;
-  openResultsModal: () => void;
+  openResultModal: () => void;
   closeModal: () => void;
 };
 

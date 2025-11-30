@@ -1,17 +1,17 @@
 import { Activity } from "react";
 import HintModal from "../hintModal/HintModal";
 import InfoModal from "../infoModal/InfoModal";
-import ResultsModal from "../resultsModal/ResultsModal";
-import styles from "./ModalPortal.module.css";
+import ResultModal from "../resultModal/ResultModal";
+import styles from "./ModalManager.module.css";
 import closeIcon from "/closeIcon.svg";
 import { useModal } from "../../hooks/modal/useModal";
 import { ModalName } from "../../constants";
 
-export default function ModalPortal() {
+export default function ModalManager() {
     const { modalInfo, closeModal } = useModal();
     const shouldShowInfoModal = modalInfo.modalToShow === ModalName.InfoModal;
     const shouldShowHintModal = modalInfo.modalToShow === ModalName.HintModal;
-    const shouldShowResultsModal = modalInfo.modalToShow === ModalName.ResultsModal;
+    const shouldShowResultModal = modalInfo.modalToShow === ModalName.ResultModal;
 
     return (
         modalInfo.shouldShowModal && (
@@ -26,8 +26,8 @@ export default function ModalPortal() {
                 <Activity mode={shouldShowHintModal ? "visible" : "hidden"} >
                     <HintModal />
                 </Activity>
-                <Activity mode={shouldShowResultsModal ? "visible" : "hidden"} >
-                    <ResultsModal />
+                <Activity mode={shouldShowResultModal ? "visible" : "hidden"} >
+                    <ResultModal />
                 </Activity>
             </dialog>
         </div>

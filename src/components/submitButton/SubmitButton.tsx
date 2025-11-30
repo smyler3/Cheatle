@@ -2,11 +2,11 @@ import styles from "./SubmitButton.module.css";
 import { useModal } from "../../hooks/modal/useModal";
 
 const SubmitButton = () => {
-    const { openResultsModal } = useModal();
+    const { openResultModal } = useModal();
     return (
         <button
             className={styles.button}
-            onClick={openResultsModal}
+            onClick={openResultModal}
         >
             Finish
         </button>

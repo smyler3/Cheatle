@@ -1,10 +1,7 @@
 ### Code logic ###
-Change resultsModal to resultModal
-Change modalPortal to modalManager
+Add hints logic
 
 extrapolate timer logic into hook?
-
-Add hints logic
 
 extrapolate hint system logic into hook?
 
@@ -20,7 +17,7 @@ Shoulds the best words be randomised? Or just ordered top to bottom with no poin
 - Add ability to pause game starting until play button clicked
 - Add ability for the game to end by timer finish
 - Add ability for game to end by finish button being clicked
-- Pass data into results modal to display on end screen
+- Pass data into result modal to display on end screen
 
 use localstoreage for current guesses and reset every midnight/every board
 maybe timer should use Dates and keep current date in local storage?
