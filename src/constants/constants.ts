@@ -9,6 +9,9 @@ export const MINUTES_IN_A_GAME: number = 10;
 export const INITIAL_CLOCK_WARNING_THRESHOLD: number = 180;
 export const FINAL_CLOCK_WARNING_THRESHOLD: number = 60;
 
+// Hints
+export const HINT_POINTS_REQUIRED: number = 20;
+
 // Modal
 export const ModalName = {
   InfoModal: "infoModal",

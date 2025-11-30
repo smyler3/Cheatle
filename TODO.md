@@ -1,9 +1,15 @@
 ### Code logic ###
 Add hints logic
-
-extrapolate timer logic into hook?
+- Style disabled state of hint button
+- Add logic for using hint button
+- Flip order of highest scoring words? or leave if doing locked tiers
+- Rename highestScoringWords to topWords or something simple like that?
+- Rename hintWords to topWords? or Hints or something
+- Change typing of HintWords in GameBody
 
 extrapolate hint system logic into hook?
+
+extrapolate timer logic into hook?
 
 Add half stars logic
 

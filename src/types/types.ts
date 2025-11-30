@@ -6,4 +6,9 @@ export type Guess = {
     isTopWord: boolean,
 };
 
+export type Hint = {
+    text: string,
+    revealedText: string,
+};
+
 export type ModalNameType = (typeof ModalName)[keyof typeof ModalName];

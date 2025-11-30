@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ActionButtons from '../actionButtons/ActionButtons';
 import './GameBody.module.css';
 import GameBoard from '../gameBoard/GameBoard';
@@ -11,12 +11,12 @@ import CountdownClock from '../countdownClock/CountdownClock';
 import { ADJACENT_LIST } from '../../constants';
 import Tile from '../tile/Tile';
 import { useChealteData } from '../../hooks/useChealteData';
-import type { TileType } from '../../schema/CheatleSchema';
-import type { Guess } from '../../types/types';
+import type { TileType, Word } from '../../schema/CheatleSchema';
+import type { Guess, Hint } from '../../types/types';
 import { createPortal } from 'react-dom';
 import ModalManager from '../modalManager/ModalManager';
 
-type CurrentGuessProps = {
+type CurrentGuessType = {
     text: string,
     value: number,
     prevTileOrder: number[];
@@ -24,12 +24,10 @@ type CurrentGuessProps = {
 };
 
 export default function GameBody() {
-    const {data, isLoading, isError, error} = useChealteData();
-    console.log('error', error);
     const [totalScore, setTotalScore] = useState(0);
     const [correctGuesses, setCorrectGuesses] = useState<Guess[]>([]);
     const [hintPoints, setHintPoints] = useState(0);
-    const [currentGuess, setCurrentGuess] = useState<CurrentGuessProps>(
+    const [currentGuess, setCurrentGuess] = useState<CurrentGuessType>(
         {
             text: "",
             value: 0,
@@ -37,25 +35,38 @@ export default function GameBody() {
             prevTilePositions: Array(16).fill(false),
         }
     );
+    const [hintWords, setHintWords] = useState<Record<number, Hint[]>>({});
 
-        const modalManager = createPortal(<ModalManager />, document.body);
+    const {data, isLoading, isError, error} = useChealteData();
+    console.log('error', error);
+
+    useEffect(() => {
+        const topWordsByValue: Record<number, Hint[]> = {};
+
+        // Group words by value
+        data?.highestScoringWords.forEach((word: Word) => {
+        const { value, text } = word;
+        const hintWord: Hint = { text, revealedText: "" };
+
+        if (topWordsByValue[value]) {
+            topWordsByValue[value].push(hintWord);
+        } else {
+            topWordsByValue[value] = [hintWord];
+        }
+        });
+
+        setHintWords(topWordsByValue);
+    }, [data]);
 
     if (isError) {
         return (
-            <>
-                {modalManager}
-                <div>Something went wrong</div>
-            </>
-            
+            <div>Something went wrong</div>
         );
     };
 
     if (isLoading || !data) {
         return (
-            <>
-                {modalManager}
-                <div>...Loading</div>
-            </>
+            <div>...Loading</div>
         );
     };
 
@@ -109,7 +120,13 @@ export default function GameBody() {
 
     return (
         <main>
-            {modalManager}
+            {createPortal(
+                <ModalManager 
+                    hintPoints={hintPoints}
+                    hintWords={hintWords}
+                />, 
+                document.body
+            )}
             <div className="contentContainer">
                 <CountdownClock />
                 <GameBoard>
