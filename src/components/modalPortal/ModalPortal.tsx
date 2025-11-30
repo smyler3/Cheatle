@@ -5,12 +5,13 @@ import ResultsModal from "../resultsModal/ResultsModal";
 import styles from "./ModalPortal.module.css";
 import closeIcon from "/closeIcon.svg";
 import { useModal } from "../../hooks/modal/useModal";
+import { ModalName } from "../../constants";
 
 export default function ModalPortal() {
     const { modalInfo, closeModal } = useModal();
-    const shouldShowInfoModal = modalInfo.modalToShow === "infoModal";
-    const shouldShowHintModal = modalInfo.modalToShow === "hintModal";
-    const shouldShowResultsModal = modalInfo.modalToShow === "resultsModal";
+    const shouldShowInfoModal = modalInfo.modalToShow === ModalName.InfoModal;
+    const shouldShowHintModal = modalInfo.modalToShow === ModalName.HintModal;
+    const shouldShowResultsModal = modalInfo.modalToShow === ModalName.ResultsModal;
 
     return (
         modalInfo.shouldShowModal && (

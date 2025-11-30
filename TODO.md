@@ -1,9 +1,9 @@
 ### Code logic ###
 -- Pass required info to results modal
 
-- Use enum for modalToShow?
-- Add buttons to setModalToShow
 - Make info button load the how to play modal
+- Make hint button load the hints modal
+- Make finish button load the finish modal
 - Pass data into results modal
 
 
