@@ -44,6 +44,10 @@
     font-size: 20px;
 }
 
+.guessedHintText {
+    color: #0090FF;
+}
+
 .hintButton {
     min-height: 24px;
     padding: .4rem 1.2rem;

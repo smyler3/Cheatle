@@ -1,9 +1,6 @@
 ### Code logic ###
-Add hints logic
-- Add 'isGuessed' prop to Hint, and then once a hint has been guessed, change the colour it displays as
 - Flip order of highest scoring words? or leave if doing locked tiers
 - Rename highestScoringWords to topWords or something simple like that?
-- Rename hintWords to topWords? or Hints or something
 
 extrapolate hint system logic into hook?
 

@@ -10,16 +10,16 @@ import type { Hint, StateSetter } from "../../types/types";
 
 type ModalManagerProps = {
     hintPoints: number,
-    hintWords: Record<number, Hint[]>,
+    topWordHints: Record<number, Hint[]>,
     setHintPoints: StateSetter<number>,
-    setHintWords: StateSetter<Record<number, Hint[]>>,
+    setTopWordHints: StateSetter<Record<number, Hint[]>>,
 };
 
 export default function ModalManager({
     hintPoints,
-    hintWords,
+    topWordHints,
     setHintPoints,
-    setHintWords,
+    setTopWordHints,
 }: ModalManagerProps) {
     const { modalInfo, closeModal } = useModal();
     const shouldShowInfoModal = modalInfo.modalToShow === ModalName.InfoModal;
@@ -39,9 +39,9 @@ export default function ModalManager({
                 <Activity mode={shouldShowHintModal ? "visible" : "hidden"} >
                     <HintModal
                         hintPoints={hintPoints}
-                        hintWords={hintWords}
+                        topWordHints={topWordHints}
                         setHintPoints={setHintPoints}
-                        setHintWords={setHintWords}
+                        setTopWordHints={setTopWordHints}
                     />
                 </Activity>
                 <Activity mode={shouldShowResultModal ? "visible" : "hidden"} >

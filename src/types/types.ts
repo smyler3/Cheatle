@@ -9,6 +9,7 @@ export type Guess = {
 export type Hint = {
     text: string,
     revealedText: string,
+    isGuessed: boolean,
 };
 
 export type ModalNameType = (typeof ModalName)[keyof typeof ModalName];

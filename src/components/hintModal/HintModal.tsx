@@ -5,18 +5,18 @@ import styles from "./HintModal.module.css";
 
 type HintModalProps = {
     hintPoints: number,
-    hintWords: Record<number, Hint[]>,
+    topWordHints: Record<number, Hint[]>,
     setHintPoints: StateSetter<number>,
-    setHintWords: StateSetter<Record<number, Hint[]>>,
+    setTopWordHints: StateSetter<Record<number, Hint[]>>,
 };
 
-export default function HintModal({ hintPoints, hintWords, setHintPoints, setHintWords }: HintModalProps) {
+export default function HintModal({ hintPoints, topWordHints, setHintPoints, setTopWordHints }: HintModalProps) {
     const { closeModal } = useModal();
     const numberOfHints = Math.floor(hintPoints / HINT_POINTS_REQUIRED); 
 
     const handleUseHint = (value: number, wordIndex: number) => {
         setHintPoints(prev => prev - HINT_POINTS_REQUIRED);
-        setHintWords((prev: Record<number, Hint[]>)  => {
+        setTopWordHints((prev: Record<number, Hint[]>)  => {
             // Clone object and nested array
             const updatedWords = { ...prev };
             updatedWords[value] = [...updatedWords[value]];
@@ -29,7 +29,7 @@ export default function HintModal({ hintPoints, hintWords, setHintPoints, setHin
 
             const updatedHint = {
                 ...selectedWord,
-                revealedText: selectedWord.revealedText + nextTile
+                revealedText: selectedWord.revealedText + nextTile,
             };
 
             // replace the updated object
@@ -52,7 +52,7 @@ export default function HintModal({ hintPoints, hintWords, setHintPoints, setHin
                 <p>{hintPoints}/{HINT_POINTS_REQUIRED}</p>
                 <p>Available: {numberOfHints}</p>
             </div>
-            {Object.entries(hintWords).map(([valueStr, words]) => {
+            {Object.entries(topWordHints).map(([valueStr, words]) => {
                 const value = Number(valueStr);
 
                 return (
@@ -64,7 +64,11 @@ export default function HintModal({ hintPoints, hintWords, setHintPoints, setHin
                                 const areHintsAvailable = numberOfHints > 0;
                                 return (
                                     <li key={index} className={styles.hintItem}>
-                                        <p className={styles.hintText}>{hint.revealedText ? hint.revealedText : "..."}</p>
+                                        <p 
+                                            className={ `${styles.hintText} ${hint.isGuessed && styles.guessedHintText}`}
+                                        >
+                                            {hint.revealedText ? hint.revealedText : "..."}
+                                        </p>
                                         {shouldShowHintButton && 
                                             <button 
                                                 className={styles.hintButton}

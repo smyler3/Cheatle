@@ -35,7 +35,7 @@ export default function GameBody() {
             prevTilePositions: Array(16).fill(false),
         }
     );
-    const [hintWords, setHintWords] = useState<Record<number, Hint[]>>({});
+    const [topWordHints, setTopWordHints] = useState<Record<number, Hint[]>>({});
 
     const {data, isLoading, isError, error} = useChealteData();
     console.log('error', error);
@@ -46,7 +46,7 @@ export default function GameBody() {
         // Group words by value
         data?.highestScoringWords.forEach((word: Word) => {
         const { value, text } = word;
-        const hintWord: Hint = { text, revealedText: "" };
+        const hintWord: Hint = { text, revealedText: "", isGuessed: false };
 
         if (topWordsByValue[value]) {
             topWordsByValue[value].push(hintWord);
@@ -55,7 +55,7 @@ export default function GameBody() {
         }
         });
 
-        setHintWords(topWordsByValue);
+        setTopWordHints(topWordsByValue);
     }, [data]);
 
     if (isError) {
@@ -95,7 +95,7 @@ export default function GameBody() {
                 setHintPoints(prev => prev + currentGuess.text.length);
 
                 if (isTopWord) {
-                    setHintWords(prev => {
+                    setTopWordHints(prev => {
                         const wordsAtValue = prev[currentValue];
                         if (!wordsAtValue) return prev;
 
@@ -103,7 +103,7 @@ export default function GameBody() {
                         if (wordIndex === -1) return prev;
 
                         const updatedHints = wordsAtValue.map((word, index) =>
-                            index === wordIndex ? { ...word, revealedText: word.text } : word
+                            index === wordIndex ? { ...word, revealedText: word.text, isGuessed: true } : word
                         );
 
                         return {
@@ -144,9 +144,9 @@ export default function GameBody() {
             {createPortal(
                 <ModalManager 
                     hintPoints={hintPoints}
-                    hintWords={hintWords}
+                    topWordHints={topWordHints}
                     setHintPoints={setHintPoints}
-                    setHintWords={setHintWords}
+                    setTopWordHints={setTopWordHints}
                 />, 
                 document.body
             )}
