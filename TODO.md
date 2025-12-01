@@ -1,10 +1,10 @@
 ### Code logic ###
-- Flip order of highest scoring words? or leave if doing locked tiers
-- Rename highestScoringWords to topWords or something simple like that?
+- Add ability to pause game starting until play button clicked
+- Add ability for the game to end by timer finish
+- Add ability for game to end by finish button being clicked
+- Pass data into result modal to display on end screen
 
-extrapolate hint system logic into hook?
-
-Add half stars logic
+extrapolate timer logic into hook?
 
 Clean up the gameBody function
 - Create a context provider to pass all globally needed state through the app
@@ -13,12 +13,10 @@ Clean up the gameBody function
 Redesign hints available/points for the hints modal
 Shoulds the best words be randomised? Or just ordered top to bottom with no points showing dividers? or lock each tier behind completing the last?
 
-- Add ability to pause game starting until play button clicked
-- Add ability for the game to end by timer finish
-- Add ability for game to end by finish button being clicked
-- Pass data into result modal to display on end screen
+- Flip order of highest scoring words? or leave if doing locked tiers
+- Rename highestScoringWords to topWords or something simple like that?
 
-extrapolate timer logic into hook?
+Add half stars logic
 
 use localstoreage for current guesses and reset every midnight/every board
 maybe timer should use Dates and keep current date in local storage?

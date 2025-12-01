@@ -15,6 +15,7 @@ import type { TileType, Word } from '../../schema/CheatleSchema';
 import type { Guess, Hint } from '../../types/types';
 import { createPortal } from 'react-dom';
 import ModalManager from '../modalManager/ModalManager';
+import { useHints } from '../../hooks/hints/useHints';
 
 type CurrentGuessType = {
     text: string,
@@ -24,9 +25,9 @@ type CurrentGuessType = {
 };
 
 export default function GameBody() {
+    const { hintPoints, setHintPoints, setTopWordHints, markTopWordAsGuessed } = useHints();
     const [totalScore, setTotalScore] = useState(0);
     const [correctGuesses, setCorrectGuesses] = useState<Guess[]>([]);
-    const [hintPoints, setHintPoints] = useState(0);
     const [currentGuess, setCurrentGuess] = useState<CurrentGuessType>(
         {
             text: "",
@@ -35,28 +36,9 @@ export default function GameBody() {
             prevTilePositions: Array(16).fill(false),
         }
     );
-    const [topWordHints, setTopWordHints] = useState<Record<number, Hint[]>>({});
 
     const {data, isLoading, isError, error} = useChealteData();
     console.log('error', error);
-
-    useEffect(() => {
-        const topWordsByValue: Record<number, Hint[]> = {};
-
-        // Group words by value
-        data?.highestScoringWords.forEach((word: Word) => {
-        const { value, text } = word;
-        const hintWord: Hint = { text, revealedText: "", isGuessed: false };
-
-        if (topWordsByValue[value]) {
-            topWordsByValue[value].push(hintWord);
-        } else {
-            topWordsByValue[value] = [hintWord];
-        }
-        });
-
-        setTopWordHints(topWordsByValue);
-    }, [data]);
 
     if (isError) {
         return (
@@ -95,22 +77,7 @@ export default function GameBody() {
                 setHintPoints(prev => prev + currentGuess.text.length);
 
                 if (isTopWord) {
-                    setTopWordHints(prev => {
-                        const wordsAtValue = prev[currentValue];
-                        if (!wordsAtValue) return prev;
-
-                        const wordIndex = wordsAtValue.findIndex(word => word.text === currentWord);
-                        if (wordIndex === -1) return prev;
-
-                        const updatedHints = wordsAtValue.map((word, index) =>
-                            index === wordIndex ? { ...word, revealedText: word.text, isGuessed: true } : word
-                        );
-
-                        return {
-                            ...prev,
-                            [currentValue]: updatedHints
-                        };
-                    })
+                    markTopWordAsGuessed(currentValue, currentWord);
                 }
             };
 
@@ -142,12 +109,7 @@ export default function GameBody() {
     return (
         <main>
             {createPortal(
-                <ModalManager 
-                    hintPoints={hintPoints}
-                    topWordHints={topWordHints}
-                    setHintPoints={setHintPoints}
-                    setTopWordHints={setTopWordHints}
-                />, 
+                <ModalManager />, 
                 document.body
             )}
             <div className="contentContainer">

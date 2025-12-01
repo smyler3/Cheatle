@@ -1,44 +1,14 @@
 import { HINT_POINTS_REQUIRED } from "../../constants";
+import { useHints } from "../../hooks/hints/useHints";
 import { useModal } from "../../hooks/modal/useModal";
-import type { Hint, StateSetter } from "../../types/types";
+import type { Hint } from "../../types/types";
 import styles from "./HintModal.module.css";
 
-type HintModalProps = {
-    hintPoints: number,
-    topWordHints: Record<number, Hint[]>,
-    setHintPoints: StateSetter<number>,
-    setTopWordHints: StateSetter<Record<number, Hint[]>>,
-};
-
-export default function HintModal({ hintPoints, topWordHints, setHintPoints, setTopWordHints }: HintModalProps) {
+export default function HintModal() {
     const { closeModal } = useModal();
+    const { hintPoints, topWordHints, handleUseHint } = useHints();
+    console.log(topWordHints);
     const numberOfHints = Math.floor(hintPoints / HINT_POINTS_REQUIRED); 
-
-    const handleUseHint = (value: number, wordIndex: number) => {
-        setHintPoints(prev => prev - HINT_POINTS_REQUIRED);
-        setTopWordHints((prev: Record<number, Hint[]>)  => {
-            // Clone object and nested array
-            const updatedWords = { ...prev };
-            updatedWords[value] = [...updatedWords[value]];
-
-            const selectedWord = updatedWords[value][wordIndex];
-
-            // Extract next tile
-            const remainingText = selectedWord.text.replace(selectedWord.revealedText, '');
-            const nextTile = remainingText.charAt(0) === "Q" ? remainingText.slice(0, 2) : remainingText.slice(0, 1);
-
-            const updatedHint = {
-                ...selectedWord,
-                revealedText: selectedWord.revealedText + nextTile,
-            };
-
-            // replace the updated object
-            updatedWords[value][wordIndex] = updatedHint;
-
-            return updatedWords;
-        });
-        console.log("made it");
-    }
 
     return (
         <div className={styles.hintModal}>
