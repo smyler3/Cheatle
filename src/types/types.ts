@@ -12,3 +12,5 @@ export type Hint = {
 };
 
 export type ModalNameType = (typeof ModalName)[keyof typeof ModalName];
+
+export type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;

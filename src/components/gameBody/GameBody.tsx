@@ -76,9 +76,9 @@ export default function GameBody() {
         console.log(currentGuess);
         const prevPosition = currentGuess.prevTileOrder.at(-1) || null;
         const currentWord = currentGuess.text;
+        const currentValue = currentGuess.value;
 
-        const addToCorrectGuesses = (): void => {
-            const isTopWord = highestScoringWords.some(word => word.text === currentWord);
+        const addToCorrectGuesses = (isTopWord: boolean): void => {
             setCorrectGuesses(prev => binaryInsertion({...currentGuess, "isTopWord": isTopWord }, prev));
         }
 
@@ -88,9 +88,30 @@ export default function GameBody() {
             const isValid = validWords.some(word => word.text === currentWord);
             
             if (!isRepeat && isValid) {
-                addToCorrectGuesses();
+                const isTopWord = highestScoringWords.some(word => word.text === currentWord);
+
+                addToCorrectGuesses(isTopWord);
                 setTotalScore(prev => prev + currentGuess.value);
                 setHintPoints(prev => prev + currentGuess.text.length);
+
+                if (isTopWord) {
+                    setHintWords(prev => {
+                        const wordsAtValue = prev[currentValue];
+                        if (!wordsAtValue) return prev;
+
+                        const wordIndex = wordsAtValue.findIndex(word => word.text === currentWord);
+                        if (wordIndex === -1) return prev;
+
+                        const updatedHints = wordsAtValue.map((word, index) =>
+                            index === wordIndex ? { ...word, revealedText: word.text } : word
+                        );
+
+                        return {
+                            ...prev,
+                            [currentValue]: updatedHints
+                        };
+                    })
+                }
             };
 
             setCurrentGuess({
@@ -124,6 +145,8 @@ export default function GameBody() {
                 <ModalManager 
                     hintPoints={hintPoints}
                     hintWords={hintWords}
+                    setHintPoints={setHintPoints}
+                    setHintWords={setHintWords}
                 />, 
                 document.body
             )}

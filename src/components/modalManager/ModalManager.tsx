@@ -6,16 +6,20 @@ import styles from "./ModalManager.module.css";
 import closeIcon from "/closeIcon.svg";
 import { useModal } from "../../hooks/modal/useModal";
 import { ModalName } from "../../constants";
-import type { Hint } from "../../types/types";
+import type { Hint, StateSetter } from "../../types/types";
 
 type ModalManagerProps = {
     hintPoints: number,
-    hintWords: Hint,
+    hintWords: Record<number, Hint[]>,
+    setHintPoints: StateSetter<number>,
+    setHintWords: StateSetter<Record<number, Hint[]>>,
 };
 
 export default function ModalManager({
     hintPoints,
-    hintWords
+    hintWords,
+    setHintPoints,
+    setHintWords,
 }: ModalManagerProps) {
     const { modalInfo, closeModal } = useModal();
     const shouldShowInfoModal = modalInfo.modalToShow === ModalName.InfoModal;
@@ -36,6 +40,8 @@ export default function ModalManager({
                     <HintModal
                         hintPoints={hintPoints}
                         hintWords={hintWords}
+                        setHintPoints={setHintPoints}
+                        setHintWords={setHintWords}
                     />
                 </Activity>
                 <Activity mode={shouldShowResultModal ? "visible" : "hidden"} >

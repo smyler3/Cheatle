@@ -1,15 +1,11 @@
 ### Code logic ###
 Add hints logic
-- Style disabled state of hint button
-- Add logic for using hint button
+- Add 'isGuessed' prop to Hint, and then once a hint has been guessed, change the colour it displays as
 - Flip order of highest scoring words? or leave if doing locked tiers
 - Rename highestScoringWords to topWords or something simple like that?
 - Rename hintWords to topWords? or Hints or something
-- Change typing of HintWords in GameBody
 
 extrapolate hint system logic into hook?
-
-extrapolate timer logic into hook?
 
 Add half stars logic
 
@@ -24,6 +20,8 @@ Shoulds the best words be randomised? Or just ordered top to bottom with no poin
 - Add ability for the game to end by timer finish
 - Add ability for game to end by finish button being clicked
 - Pass data into result modal to display on end screen
+
+extrapolate timer logic into hook?
 
 use localstoreage for current guesses and reset every midnight/every board
 maybe timer should use Dates and keep current date in local storage?
