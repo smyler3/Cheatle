@@ -1,8 +1,19 @@
 import { useModal } from "../../hooks/modal/useModal";
+import { useTimer } from "../../hooks/timer/useTimer";
 import styles from "./InfoModal.module.css";
 
 export default function InfoModal() {
+    const { isTimerStarted, startTimer } = useTimer();
     const { closeModal } = useModal(); 
+
+    const handleCloseModal = () => {
+        if (!isTimerStarted) {
+            startTimer();
+        };
+        closeModal();
+    };
+
+
     return (
         <div className={styles.infoModal}>
             <h2 className={styles.modalHeading}>How to play</h2>
@@ -36,7 +47,7 @@ export default function InfoModal() {
             </section>
             <button 
                 className={styles.playButton}
-                onClick={closeModal}
+                onClick={handleCloseModal}
             >
                 Play
             </button>

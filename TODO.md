@@ -1,14 +1,23 @@
 ### Code logic ###
-- Add ability to pause game starting until play button clicked
+- Move the modal close button into each modal component
+- Pass handleCloseModal to the close button of infoModal
+
 - Add ability for the game to end by timer finish
-- Add ability for game to end by finish button being clicked
-- Pass data into result modal to display on end screen
+- Stop the game from being playable after it ends
 
-extrapolate timer logic into hook?
+Pass data into result modal to display on end screen
+- Add hintsUsed counter
 
-Clean up the gameBody function
+- Clean up the gameBody function
 - Create a context provider to pass all globally needed state through the app
 - Use a custom hook to have a useReducer for handleTileClick
+
+
+Add finish game confirm modal
+
+Rename submitButton to finishButton
+
+Rename countdownClock to countdownTimer
 
 Redesign hints available/points for the hints modal
 Shoulds the best words be randomised? Or just ordered top to bottom with no points showing dividers? or lock each tier behind completing the last?

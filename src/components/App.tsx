@@ -5,19 +5,22 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import GameBody from './gameBody/GameBody';
 import { ModalProvider } from '../hooks/modal/ModalProvider';
 import HintProvider from '../hooks/hints/HintProvider';
+import { TimerProvider } from '../hooks/timer/TimerProvider';
 
 const queryClient = new QueryClient();
 
 export default function App() {
     return (
         <QueryClientProvider client={queryClient}>
-            <HintProvider>
-                <ModalProvider>
-                    <Header />
-                    <GameBody />
-                    <Footer />
-                </ModalProvider>
-            </HintProvider>
+            <TimerProvider>
+                <HintProvider>
+                    <ModalProvider>
+                        <Header />
+                        <GameBody />
+                        <Footer />
+                    </ModalProvider>
+                </HintProvider>
+            </TimerProvider>
         </QueryClientProvider>
     )
 }

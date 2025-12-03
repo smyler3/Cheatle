@@ -1,4 +1,5 @@
 import { useModal } from "../../hooks/modal/useModal";
+import { useTimer } from "../../hooks/timer/useTimer";
 import type { Guess } from "../../types/types";
 import GuessList from "../guessList/GuessList";
 import styles from "./ResultModal.module.css";
@@ -6,7 +7,6 @@ import styles from "./ResultModal.module.css";
 type ResultModalProps = {
     score: number,
     maxPossibleScore: number,
-    timeUsed: string,
     hintsUsed: number,
     guesses: Guess[],
     // highestScoringWords: Word[],
@@ -15,7 +15,6 @@ type ResultModalProps = {
 export default function ResultModal({
     score = 46,
     maxPossibleScore = 54,
-    timeUsed = "10:00",
     hintsUsed = 4,
     guesses = [
         { value: 12, text: "WORD", isTopWord: true },
@@ -27,7 +26,9 @@ export default function ResultModal({
     ],
     // highestScoringWords = [],
 }: ResultModalProps) {
+    const { minutesUsed, secondsUsed } = useTimer();
     const { closeModal } = useModal();
+
     const topGuesses = guesses.slice(0, 5);
 
     return (
@@ -39,7 +40,9 @@ export default function ResultModal({
                     <p>Score</p>
                 </span>
                 <span className={styles.statContainer}>
-                    <div className={styles.stat}>{timeUsed}</div>
+                    <div className={styles.stat}>
+                        {minutesUsed}:{secondsUsed}
+                    </div>
                     <p>Time</p>
                 </span>
                 <span className={styles.statContainer}>

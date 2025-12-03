@@ -25,7 +25,7 @@ type CurrentGuessType = {
 };
 
 export default function GameBody() {
-    const { hintPoints, setHintPoints, setTopWordHints, markTopWordAsGuessed } = useHints();
+    const { hintPoints, setHintPoints, markTopWordAsGuessed } = useHints();
     const [totalScore, setTotalScore] = useState(0);
     const [correctGuesses, setCorrectGuesses] = useState<Guess[]>([]);
     const [currentGuess, setCurrentGuess] = useState<CurrentGuessType>(
