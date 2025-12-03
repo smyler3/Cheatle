@@ -61,7 +61,7 @@ export default function HintModal() {
                     )
                 })}
                 <button 
-                    className={styles.closeButton}
+                    className={styles.cancelButton}
                     onClick={closeModal}
                 >
                     Close

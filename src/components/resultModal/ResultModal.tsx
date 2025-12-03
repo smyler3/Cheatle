@@ -82,7 +82,7 @@ export default function ResultModal({
                 </section>
             </div>
             <button 
-                className={styles.closeButton}
+                className={styles.cancelButton}
                 onClick={closeModal}
             >
                 Close

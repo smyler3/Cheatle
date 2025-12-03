@@ -74,7 +74,7 @@
     cursor: default;
 }
 
-.closeButton {
+.cancelButton {
     align-self: center;
     padding: .6rem 3rem;
     margin-top: 2rem;

@@ -16,5 +16,6 @@ export const HINT_POINTS_REQUIRED: number = 20;
 export const ModalName = {
   InfoModal: "infoModal",
   HintModal: "hintModal",
+  ConfirmModal: "confirmModal",
   ResultModal: "resultModal",
 };

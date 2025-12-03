@@ -18,6 +18,10 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
         setModalInfo({ shouldShowModal: true, modalToShow: ModalName.HintModal });
     };
 
+    const openConfirmModal = () => {
+        setModalInfo({ shouldShowModal: true, modalToShow: ModalName.ConfirmModal });
+    }
+
     const openResultModal = () => {
         setModalInfo({ shouldShowModal: true, modalToShow: ModalName.ResultModal });
     };
@@ -32,6 +36,7 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
                 modalInfo, 
                 openInfoModal,
                 openHintModal,
+                openConfirmModal,
                 openResultModal,
                 closeModal, 
             }}
