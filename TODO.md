@@ -1,7 +1,4 @@
 ### Code logic ###
-- Move the modal close button into each modal component
-- Pass handleCloseModal to the close button of infoModal
-
 - Add ability for the game to end by timer finish
 - Stop the game from being playable after it ends
 

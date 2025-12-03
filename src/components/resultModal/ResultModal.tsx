@@ -3,6 +3,7 @@ import { useTimer } from "../../hooks/timer/useTimer";
 import type { Guess } from "../../types/types";
 import GuessList from "../guessList/GuessList";
 import styles from "./ResultModal.module.css";
+import closeIcon from "/closeIcon.svg";
 
 type ResultModalProps = {
     score: number,
@@ -32,7 +33,11 @@ export default function ResultModal({
     const topGuesses = guesses.slice(0, 5);
 
     return (
-        <div className={styles.resultModal}>
+        <>
+            <button className={styles.closeButton} onClick={closeModal}>
+                <img src={closeIcon} alt="" />
+            </button>
+            <div className={styles.resultModal}>
             <h2 className={styles.modalHeading}>Results</h2>
             <div className={styles.statsContainer}>
                 <span className={styles.statContainer}>
@@ -83,5 +88,6 @@ export default function ResultModal({
                 Close
             </button>
         </div>
-    )
+        </>
+    );
 };
