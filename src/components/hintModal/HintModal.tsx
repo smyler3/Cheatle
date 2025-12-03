@@ -42,7 +42,7 @@ export default function HintModal() {
                                             <p 
                                                 className={ `${styles.hintText} ${hint.isGuessed && styles.guessedHintText}`}
                                             >
-                                                {hint.revealedText ? hint.revealedText : "..."}
+                                                {hint.revealedText.length < hint.text.length ? `${hint.revealedText}...` : hint.revealedText}
                                             </p>
                                             {shouldShowHintButton && 
                                                 <button 
