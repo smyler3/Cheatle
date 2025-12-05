@@ -1,20 +1,23 @@
 ### Code logic ###
-Pass data into result modal to display on end screen
-- Add hintsUsed counter
-- Pass hintsUsed to results modal
-- Pass highest scoring words to results modal
-
-- Clean up the gameBody function
+Clean up the gameBody function
 - Create a context provider to pass all globally needed state through the app
 - Use a custom hook to have a useReducer for handleTileClick
+- Guess list and results modal have duplicate logic for getting the user score
+- Guess list and results modal have duplicate logic for getting the max possible score
+- HintsModal and ResultsModal have duplicate logic for getting 
 
-- Pass user score to results modal
-- Pass max score to results modal
-- Pass guesses to results modal
+Clean topWords:
+- use a map to grab all top words and organise by pointValue
+- Pass that map into useHints and results modal
+- rename highestScoringWords to topWords
 
 Game end logic
 - Add ability for the game to end by timer finish
 -- useEffect that once timeRemaining === 0, we set some isGameOver state to true, or have that in timer?
+-- isGameOver then stops the timer, and renders the result screen
+
+- End game when max score is reached
+-- Need to add max score calculator to the backend and pass it through?
 
 - Stop the game from being playable after it ends
 -- Update the play button not to start the game again

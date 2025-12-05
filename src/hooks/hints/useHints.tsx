@@ -6,6 +6,7 @@ type HintContextType = {
     setHintPoints: StateSetter<number>,
     topWordHints: Record<number, Hint[]>,
     setTopWordHints: StateSetter<Record<number, Hint[]>>,
+    hintsUsed: number,
     markTopWordAsGuessed: (value: number, topWord: string) => void,
     handleUseHint: (value: number, wordIndex: number) => void,
 };

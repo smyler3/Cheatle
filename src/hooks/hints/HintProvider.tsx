@@ -14,6 +14,7 @@ export default function HintProvider({ children } : HintProviderProps) {
     
     const [hintPoints, setHintPoints] = useState(0);
     const [topWordHints, setTopWordHints] = useState<Record<number, Hint[]>>({});
+    const [hintsUsed, setHintsUsed] = useState(0);
 
     const markTopWordAsGuessed = (value: number, topWord: string) => {
         setTopWordHints(prev => {
@@ -36,6 +37,7 @@ export default function HintProvider({ children } : HintProviderProps) {
 
     const handleUseHint = (value: number, wordIndex: number) => {
         setHintPoints(prev => prev - HINT_POINTS_REQUIRED);
+        setHintsUsed(prev => prev + 1);
         setTopWordHints((prev: Record<number, Hint[]>) => {
             const updatedTopWordHints = { ...prev };
             const updatedWordsAtValue = [...updatedTopWordHints[value]];
@@ -79,6 +81,7 @@ export default function HintProvider({ children } : HintProviderProps) {
             setHintPoints,
             topWordHints,
             setTopWordHints,
+            hintsUsed,
             markTopWordAsGuessed,
             handleUseHint,
         }}>

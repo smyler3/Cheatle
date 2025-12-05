@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import ActionButtons from '../actionButtons/ActionButtons';
 import './GameBody.module.css';
 import GameBoard from '../gameBoard/GameBoard';
@@ -11,8 +11,8 @@ import CountdownClock from '../countdownClock/CountdownClock';
 import { ADJACENT_LIST } from '../../constants';
 import Tile from '../tile/Tile';
 import { useChealteData } from '../../hooks/useChealteData';
-import type { TileType, Word } from '../../schema/CheatleSchema';
-import type { Guess, Hint } from '../../types/types';
+import type { TileType } from '../../schema/CheatleSchema';
+import type { Guess } from '../../types/types';
 import { createPortal } from 'react-dom';
 import ModalManager from '../modalManager/ModalManager';
 import { useHints } from '../../hooks/hints/useHints';
@@ -26,7 +26,6 @@ type CurrentGuessType = {
 
 export default function GameBody() {
     const { hintPoints, setHintPoints, markTopWordAsGuessed } = useHints();
-    const [totalScore, setTotalScore] = useState(0);
     const [correctGuesses, setCorrectGuesses] = useState<Guess[]>([]);
     const [currentGuess, setCurrentGuess] = useState<CurrentGuessType>(
         {
@@ -37,7 +36,7 @@ export default function GameBody() {
         }
     );
 
-    const {data, isLoading, isError, error} = useChealteData();
+    const { data, isLoading, isError, error } = useChealteData();
     console.log('error', error);
 
     if (isError) {
@@ -52,10 +51,9 @@ export default function GameBody() {
         );
     };
 
-    const {board, validWords, highestScoringWords} = data;
+    const { board, validWords, highestScoringWords } = data;
 
     const handleTileSelect = (tile: TileType, selectedPosition: number) => {
-        console.log(currentGuess);
         const prevPosition = currentGuess.prevTileOrder.at(-1) || null;
         const currentWord = currentGuess.text;
         const currentValue = currentGuess.value;
@@ -73,7 +71,6 @@ export default function GameBody() {
                 const isTopWord = highestScoringWords.some(word => word.text === currentWord);
 
                 addToCorrectGuesses(isTopWord);
-                setTotalScore(prev => prev + currentGuess.value);
                 setHintPoints(prev => prev + currentGuess.text.length);
 
                 if (isTopWord) {
@@ -109,7 +106,10 @@ export default function GameBody() {
     return (
         <main>
             {createPortal(
-                <ModalManager />, 
+                <ModalManager 
+                    guesses={correctGuesses}
+                    highestScoringWords={highestScoringWords}
+                />, 
                 document.body
             )}
             <div className="contentContainer">
@@ -126,7 +126,11 @@ export default function GameBody() {
                     <SubmitButton />
                 </ActionButtons>
                 <LiveGuessDisplay guess={currentGuess.text} />
-                <GuessList guesses={correctGuesses} score={totalScore} />
+                <GuessList
+                    guesses={correctGuesses} 
+                    shouldShowScore={true} 
+                    highestScoringWords={highestScoringWords}
+                />
             </div>
         </main>
     )

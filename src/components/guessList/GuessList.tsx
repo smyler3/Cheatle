@@ -1,20 +1,31 @@
+import type { Word } from "../../schema/CheatleSchema";
 import type { Guess } from "../../types/types";
 import styles from "./GuessList.module.css";
 
 type GuessListProps = {
     guesses: Guess[],
-    score?: number,
+    shouldShowScore: boolean,
+    highestScoringWords?: Word[],
 };
 
-const GuessList = ({ guesses, score }: GuessListProps) => {
+const GuessList = ({ guesses, shouldShowScore, highestScoringWords }: GuessListProps) => {
+    const topGuesses = guesses.slice(0, 5);
+    const score = topGuesses.reduce((score, word) => {
+        return score += word.value;
+    }, 0);
+
+    const maxPossibleScore = highestScoringWords?.slice(0, 5).reduce((maxScore, word) => {
+        return maxScore += word.value;
+    }, 0);
+
     return (
         <div>
-            {score && 
+            {shouldShowScore && 
                 <div 
                     className={styles.listHeading}
                 >
                     <p>Your guesses</p>
-                    <p>{score}/54</p>
+                    <p>{score}/{maxPossibleScore}</p>
                 </div>
             }
             <ol className={styles.wordList}>
