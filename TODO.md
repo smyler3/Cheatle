@@ -1,11 +1,4 @@
 ### Code logic ###
-Clean up the gameBody function
-- Create a context provider to pass all globally needed state through the app
-- Use a custom hook to have a useReducer for handleTileClick
-- Guess list and results modal have duplicate logic for getting the user score
-- Guess list and results modal have duplicate logic for getting the max possible score
-- HintsModal and ResultsModal have duplicate logic for getting 
-
 Clean topWords:
 - use a map to grab all top words and organise by pointValue
 - Pass that map into useHints and results modal

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
 import ActionButtons from '../actionButtons/ActionButtons';
 import './GameBody.module.css';
 import GameBoard from '../gameBoard/GameBoard';
@@ -12,10 +12,10 @@ import { ADJACENT_LIST } from '../../constants';
 import Tile from '../tile/Tile';
 import { useChealteData } from '../../hooks/useChealteData';
 import type { TileType } from '../../schema/CheatleSchema';
-import type { Guess } from '../../types/types';
 import { createPortal } from 'react-dom';
 import ModalManager from '../modalManager/ModalManager';
 import { useHints } from '../../hooks/hints/useHints';
+import { useGameData } from '../../hooks/gameData/useGameData';
 
 type CurrentGuessType = {
     text: string,
@@ -25,8 +25,10 @@ type CurrentGuessType = {
 };
 
 export default function GameBody() {
+    const { data, isLoading, isError } = useChealteData();
     const { hintPoints, setHintPoints, markTopWordAsGuessed } = useHints();
-    const [correctGuesses, setCorrectGuesses] = useState<Guess[]>([]);
+    const { correctGuesses, setCorrectGuesses } = useGameData();
+
     const [currentGuess, setCurrentGuess] = useState<CurrentGuessType>(
         {
             text: "",
@@ -35,9 +37,6 @@ export default function GameBody() {
             prevTilePositions: Array(16).fill(false),
         }
     );
-
-    const { data, isLoading, isError, error } = useChealteData();
-    console.log('error', error);
 
     if (isError) {
         return (
@@ -127,9 +126,7 @@ export default function GameBody() {
                 </ActionButtons>
                 <LiveGuessDisplay guess={currentGuess.text} />
                 <GuessList
-                    guesses={correctGuesses} 
                     shouldShowScore={true} 
-                    highestScoringWords={highestScoringWords}
                 />
             </div>
         </main>

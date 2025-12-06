@@ -1,22 +1,12 @@
-import type { Word } from "../../schema/CheatleSchema";
-import type { Guess } from "../../types/types";
+import { useGameData } from "../../hooks/gameData/useGameData";
 import styles from "./GuessList.module.css";
 
 type GuessListProps = {
-    guesses: Guess[],
     shouldShowScore: boolean,
-    highestScoringWords?: Word[],
 };
 
-const GuessList = ({ guesses, shouldShowScore, highestScoringWords }: GuessListProps) => {
-    const topGuesses = guesses.slice(0, 5);
-    const score = topGuesses.reduce((score, word) => {
-        return score += word.value;
-    }, 0);
-
-    const maxPossibleScore = highestScoringWords?.slice(0, 5).reduce((maxScore, word) => {
-        return maxScore += word.value;
-    }, 0);
+const GuessList = ({ shouldShowScore }: GuessListProps) => {
+    const { correctGuesses, score, maxPossibleScore } = useGameData();
 
     return (
         <div>
@@ -29,7 +19,7 @@ const GuessList = ({ guesses, shouldShowScore, highestScoringWords }: GuessListP
                 </div>
             }
             <ol className={styles.wordList}>
-                {guesses.map(guess => {
+                {correctGuesses.map(guess => {
                         return (
                             <li 
                                 key={guess.text}

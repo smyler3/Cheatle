@@ -1,33 +1,17 @@
+import { useGameData } from "../../hooks/gameData/useGameData";
 import { useHints } from "../../hooks/hints/useHints";
 import { useModal } from "../../hooks/modal/useModal";
 import { useTimer } from "../../hooks/timer/useTimer";
-import type { Word } from "../../schema/CheatleSchema";
-import type { Guess, Hint } from "../../types/types";
+import type { Hint } from "../../types/types";
 import GuessList from "../guessList/GuessList";
 import styles from "./ResultModal.module.css";
 import closeIcon from "/closeIcon.svg";
 
-type ResultModalProps = {
-    guesses: Guess[],
-    highestScoringWords: Word[],
-}
-
-export default function ResultModal({
-    guesses,
-    highestScoringWords,
-}: ResultModalProps) {
+export default function ResultModal() {
+    const { score, maxPossibleScore } = useGameData();
     const { minutesUsed, secondsUsed } = useTimer();
     const { hintsUsed, topWordHints } = useHints();
     const { closeModal } = useModal();
-
-    const maxPossibleScore = highestScoringWords?.slice(0, 5).reduce((maxScore, word) => {
-        return maxScore += word.value;
-    }, 0);
-
-    const topGuesses = guesses.slice(0, 5);
-    const score = topGuesses.reduce((score, word) => {
-        return score += word.value;
-    }, 0);
 
     return (
         <>
@@ -52,7 +36,7 @@ export default function ResultModal({
                     <p>Hints</p>
                 </span>
             </div>
-            <GuessList guesses={topGuesses} shouldShowScore={false} />
+            <GuessList shouldShowScore={false} />
             <div className={styles.highestScoringWords}>
                 <h3>Highest scoring words:</h3>
                 {Object.entries(topWordHints).map(([valueStr, words]) => {

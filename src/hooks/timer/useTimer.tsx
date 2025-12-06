@@ -1,8 +1,9 @@
 import { createContext, useContext } from "react";
 
-export type TimerContextType = {
+type TimerContextType = {
     isTimerStarted: boolean,
     timeRemaining: number,
+    isTimerDone: boolean,
     minutesRemaining: string,
     secondsRemaining: string,
     minutesUsed: string,

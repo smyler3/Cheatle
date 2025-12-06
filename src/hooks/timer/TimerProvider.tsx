@@ -10,6 +10,7 @@ type TimerProviderProps = {
 export const TimerProvider = ({ children }: TimerProviderProps) => {
     const [isTimerStarted, setIsTimerStarted] = useState(false);
     const [timeRemaining, setTimeRemaining] = useState(SECONDS_IN_A_MINUTE * MINUTES_IN_A_GAME);
+    const [isTimerDone, setIsTimerDone] = useState(false);
     const minutesRemaining = String(Math.floor(timeRemaining / SECONDS_IN_A_MINUTE));
     const secondsRemaining = String(timeRemaining % SECONDS_IN_A_MINUTE).padStart(2, '0');
     const minutesUsed = String(Math.floor(((SECONDS_IN_A_MINUTE * MINUTES_IN_A_GAME) - timeRemaining) / 60));
@@ -21,6 +22,7 @@ export const TimerProvider = ({ children }: TimerProviderProps) => {
 
     const stopTimer = () => {
         setIsTimerStarted(false);
+        setIsTimerDone(true);
     };
 
     useEffect(() => {
@@ -29,11 +31,11 @@ export const TimerProvider = ({ children }: TimerProviderProps) => {
                 setTimeRemaining((prev) => {
                     if (prev <= 0) {
                         clearInterval(intervalID);
+                        setIsTimerDone(true);
                         return 0;
                     }
                     return prev - 1;
                 });
-                console.log("count");
             };
         }, 1000);
 
@@ -44,6 +46,7 @@ export const TimerProvider = ({ children }: TimerProviderProps) => {
         <TimerContext.Provider value={{
             isTimerStarted,
             timeRemaining,
+            isTimerDone,
             minutesRemaining,
             secondsRemaining,
             minutesUsed,
