@@ -5,17 +5,7 @@ Clean topWords:
 - rename highestScoringWords to topWords
 
 Game end logic
-- Add ability for the game to end by timer finish
--- useEffect that once timeRemaining === 0, we set some isGameOver state to true, or have that in timer?
--- isGameOver then stops the timer, and renders the result screen
-
-- End game when max score is reached
--- Need to add max score calculator to the backend and pass it through?
-
 - Stop the game from being playable after it ends
--- Update the play button not to start the game again
--- Update tile handle click to not run
--- Update hint buttons to not run
 
 Rename submitButton to finishButton
 Rename countdownClock to countdownTimer

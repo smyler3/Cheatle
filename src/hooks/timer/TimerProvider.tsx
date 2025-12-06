@@ -17,12 +17,13 @@ export const TimerProvider = ({ children }: TimerProviderProps) => {
     const secondsUsed = String(((SECONDS_IN_A_MINUTE * MINUTES_IN_A_GAME) - timeRemaining) % 60).padStart(2, '0');
 
     const startTimer = () => {
-        setIsTimerStarted(true);
+        if (!isTimerDone) {
+            setIsTimerStarted(true);
+        }
     };
 
     const stopTimer = () => {
         setIsTimerStarted(false);
-        setIsTimerDone(true);
     };
 
     useEffect(() => {
@@ -30,8 +31,8 @@ export const TimerProvider = ({ children }: TimerProviderProps) => {
             if (isTimerStarted) {
                 setTimeRemaining((prev) => {
                     if (prev <= 0) {
-                        clearInterval(intervalID);
                         setIsTimerDone(true);
+                        clearInterval(intervalID);
                         return 0;
                     }
                     return prev - 1;

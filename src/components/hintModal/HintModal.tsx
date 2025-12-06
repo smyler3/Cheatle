@@ -8,7 +8,7 @@ import closeIcon from "/closeIcon.svg";
 export default function HintModal() {
     const { closeModal } = useModal();
     const { hintPoints, topWordHints, handleUseHint } = useHints();
-    console.log(topWordHints);
+    
     const numberOfHints = Math.floor(hintPoints / HINT_POINTS_REQUIRED); 
 
     return (

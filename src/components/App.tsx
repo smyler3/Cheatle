@@ -13,17 +13,17 @@ const queryClient = new QueryClient();
 export default function App() {
     return (
         <QueryClientProvider client={queryClient}>
-            <GameDataProvider>
-                <TimerProvider>
-                    <HintProvider>
-                        <ModalProvider>
-                            <Header />
-                            <GameBody />
-                            <Footer />
-                        </ModalProvider>
-                    </HintProvider>
-                </TimerProvider>
-            </GameDataProvider>
+            <TimerProvider>
+                <GameDataProvider>
+                <HintProvider>
+                    <ModalProvider>
+                        <Header />
+                        <GameBody />
+                        <Footer />
+                    </ModalProvider>
+                </HintProvider>
+                </GameDataProvider>
+            </TimerProvider>
         </QueryClientProvider>
     )
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import ActionButtons from '../actionButtons/ActionButtons';
 import './GameBody.module.css';
 import GameBoard from '../gameBoard/GameBoard';
@@ -16,6 +16,8 @@ import { createPortal } from 'react-dom';
 import ModalManager from '../modalManager/ModalManager';
 import { useHints } from '../../hooks/hints/useHints';
 import { useGameData } from '../../hooks/gameData/useGameData';
+import { useTimer } from '../../hooks/timer/useTimer';
+import { useModal } from '../../hooks/modal/useModal';
 
 type CurrentGuessType = {
     text: string,
@@ -26,7 +28,10 @@ type CurrentGuessType = {
 
 export default function GameBody() {
     const { data, isLoading, isError } = useChealteData();
+    const { stopTimer, isTimerDone, setIsTimerDone } = useTimer();
+    const { score, maxPossibleScore } = useGameData();
     const { hintPoints, setHintPoints, markTopWordAsGuessed } = useHints();
+    const { openResultModal } = useModal();
     const { correctGuesses, setCorrectGuesses } = useGameData();
 
     const [currentGuess, setCurrentGuess] = useState<CurrentGuessType>(
@@ -37,6 +42,23 @@ export default function GameBody() {
             prevTilePositions: Array(16).fill(false),
         }
     );
+
+    const endGame = useCallback(() => {
+        stopTimer();
+        openResultModal();
+    }, [stopTimer, openResultModal]);
+
+    useEffect(() => {
+        if (isTimerDone) {
+            endGame();
+        }
+    }, [isTimerDone, endGame]);
+
+    useEffect(() => {
+        if (score === maxPossibleScore) {
+            endGame();
+        };
+    }, [score, maxPossibleScore, endGame]);
 
     if (isError) {
         return (
@@ -60,6 +82,10 @@ export default function GameBody() {
         const addToCorrectGuesses = (isTopWord: boolean): void => {
             setCorrectGuesses(prev => binaryInsertion({...currentGuess, "isTopWord": isTopWord }, prev));
         }
+
+        if (isTimerDone) {
+            return;
+        };
 
         // Submitting guess
         if (currentGuess.prevTilePositions[selectedPosition] === true) {
@@ -105,10 +131,7 @@ export default function GameBody() {
     return (
         <main>
             {createPortal(
-                <ModalManager 
-                    guesses={correctGuesses}
-                    highestScoringWords={highestScoringWords}
-                />, 
+                <ModalManager />, 
                 document.body
             )}
             <div className="contentContainer">

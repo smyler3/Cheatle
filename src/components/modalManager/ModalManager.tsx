@@ -6,18 +6,8 @@ import styles from "./ModalManager.module.css";
 import { useModal } from "../../hooks/modal/useModal";
 import { ModalName } from "../../constants";
 import ConfirmModal from "../confirmModal/ConfirmModal";
-import type { Guess } from "../../types/types";
-import type { Word } from "../../schema/CheatleSchema";
 
-type ModalManagerType = {
-    guesses: Guess[],
-    highestScoringWords: Word[],
-};
-
-export default function ModalManager({
-    guesses,
-    highestScoringWords,
-}: ModalManagerType) {
+export default function ModalManager() {
     const { modalInfo } = useModal();
     const shouldShowInfoModal = modalInfo.modalToShow === ModalName.InfoModal;
     const shouldShowHintModal = modalInfo.modalToShow === ModalName.HintModal;
@@ -38,10 +28,7 @@ export default function ModalManager({
                     <ConfirmModal />
                 </Activity>
                 <Activity mode={shouldShowResultModal ? "visible" : "hidden"} >
-                    <ResultModal
-                        guesses={guesses}
-                        highestScoringWords={highestScoringWords}
-                    />
+                    <ResultModal />
                 </Activity>
             </dialog>
         </div>

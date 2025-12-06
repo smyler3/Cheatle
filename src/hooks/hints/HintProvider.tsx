@@ -4,6 +4,7 @@ import type { Hint } from "../../types/types";
 import { HINT_POINTS_REQUIRED } from "../../constants";
 import { useChealteData } from "../useChealteData";
 import type { Word } from "../../schema/CheatleSchema";
+import { useTimer } from "../timer/useTimer";
 
 type HintProviderProps = {
     children: React.ReactNode,
@@ -11,6 +12,7 @@ type HintProviderProps = {
 
 export default function HintProvider({ children } : HintProviderProps) {
     const { data } = useChealteData();
+    const { isTimerDone } = useTimer();
     
     const [hintPoints, setHintPoints] = useState(0);
     const [topWordHints, setTopWordHints] = useState<Record<number, Hint[]>>({});
@@ -36,6 +38,10 @@ export default function HintProvider({ children } : HintProviderProps) {
     };
 
     const handleUseHint = (value: number, wordIndex: number) => {
+        if (isTimerDone) {
+            return;
+        };
+
         setHintPoints(prev => prev - HINT_POINTS_REQUIRED);
         setHintsUsed(prev => prev + 1);
         setTopWordHints((prev: Record<number, Hint[]>) => {
