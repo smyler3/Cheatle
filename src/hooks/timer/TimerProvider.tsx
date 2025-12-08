@@ -24,6 +24,7 @@ export const TimerProvider = ({ children }: TimerProviderProps) => {
 
     const stopTimer = () => {
         setIsTimerStarted(false);
+        setIsTimerDone(true);
     };
 
     useEffect(() => {

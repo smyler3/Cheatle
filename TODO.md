@@ -1,8 +1,4 @@
 ### Code logic ###
-Hint modal isn't rendering any hints:
-- maxPossibleScore has new useEffect, check that's applied everywhere correctly
-- other things that rely on data?. should instead have a use effect to update once that ends 
-
 Add half stars logic
 
 Game end logic
@@ -14,6 +10,8 @@ maybe timer should use Dates and keep current date in local storage?
 have fonts locally 
 
 ### Code styling ###
+
+Fix the spacing/sizing of the page
 
 Redesign hints available/points for the hints modal
 Shoulds the best words be randomised? Or just ordered top to bottom with no points showing dividers? or lock each tier behind completing the last?
