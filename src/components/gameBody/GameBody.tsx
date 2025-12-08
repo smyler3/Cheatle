@@ -5,9 +5,9 @@ import GameBoard from '../gameBoard/GameBoard';
 import GuessList from '../guessList/GuessList';
 import HintButton from '../hintButton/HintButton';
 import LiveGuessDisplay from '../liveGuessDisplay/LiveGuessDisplay';
-import SubmitButton from '../submitButton/SubmitButton';
+import FinishButton from '../finishButton/FinishButton';
 import { binaryInsertion } from '../../utils/utils';
-import CountdownClock from '../countdownClock/CountdownClock';
+import CountdownTimer from '../countdownTimer/CountdownTimer';
 import { ADJACENT_LIST } from '../../constants';
 import Tile from '../tile/Tile';
 import { useChealteData } from '../../hooks/useChealteData';
@@ -135,7 +135,7 @@ export default function GameBody() {
                 document.body
             )}
             <div className="contentContainer">
-                <CountdownClock />
+                <CountdownTimer />
                 <GameBoard>
                     {board.map((tile, index) => {
                         return (
@@ -145,7 +145,7 @@ export default function GameBody() {
                 </GameBoard>
                 <ActionButtons>
                     <HintButton points={hintPoints} />
-                    <SubmitButton />
+                    <FinishButton />
                 </ActionButtons>
                 <LiveGuessDisplay guess={currentGuess.text} />
                 <GuessList

@@ -1,7 +1,7 @@
-import styles from "./SubmitButton.module.css";
+import styles from "./FinishButton.module.css";
 import { useModal } from "../../hooks/modal/useModal";
 
-const SubmitButton = () => {
+const FinishButton = () => {
     const { openConfirmModal } = useModal();
 
     return (
@@ -14,4 +14,4 @@ const SubmitButton = () => {
     )
 };
 
-export default SubmitButton;
+export default FinishButton;

@@ -1,6 +1,6 @@
 import { memo, type ReactNode } from "react";
 import HintButton from "../hintButton/HintButton";
-import SubmitButton from "../submitButton/SubmitButton";
+import FinishButton from "../finishButton/FinishButton";
 import styles from "./ActionButtons.module.css";
 
 type ActionButtonsProps = {

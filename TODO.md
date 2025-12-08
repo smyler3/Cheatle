@@ -1,4 +1,6 @@
 ### Code logic ###
+Add half stars logic
+
 Clean topWords:
 - use a map to grab all top words and organise by pointValue
 - Pass that map into useHints and results modal
@@ -6,11 +8,6 @@ Clean topWords:
 
 Game end logic
 - Stop the game from being playable after it ends
-
-Rename submitButton to finishButton
-Rename countdownClock to countdownTimer
-
-Add half stars logic
 
 use localstoreage for current guesses and reset every midnight/every board
 maybe timer should use Dates and keep current date in local storage?
