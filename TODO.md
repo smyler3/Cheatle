@@ -1,10 +1,9 @@
 ### Code logic ###
-Add half stars logic
+Hint modal isn't rendering any hints:
+- maxPossibleScore has new useEffect, check that's applied everywhere correctly
+- other things that rely on data?. should instead have a use effect to update once that ends 
 
-Clean topWords:
-- use a map to grab all top words and organise by pointValue
-- Pass that map into useHints and results modal
-- rename highestScoringWords to topWords
+Add half stars logic
 
 Game end logic
 - Stop the game from being playable after it ends

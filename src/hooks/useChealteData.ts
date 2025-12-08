@@ -7,8 +7,10 @@ const fetchCheatleData = async (): Promise<CheatleResponse> => {
         throw new Error("Network request failed");
     };
     const jsonResponse = await response.json();
-    console.log(jsonResponse);
-    return CheatleResponseSchema.parse(jsonResponse);
+    console.log("json", jsonResponse);
+    const res = CheatleResponseSchema.parse(jsonResponse);
+    console.log("res", res);
+    return res;
 };
 
 export const useChealteData = () => {

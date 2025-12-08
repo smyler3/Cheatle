@@ -6,7 +6,7 @@ import GuessList from '../guessList/GuessList';
 import HintButton from '../hintButton/HintButton';
 import LiveGuessDisplay from '../liveGuessDisplay/LiveGuessDisplay';
 import FinishButton from '../finishButton/FinishButton';
-import { binaryInsertion } from '../../utils/utils';
+import { binaryInsertion, isTopWord } from '../../utils/utils';
 import CountdownTimer from '../countdownTimer/CountdownTimer';
 import { ADJACENT_LIST } from '../../constants';
 import Tile from '../tile/Tile';
@@ -27,8 +27,9 @@ type CurrentGuessType = {
 };
 
 export default function GameBody() {
-    const { data, isLoading, isError } = useChealteData();
-    const { stopTimer, isTimerDone, setIsTimerDone } = useTimer();
+    const { data, isLoading, isError, error } = useChealteData();
+    // console.log("error:", error);
+    const { stopTimer, isTimerDone } = useTimer();
     const { score, maxPossibleScore } = useGameData();
     const { hintPoints, setHintPoints, markTopWordAsGuessed } = useHints();
     const { openResultModal } = useModal();
@@ -72,7 +73,7 @@ export default function GameBody() {
         );
     };
 
-    const { board, validWords, highestScoringWords } = data;
+    const { board, validWords, topWords } = data;
 
     const handleTileSelect = (tile: TileType, selectedPosition: number) => {
         const prevPosition = currentGuess.prevTileOrder.at(-1) || null;
@@ -93,12 +94,12 @@ export default function GameBody() {
             const isValid = validWords.some(word => word.text === currentWord);
             
             if (!isRepeat && isValid) {
-                const isTopWord = highestScoringWords.some(word => word.text === currentWord);
+                const isCurrentATopWord = isTopWord(currentWord, topWords);
 
-                addToCorrectGuesses(isTopWord);
+                addToCorrectGuesses(isCurrentATopWord);
                 setHintPoints(prev => prev + currentGuess.text.length);
 
-                if (isTopWord) {
+                if (isCurrentATopWord) {
                     markTopWordAsGuessed(currentValue, currentWord);
                 }
             };

@@ -6,7 +6,6 @@ type GameDataType = {
     maxPossibleScore: number,
     correctGuesses: Guess[],
     setCorrectGuesses: Dispatch<SetStateAction<Guess[]>>,
-    isGameOver: boolean,
 };
 
 export const GameDataContext = createContext<GameDataType>({} as GameDataType);

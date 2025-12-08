@@ -6,12 +6,6 @@ export type Guess = {
     isTopWord: boolean,
 };
 
-export type Hint = {
-    text: string,
-    revealedText: string,
-    isGuessed: boolean,
-};
-
 export type ModalNameType = (typeof ModalName)[keyof typeof ModalName];
 
 export type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;

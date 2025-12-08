@@ -1,3 +1,5 @@
+import { REQUIRED_TOP_WORDS } from "../constants";
+import type { Word } from "../schema/CheatleSchema";
 import type { Guess } from "../types/types";
 
 export const binaryInsertion = (elem: Guess, array: Guess[]): Guess[] => {
@@ -16,3 +18,32 @@ export const binaryInsertion = (elem: Guess, array: Guess[]): Guess[] => {
 
     return [...array.slice(0, left), elem, ...array.slice(left)];
 };
+
+export const isTopWord = (wordToCheck: string, topWords: Map<number, Word[]>): boolean => {
+    topWords.forEach(valueGroup => {
+        if (valueGroup.some(word => word.text === wordToCheck)) {
+            return true;
+        }; 
+    });
+
+    return false;
+};
+
+export const getMaxPossibleScore = (topWords: Map<number, Word[]>): number => {
+    let count = 0;
+    let maxPossibleScore = 0;
+
+    topWords.forEach(valueGroup => {
+        for (let i = 0; i < valueGroup.length; i += 1) {
+            if (count < REQUIRED_TOP_WORDS) {
+                maxPossibleScore += valueGroup[i].value;
+                count += 1;
+            }
+            else {
+                return maxPossibleScore;
+            }
+        };
+    });
+
+    return maxPossibleScore;
+}

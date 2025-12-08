@@ -1,7 +1,7 @@
 import { HINT_POINTS_REQUIRED } from "../../constants";
 import { useHints } from "../../hooks/hints/useHints";
 import { useModal } from "../../hooks/modal/useModal";
-import type { Hint } from "../../types/types";
+import type { Hint } from "../../schema/CheatleSchema";
 import styles from "./HintModal.module.css";
 import closeIcon from "/closeIcon.svg";
 
@@ -9,7 +9,9 @@ export default function HintModal() {
     const { closeModal } = useModal();
     const { hintPoints, topWordHints, handleUseHint } = useHints();
     
-    const numberOfHints = Math.floor(hintPoints / HINT_POINTS_REQUIRED); 
+    const numberOfHints = Math.floor(hintPoints / HINT_POINTS_REQUIRED);
+    
+    console.log("topWordHints:", topWordHints);
 
     return (
         <>
@@ -27,8 +29,9 @@ export default function HintModal() {
                     <p>{hintPoints}/{HINT_POINTS_REQUIRED}</p>
                     <p>Available: {numberOfHints}</p>
                 </div>
-                {Object.entries(topWordHints).map(([valueStr, words]) => {
+                {Array.from(topWordHints.entries()).map(([valueStr, words]) => {
                     const value = Number(valueStr);
+                    console.log("haha", value, words);
 
                     return (
                         <section key={value}>
