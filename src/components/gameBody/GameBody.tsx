@@ -135,24 +135,22 @@ export default function GameBody() {
                 <ModalManager />, 
                 document.body
             )}
-            <div className="contentContainer">
-                <CountdownTimer />
-                <GameBoard>
-                    {board.map((tile, index) => {
-                        return (
-                            <Tile key={index} tile={tile} position={index} handleClick={handleTileSelect} />
-                        )
-                    })}
-                </GameBoard>
-                <ActionButtons>
-                    <HintButton points={hintPoints} />
-                    <FinishButton />
-                </ActionButtons>
-                <LiveGuessDisplay guess={currentGuess.text} />
-                <GuessList
-                    shouldShowScore={true} 
-                />
-            </div>
+            <CountdownTimer />
+            <GameBoard>
+                {board.map((tile, index) => {
+                    return (
+                        <Tile key={index} tile={tile} position={index} handleClick={handleTileSelect} />
+                    )
+                })}
+            </GameBoard>
+            <ActionButtons>
+                <HintButton points={hintPoints} />
+                <FinishButton />
+            </ActionButtons>
+            <LiveGuessDisplay guess={currentGuess.text} />
+            <GuessList
+                shouldShowScore={true} 
+            />
         </main>
     )
 }
