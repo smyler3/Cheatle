@@ -10,12 +10,14 @@
     color: var(--grey-900);
 
     border-radius: 100px;
-    border: 1px solid var(--grey-800);
+    border: 2px solid var(--grey-1000);
+
+    overflow: hidden;
 }
 
 .hintProgressIndicator {
     position: absolute;
-    left: 0;
+    left: -20px;
     top: 0;
 
     min-height: 44px;

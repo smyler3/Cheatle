@@ -10,15 +10,15 @@ maybe timer should use Dates and keep current date in local storage?
 have fonts locally 
 
 ### Code styling ###
+Add styling for hint points being added
+- bar filling up
+- +x animation
+
 
 create skeleton loader while waiting for request?
 create error page for when things go wrong?
 
 keep previous submitted word greyed out and fix overflow logic
-
-Add styling for hint points being added
-- bar filling up
-- +x animation
 
 add styling to tiles for selected, correct, incorrect, etc
 
