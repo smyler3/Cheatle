@@ -10,7 +10,7 @@ import { binaryInsertion, isTopWord } from '../../utils/utils';
 import CountdownTimer from '../countdownTimer/CountdownTimer';
 import { ADJACENT_LIST } from '../../constants';
 import Tile from '../tile/Tile';
-import { useChealteData } from '../../hooks/useChealteData';
+import { useCheatleData } from '../../hooks/useCheatleData';
 import type { TileType } from '../../schema/CheatleSchema';
 import { createPortal } from 'react-dom';
 import ModalManager from '../modalManager/ModalManager';
@@ -28,7 +28,7 @@ type CurrentGuessType = {
 };
 
 export default function GameBody() {
-    const { data, isLoading, isError, error } = useChealteData();
+    const { data, isLoading, isError, error } = useCheatleData();
     // console.log("error:", error);
     const { stopTimer, isTimerDone } = useTimer();
     const { score, maxPossibleScore } = useGameData();

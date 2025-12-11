@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { HintContext } from "./useHints";
 import { HINT_POINTS_REQUIRED } from "../../constants";
-import { useChealteData } from "../useChealteData";
+import { useCheatleData } from "../useCheatleData";
 import { useTimer } from "../timer/useTimer";
 import type { Hint } from "../../schema/CheatleSchema";
 
@@ -10,7 +10,7 @@ type HintProviderProps = {
 };
 
 export default function HintProvider({ children } : HintProviderProps) {
-    const { data } = useChealteData();
+    const { data } = useCheatleData();
     const { isTimerDone } = useTimer();
     
     const [hintPoints, setHintPoints] = useState(0);

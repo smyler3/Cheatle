@@ -13,9 +13,9 @@ const fetchCheatleData = async (): Promise<CheatleResponse> => {
     return res;
 };
 
-export const useChealteData = () => {
+export const useCheatleData = () => {
     return useQuery({
-        queryKey: ["chealte"],
+        queryKey: ["cheatle"],
         queryFn: () => fetchCheatleData(),
     });
 };

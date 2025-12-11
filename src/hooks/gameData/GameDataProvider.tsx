@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { GameDataContext } from "./useGameData";
-import { useChealteData } from "../useChealteData";
+import { useCheatleData } from "../useCheatleData";
 import type { Guess } from "../../types/types";
 import { getMaxPossibleScore } from "../../utils/utils";
 
@@ -9,7 +9,7 @@ type GameDataProviderProps = {
 };
 
 export const GameDataProvider = ({ children }: GameDataProviderProps) => {
-    const { data } = useChealteData();
+    const { data } = useCheatleData();
 
     const [correctGuesses, setCorrectGuesses] = useState<Guess[]>([]);
     const [maxPossibleScore, setMaxPossibleScore] = useState<number>(null);
