@@ -9,3 +9,8 @@ export type Guess = {
 export type ModalNameType = (typeof ModalName)[keyof typeof ModalName];
 
 export type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
+
+export type tileColourType = {
+    default: string,
+    selected: string,
+};

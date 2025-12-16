@@ -15,7 +15,7 @@
 }
 
 .wordList li:nth-child(-n+5) {
-    background-color: var(--blue-100);
+    background-color: var(--primary-100);
     color: var(--grey-1000);
 }
 

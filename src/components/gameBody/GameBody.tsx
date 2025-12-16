@@ -139,7 +139,7 @@ export default function GameBody() {
             <GameBoard>
                 {board.map((tile, index) => {
                     return (
-                        <Tile key={index} tile={tile} position={index} handleClick={handleTileSelect} />
+                        <Tile key={index} tile={tile} position={index} selectedTiles={currentGuess.prevTilePositions} handleClick={handleTileSelect} />
                     )
                 })}
             </GameBoard>

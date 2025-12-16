@@ -6,19 +6,24 @@ import styles from "./Tile.module.css";
 type TileProps = {
     tile: TileType,
     position: number,
+    selectedTiles: boolean[],
     handleClick: (tile: TileType, position: number) => void;
 };
 
 const Tile = ({ 
     tile, 
     position, 
+    selectedTiles,
     handleClick
 }: TileProps) => {
+    const isSelected = selectedTiles[position];
+    const selectedValue = isSelected ? "selected" : "default";
     return (
         <button
             className={styles.tile}
-            style={{ backgroundColor: TILE_VALUE_COLOURS[tile.value] }}
+            style={{ backgroundColor: TILE_VALUE_COLOURS[tile.value][selectedValue] }}
             onClick={() => handleClick(tile, position)}
+            id={`tile-${position}`}
         >
             <div
                 className={styles.text}

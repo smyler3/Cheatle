@@ -46,4 +46,4 @@ export const getMaxPossibleScore = (topWords: Map<number, Word[]>): number => {
     });
 
     return maxPossibleScore;
-}
+};

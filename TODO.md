@@ -20,7 +20,7 @@ create error page for when things go wrong?
 
 keep previous submitted word greyed out and fix overflow logic
 
-add styling to tiles for selected, correct, incorrect, etc
+add styling to tiles for correct, incorrect, duplicate
 
 change font size on smaller screens
 
