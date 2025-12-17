@@ -1,9 +1,6 @@
 ### Code logic ###
 Add half stars logic
 
-Game end logic
-- Stop the game from being playable after it ends
-
 use localstoreage for current guesses and reset every midnight/every board
 maybe timer should use Dates and keep current date in local storage?
 
@@ -20,7 +17,11 @@ create error page for when things go wrong?
 
 keep previous submitted word greyed out and fix overflow logic
 
-add styling to tiles for correct, incorrect, duplicate
+add constants for 'correct' | 'incorrect' | 'idle'
+add already guessed logic to let the user know
+
+Modal shouldn't have the scrollbar inside of the modal
+modal should have width 100% with max-width
 
 change font size on smaller screens
 

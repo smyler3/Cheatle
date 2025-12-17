@@ -18,6 +18,7 @@ import { useHints } from '../../hooks/hints/useHints';
 import { useGameData } from '../../hooks/gameData/useGameData';
 import { useTimer } from '../../hooks/timer/useTimer';
 import { useModal } from '../../hooks/modal/useModal';
+import type { LastGuessType } from '../../types/types';
 
 type CurrentGuessType = {
     text: string,
@@ -35,6 +36,10 @@ export default function GameBody() {
     const { openResultModal } = useModal();
     const { correctGuesses, setCorrectGuesses } = useGameData();
 
+    const [lastGuess, setLastGuess] = useState<LastGuessType>({
+        tilePositions: [],
+        result: 'incorrect', 
+    });
     const [currentGuess, setCurrentGuess] = useState<CurrentGuessType>(
         {
             text: "",
@@ -43,6 +48,13 @@ export default function GameBody() {
             prevTilePositions: Array(16).fill(false),
         }
     );
+
+    const clearLastGuess = () => {
+        setLastGuess({
+            tilePositions: [], 
+            result: "idle",
+        });
+    };
 
     const endGame = useCallback(() => {
         stopTimer();
@@ -104,6 +116,11 @@ export default function GameBody() {
                 }
             };
 
+            setLastGuess({
+                tilePositions: currentGuess.prevTileOrder,
+                result: (!isRepeat && isValid) ? 'correct' : 'incorrect',
+            });
+
             setCurrentGuess({
                 text: "",
                 value: 0,
@@ -139,7 +156,7 @@ export default function GameBody() {
             <GameBoard>
                 {board.map((tile, index) => {
                     return (
-                        <Tile key={index} tile={tile} position={index} selectedTiles={currentGuess.prevTilePositions} handleClick={handleTileSelect} />
+                        <Tile key={index} tile={tile} position={index} lastGuess={lastGuess} clearLastGuess={clearLastGuess} selectedTiles={currentGuess.prevTilePositions} handleClick={handleTileSelect} />
                     )
                 })}
             </GameBoard>
