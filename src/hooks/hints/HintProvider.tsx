@@ -28,6 +28,7 @@ export default function HintProvider({ children } : HintProviderProps) {
 
     const markTopWordAsGuessed = (value: number, topWord: string) => {
         setTopWordHints(prev => {
+            console.log('prev', prev);
             const wordsAtValue = prev.get(value);
             if (!wordsAtValue) return prev;
 
@@ -38,10 +39,9 @@ export default function HintProvider({ children } : HintProviderProps) {
                 index === wordIndex ? { ...word, revealedText: word.text, isGuessed: true } : word
             );
 
-            return {
-                ...prev,
-                [value]: updatedHints
-            };
+            const updatedTopWordHints = new Map(prev).set(value, updatedHints);
+
+            return updatedTopWordHints;
         })
     };
 

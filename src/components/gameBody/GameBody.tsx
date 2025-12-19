@@ -28,11 +28,11 @@ type CurrentGuessType = {
 };
 
 export default function GameBody() {
-    const { data, isLoading, isError, error } = useCheatleData();
+    const { data, isLoading, isError } = useCheatleData();
     // console.log("error:", error);
     const { stopTimer, isTimerDone } = useTimer();
     const { score, maxPossibleScore } = useGameData();
-    const { hintPoints, setHintPoints, markTopWordAsGuessed } = useHints();
+    const { setHintPoints, markTopWordAsGuessed } = useHints();
     const { openResultModal } = useModal();
     const { correctGuesses, setCorrectGuesses } = useGameData();
 
@@ -106,6 +106,7 @@ export default function GameBody() {
             const isValid = validWords.some(word => word.text === currentWord);
             
             if (!isRepeat && isValid) {
+                console.log(currentWord, topWords);
                 const isCurrentATopWord = isTopWord(currentWord, topWords);
 
                 addToCorrectGuesses(isCurrentATopWord);
@@ -161,7 +162,7 @@ export default function GameBody() {
                 })}
             </GameBoard>
             <ActionButtons>
-                <HintButton points={hintPoints} />
+                <HintButton />
                 <FinishButton />
             </ActionButtons>
             <LiveGuessDisplay guess={currentGuess.text} />

@@ -1,16 +1,22 @@
-### Code logic ###
+### Code logic
+
 Add half stars logic
 
 use localstoreage for current guesses and reset every midnight/every board
 maybe timer should use Dates and keep current date in local storage?
 
-have fonts locally 
+have fonts locally
 
-### Code styling ###
+### Code styling
+
 Add styling for hint points being added
-- bar filling up
+
+- bar filling up calculation/function
 - +x animation
 
+keep previous submitted word greyed out and fix overflow logic
+
+Modal scrollbars weird and need fixing
 
 create skeleton loader while waiting for request?
 create error page for when things go wrong?

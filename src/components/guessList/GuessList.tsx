@@ -20,6 +20,7 @@ const GuessList = ({ shouldShowScore }: GuessListProps) => {
             }
             <ol className={styles.wordList}>
                 {correctGuesses.map(guess => {
+                    console.log('guess', guess);
                         return (
                             <li 
                                 key={guess.text}

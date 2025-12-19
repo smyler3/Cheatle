@@ -1,5 +1,6 @@
 .button {
     position: relative;
+    z-index: 2;
 
     min-width: 44px;
     min-height: 44px;
@@ -7,12 +8,17 @@
     padding: 8px 16px;
 
     font: inherit;
-    color: var(--grey-900);
+    color: black;
 
     border-radius: 100px;
     border: 2px solid var(--grey-1000);
 
     overflow: hidden;
+}
+
+.buttonText {
+    position: relative;
+    z-index: 2;
 }
 
 .hintProgressIndicator {
@@ -23,11 +29,60 @@
     min-height: 44px;
 
     border-radius: 100px;
-    background-color: var(--grey-800);
+    background-color: var(--grey-700);
+    transition-property: width;
+    transition-timing-function: ease-in-out;
 }
+
+/* .scoreIncreaseIndicator {
+    position: absolute;
+    right: 25%;
+    top: 25%;
+    animation: floatAnimation 1.5s ease-in-out forwards;
+} */
 
 .scoreIncreaseIndicator {
     position: absolute;
     right: 25%;
     top: 25%;
+    animation: arcFall 1.2s forwards;
+}
+
+@keyframes arcFall {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 0) scale(0.9);
+    }
+
+    25% {
+        opacity: 1;
+        /* slight hop upward + slight right */
+        transform: translate(calc(-50% + 5px), -12px) scale(1);
+    }
+
+    60% {
+        /* arc descending, continuing to the right */
+        transform: translate(calc(-50% + 12px), 6px) rotate(3deg);
+    }
+
+    100% {
+        opacity: 0;
+        /* end much lower + right, small rotation */
+        transform: translate(calc(-50% + 18px), 32px) rotate(6deg);
+    }
+}
+
+@keyframes floatAnimation {
+    0% {
+        right: 25%;
+        top: 25%;
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        top: -35%;
+        opacity: 0;
+    }
 }

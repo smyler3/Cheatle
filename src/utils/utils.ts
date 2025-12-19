@@ -20,11 +20,11 @@ export const binaryInsertion = (elem: Guess, array: Guess[]): Guess[] => {
 };
 
 export const isTopWord = (wordToCheck: string, topWords: Map<number, Word[]>): boolean => {
-    topWords.forEach(valueGroup => {
+    for (const valueGroup of topWords.values()) {
         if (valueGroup.some(word => word.text === wordToCheck)) {
             return true;
         }; 
-    });
+    };
 
     return false;
 };
@@ -35,7 +35,7 @@ export const getMaxPossibleScore = (topWords: Map<number, Word[]>): number => {
 
     topWords.forEach(valueGroup => {
         for (let i = 0; i < valueGroup.length; i += 1) {
-            if (count < REQUIRED_TOP_WORDS) {
+            if (count <= REQUIRED_TOP_WORDS) {
                 maxPossibleScore += valueGroup[i].value;
                 count += 1;
             }
