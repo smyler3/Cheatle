@@ -5,12 +5,12 @@
     min-width: 44px;
     min-height: 44px;
 
-    padding: 8px 16px;
+    padding: 4px 20px;
 
     font: inherit;
     color: black;
 
-    border-radius: 100px;
+    /* border-radius: 100px; */
     border: 2px solid var(--grey-1000);
 
     overflow: hidden;
@@ -18,7 +18,11 @@
 
 .buttonText {
     position: relative;
+    left: 15px;
     z-index: 2;
+
+    /* font-family: "Lilita One"; */
+    font-weight: 600;
 }
 
 .hintProgressIndicator {
@@ -28,61 +32,37 @@
 
     min-height: 44px;
 
-    border-radius: 100px;
-    background-color: var(--grey-700);
+    /* border-radius: 100px; */
+    background-color: var(--primary-100);
     transition-property: width;
-    transition-timing-function: ease-in-out;
+    transition-timing-function: ease-out;
 }
 
-/* .scoreIncreaseIndicator {
-    position: absolute;
-    right: 25%;
-    top: 25%;
-    animation: floatAnimation 1.5s ease-in-out forwards;
-} */
+.full {
+    background-color: #b2e4f7;
+}
 
 .scoreIncreaseIndicator {
     position: absolute;
     right: 25%;
     top: 25%;
-    animation: arcFall 1.2s forwards;
+    z-index: 2;
+    animation: arcFloatAnimation 1.2s forwards;
 }
 
-@keyframes arcFall {
+@keyframes arcFloatAnimation {
     0% {
         opacity: 0;
         transform: translate(-50%, 0) scale(0.9);
     }
 
-    25% {
+    80% {
         opacity: 1;
-        /* slight hop upward + slight right */
         transform: translate(calc(-50% + 5px), -12px) scale(1);
     }
 
-    60% {
-        /* arc descending, continuing to the right */
-        transform: translate(calc(-50% + 12px), 6px) rotate(3deg);
-    }
-
     100% {
         opacity: 0;
-        /* end much lower + right, small rotation */
-        transform: translate(calc(-50% + 18px), 32px) rotate(6deg);
-    }
-}
-
-@keyframes floatAnimation {
-    0% {
-        right: 25%;
-        top: 25%;
-        opacity: 1;
-    }
-    80% {
-        opacity: 1;
-    }
-    100% {
-        top: -35%;
-        opacity: 0;
+        transform: translate(calc(-50% + 7px), -10px) scale(1);
     }
 }

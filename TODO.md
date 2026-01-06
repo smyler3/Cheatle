@@ -1,18 +1,19 @@
 ### Code logic
 
-Add half stars logic
+Add input field for alternate guess route and it doubles as a current guess indicator
+
+Change submit logic to accomodate this new input
 
 use localstoreage for current guesses and reset every midnight/every board
 maybe timer should use Dates and keep current date in local storage?
 
+add show more button to show full guess list on results modal
+
+Add half stars logic
+
 have fonts locally
 
 ### Code styling
-
-Add styling for hint points being added
-
-- bar filling up calculation/function
-- +x animation
 
 keep previous submitted word greyed out and fix overflow logic
 

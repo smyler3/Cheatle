@@ -4,59 +4,67 @@ import { useModal } from "../../hooks/modal/useModal";
 import styles from "./HintButton.module.css";
 import { useGameData } from "../../hooks/gameData/useGameData";
 
+type indicatorType = {
+    id: string, 
+    value: number
+};
+
 const POINTS_FOR_HINT = 25;
 
 const HintButton = () => {
-    const { hintPoints } = useHints();
-    const { openHintModal } = useModal();
-    const { correctGuesses } = useGameData();
+  const { hintPoints } = useHints();
+  const { openHintModal } = useModal();
+  const { correctGuesses } = useGameData();
 
-    const [oldHintPoints, setOldHintPoints] = useState(0);
+  const [oldHintPoints, setOldHintPoints] = useState(0);
+  const [indicators, setIndicators] = useState<indicatorType[]>([]);
 
-    useEffect(() => {
-        const pointDifference = hintPoints - oldHintPoints;
-        const wordsGuessed = correctGuesses.length;
+  useEffect(() => {
+    const diff = hintPoints - oldHintPoints;
+    if (diff <= 0) return;
 
-        const hintButton = document.getElementById("hintButton");
-        console.log("btn", hintButton);
+    setIndicators((prev) => [
+      ...prev,
+      {
+        id: `indicator-${correctGuesses.length}`,
+        value: diff,
+      },
+    ]);
 
-        const pointsIndicator = document.createElement("span");
-        pointsIndicator.setAttribute("id", `point-indicator-${wordsGuessed - 1}`);
-        pointsIndicator.classList.add(`${styles.scoreIncreaseIndicator}`)
-        pointsIndicator.textContent = `+${pointDifference}`;
+    setOldHintPoints(hintPoints);
+  }, [hintPoints, correctGuesses, oldHintPoints]);
 
-        hintButton?.appendChild(pointsIndicator);
+  const handleAnimationEnd = (id: string) => {
+    setIndicators((prev) => prev.filter((i) => i.id !== id));
+  };
 
-        const timer = setTimeout(() => {
-            pointsIndicator.remove();
-        }, 2000);
+  return (
+    <button
+      id="hintButton"
+      className={styles.button}
+      onClick={openHintModal}
+    >
+      <span className={styles.buttonText}>HINT</span>
 
-        setOldHintPoints(hintPoints);
-
-        return () => clearTimeout(timer);
-    }, [hintPoints]);
-
-    return (
-        <button
-            className={styles.button}
-            onClick={openHintModal}
-            id="hintButton"
+      {indicators.map(({ id, value }) => (
+        <span
+          key={id}
+          className={styles.scoreIncreaseIndicator}
+          onAnimationEnd={() => handleAnimationEnd(id)}
         >
-            <span className={styles.buttonText}>Hint</span>
-            <span 
-                className={styles.hintProgressIndicator}
-                style={{ 
-                    width: `calc(${Math.min(1, hintPoints / POINTS_FOR_HINT) * 100}% + 20px)`, 
-                    transitionDuration: `${Math.min(Math.min(1, hintPoints / POINTS_FOR_HINT)) * 1.5}s`
-                }}
-            ></span>
-            {/* <span 
-                className={styles.scoreIncreaseIndicator}
-            >
-                +1
-            </span> */}
-        </button>
-    )
+          +{value}
+        </span>
+      ))}
+
+      <span
+        className={`${styles.hintProgressIndicator} ${hintPoints >= POINTS_FOR_HINT && styles.full}`}
+        style={{
+          width: `calc(${Math.min(1.2, hintPoints / POINTS_FOR_HINT) * 100}% + 20px)`,
+          transitionDuration: `${Math.min(1, hintPoints / POINTS_FOR_HINT) * 1.5}s`,
+        }}
+      />
+    </button>
+  );
 };
 
 export default HintButton;

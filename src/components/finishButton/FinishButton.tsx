@@ -9,7 +9,7 @@ const FinishButton = () => {
             className={styles.button}
             onClick={openConfirmModal}
         >
-            Finish
+            FINISH
         </button>
     )
 };
