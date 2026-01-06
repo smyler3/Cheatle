@@ -1,5 +1,9 @@
 ### Code logic
 
+when I switch tabs or windows the topWords guessed highlight break in the hintModal, and resultsModal
+
+create error page for when things go wrong
+
 use localstoreage for current guesses and reset every midnight/every board
 maybe timer should use Dates and keep current date in local storage?
 
@@ -13,9 +17,6 @@ have fonts locally
 
 Modal scrollbars weird and need fixing
 
-create skeleton loader while waiting for request?
-create error page for when things go wrong?
-
 add constants for 'correct' | 'incorrect' | 'idle'
 add already guessed logic to let the user know
 
@@ -27,4 +28,3 @@ modal should have width 100% with max-width
 change font size on smaller screens
 
 Redesign hints available/points for the hints modal
-Shoulds the best words be randomised? Or just ordered top to bottom with no points showing dividers? or lock each tier behind completing the last?

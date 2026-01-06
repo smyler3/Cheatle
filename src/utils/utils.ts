@@ -33,7 +33,11 @@ export const getMaxPossibleScore = (topWords: Map<number, Word[]>): number => {
     let count = 0;
     let maxPossibleScore = 0;
 
-    topWords.forEach(valueGroup => {
+    const reversedTopWords = new Map(
+        [...topWords.entries()].sort(([a], [b]) => b - a)
+    );
+
+    reversedTopWords.forEach(valueGroup => {
         for (let i = 0; i < valueGroup.length; i += 1) {
             if (count <= REQUIRED_TOP_WORDS) {
                 maxPossibleScore += valueGroup[i].value;

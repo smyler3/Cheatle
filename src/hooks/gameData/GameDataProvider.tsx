@@ -12,7 +12,7 @@ export const GameDataProvider = ({ children }: GameDataProviderProps) => {
     const { data } = useCheatleData();
 
     const [correctGuesses, setCorrectGuesses] = useState<Guess[]>([]);
-    const [maxPossibleScore, setMaxPossibleScore] = useState<number>(null);
+    const [maxPossibleScore, setMaxPossibleScore] = useState<number>(Infinity);
     
     useEffect(() => {
         if (data?.topWords) {
