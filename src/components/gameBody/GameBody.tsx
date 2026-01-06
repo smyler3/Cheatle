@@ -19,6 +19,7 @@ import { useGameData } from '../../hooks/gameData/useGameData';
 import { useTimer } from '../../hooks/timer/useTimer';
 import { useModal } from '../../hooks/modal/useModal';
 import type { LastGuessType } from '../../types/types';
+import LoadingScreen from '../loadingScreen/LoadingScreen';
 
 type CurrentGuessType = {
     text: string,
@@ -81,7 +82,7 @@ export default function GameBody() {
 
     if (isLoading || !data) {
         return (
-            <div>...Loading</div>
+            <LoadingScreen />
         );
     };
 
