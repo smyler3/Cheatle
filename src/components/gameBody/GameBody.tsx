@@ -20,6 +20,7 @@ import { useTimer } from '../../hooks/timer/useTimer';
 import { useModal } from '../../hooks/modal/useModal';
 import type { LastGuessType } from '../../types/types';
 import LoadingScreen from '../loadingScreen/LoadingScreen';
+import DuplicateGuessIndicator from '../duplicateGuessIndicator/DuplicateGuessIndicator';
 
 type CurrentGuessType = {
     text: string,
@@ -49,6 +50,7 @@ export default function GameBody() {
             prevTilePositions: Array(16).fill(false),
         }
     );
+    const [showDuplicateModal, setShowDuplicateModal] = useState(false);
 
     const clearLastGuess = () => {
         setLastGuess({
@@ -105,6 +107,11 @@ export default function GameBody() {
         if (currentGuess.prevTilePositions[selectedPosition] === true) {
             const isRepeat = correctGuesses.filter(guess => guess.text === currentWord).length > 0;
             const isValid = validWords.some(word => word.text === currentWord);
+
+            if (isRepeat) {
+                console.log("duplicate");
+                setShowDuplicateModal(true);
+            }
             
             if (!isRepeat && isValid) {
                 console.log(currentWord, topWords);
@@ -155,6 +162,7 @@ export default function GameBody() {
                 document.body
             )}
             <CountdownTimer />
+            <DuplicateGuessIndicator showDuplicateModal={showDuplicateModal} setShowDuplicateModal={setShowDuplicateModal} />
             <GameBoard>
                 {board.map((tile, index) => {
                     return (
