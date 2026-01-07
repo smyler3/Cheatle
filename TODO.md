@@ -1,7 +1,5 @@
 ### Code logic
 
-when I switch tabs or windows the topWords guessed highlight break in the hintModal, and resultsModal
-
 create error page for when things go wrong
 
 use localstoreage for current guesses and reset every midnight/every board

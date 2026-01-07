@@ -17,5 +17,6 @@ export const useCheatleData = () => {
     return useQuery({
         queryKey: ["cheatle"],
         queryFn: () => fetchCheatleData(),
+        refetchOnWindowFocus: false,
     });
 };

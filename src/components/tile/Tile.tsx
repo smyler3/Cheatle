@@ -59,8 +59,6 @@ const Tile = ({
     const animationDelay = getAnimationDelay(position, lastGuess);
     const shouldClear = isLastTileAnimated(position, lastGuess);
 
-    console.log('shouldClear', shouldClear);
-
     return (
         <button
             id={`title-${position}`}
