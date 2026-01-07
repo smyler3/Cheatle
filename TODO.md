@@ -19,8 +19,6 @@ Modal scrollbars weird and need fixing
 Modal shouldn't have the scrollbar inside of the modal
 modal should have width 100% with max-width
 
-guess list grows into the footer
-
 change font size on smaller screens
 
 Redesign hints available/points for the hints modal
