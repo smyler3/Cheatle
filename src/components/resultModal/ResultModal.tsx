@@ -3,7 +3,6 @@ import { useHints } from "../../hooks/hints/useHints";
 import { useModal } from "../../hooks/modal/useModal";
 import { useTimer } from "../../hooks/timer/useTimer";
 import type { Hint } from "../../schema/CheatleSchema";
-import GuessList from "../guessList/GuessList";
 import styles from "./ResultModal.module.css";
 import closeIcon from "/closeIcon.svg";
 
@@ -36,7 +35,6 @@ export default function ResultModal() {
                     <p>Hints</p>
                 </span>
             </div>
-            <GuessList shouldShowScore={false} />
             <div className={styles.topWords}>
                 <h3>Highest scoring words:</h3>
                 {Array.from(topWordHints.entries()).map(([valueStr, words]) => {

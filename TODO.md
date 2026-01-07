@@ -6,6 +6,7 @@ use localstoreage for current guesses and reset every midnight/every board
 maybe timer should use Dates and keep current date in local storage?
 
 create error page for when things go wrong
+-- just pass some default data
 
 add show more button to show full guess list on results modal
 
