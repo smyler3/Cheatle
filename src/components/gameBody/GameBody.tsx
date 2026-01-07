@@ -8,7 +8,7 @@ import LiveGuessDisplay from '../liveGuessDisplay/LiveGuessDisplay';
 import FinishButton from '../finishButton/FinishButton';
 import { binaryInsertion, isTopWord } from '../../utils/utils';
 import CountdownTimer from '../countdownTimer/CountdownTimer';
-import { ADJACENT_LIST } from '../../constants';
+import { ADJACENT_LIST, TILE_STATE } from '../../constants';
 import Tile from '../tile/Tile';
 import { useCheatleData } from '../../hooks/useCheatleData';
 import type { TileType } from '../../schema/CheatleSchema';
@@ -39,7 +39,7 @@ export default function GameBody() {
 
     const [lastGuess, setLastGuess] = useState<LastGuessType>({
         tilePositions: [],
-        result: 'incorrect', 
+        result: TILE_STATE.INCORRECT, 
     });
     const [currentGuess, setCurrentGuess] = useState<CurrentGuessType>(
         {
@@ -120,7 +120,7 @@ export default function GameBody() {
 
             setLastGuess({
                 tilePositions: currentGuess.prevTileOrder,
-                result: (!isRepeat && isValid) ? 'correct' : 'incorrect',
+                result: (!isRepeat && isValid) ? TILE_STATE.CORRECT : TILE_STATE.INCORRECT,
             });
 
             setCurrentGuess({

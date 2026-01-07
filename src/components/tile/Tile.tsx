@@ -1,4 +1,4 @@
-import { TILE_VALUE_COLOURS } from "../../constants";
+import { TILE_STATE, TILE_VALUE_COLOURS } from "../../constants";
 import type { TileType } from "../../schema/CheatleSchema";
 import styles from "./Tile.module.css";
 import type { LastGuessType } from "../../types/types";
@@ -8,7 +8,7 @@ const getAnimationClass = (
     lastGuess: LastGuessType,
     styles: Record<string, string>
 ): string => {
-    if (lastGuess.result === 'idle') {
+    if (lastGuess.result === TILE_STATE.IDLE) {
         return '';
     }
 
@@ -21,7 +21,7 @@ const getAnimationDelay = (
     position: number,
     lastGuess: LastGuessType
 ): string => {
-    if (lastGuess.result !== 'correct') {
+    if (lastGuess.result !== TILE_STATE.CORRECT) {
         return '0s';
     }
 
@@ -33,7 +33,7 @@ const isLastTileAnimated = (
     position: number,
     lastGuess: LastGuessType
 ): boolean => {
-    return lastGuess.result !== 'idle' && lastGuess.tilePositions.at(-1) === position;
+    return lastGuess.result !== TILE_STATE.IDLE && lastGuess.tilePositions.at(-1) === position;
 }
 
 type TileProps = {

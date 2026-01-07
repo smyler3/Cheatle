@@ -19,3 +19,10 @@ export const ModalName = {
   ConfirmModal: "confirmModal",
   ResultModal: "resultModal",
 };
+
+// Tile status
+export const TILE_STATE = {
+  CORRECT: 'correct',
+  INCORRECT: 'incorrect',
+  IDLE: 'idle',
+};

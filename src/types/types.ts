@@ -1,4 +1,4 @@
-import { ModalName } from "../constants";
+import { ModalName, TILE_STATE } from "../constants";
 
 export type Guess = {
     text: string,
@@ -8,7 +8,7 @@ export type Guess = {
 
 export type LastGuessType = {
     tilePositions: number[],
-    result: 'correct' | 'incorrect' | 'idle',
+    result: typeof TILE_STATE[keyof typeof TILE_STATE],
 };
 
 export type ModalNameType = (typeof ModalName)[keyof typeof ModalName];
