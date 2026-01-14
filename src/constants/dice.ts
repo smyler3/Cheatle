@@ -39,7 +39,7 @@ import { TILES } from "./tiles";
 //     [TILES.B, TILES.I, TILES.F, TILES.O, TILES.R, TILES.X],
 // ];
 
-export const DICE: Tile[][] = [
+export const DICE: TileType[][] = [
     [TILES.A, TILES.E, TILES.I, TILES.O, TILES.N, TILES.J],
     [TILES.E, TILES.R, TILES.S, TILES.T, TILES.L, TILES.K],
     [TILES.A, TILES.E, TILES.I, TILES.O, TILES.U, TILES.Q],

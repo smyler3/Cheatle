@@ -14,7 +14,6 @@ export default function InfoModal() {
         closeModal();
     };
 
-
     return (
         <>
             <button className={styles.closeButton} onClick={handleCloseModal}>
