@@ -49,16 +49,6 @@ html {
   scrollbar-gutter: stable;
 }
 
-#root {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  
-  min-height: 100svh;
-  width: 100%;
-
-  background-color: white;
-}
-
 h1,
 h2,
 h3,

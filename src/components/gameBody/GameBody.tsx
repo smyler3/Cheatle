@@ -21,6 +21,8 @@ import { useModal } from '../../hooks/modal/useModal';
 import type { LastGuessType } from '../../types/types';
 import LoadingScreen from '../loadingScreen/LoadingScreen';
 import DuplicateGuessIndicator from '../duplicateGuessIndicator/DuplicateGuessIndicator';
+import ErrorScreen from '../errorScreen/ErrorScreen';
+import styles from "./GameBody.module.css";
 
 type CurrentGuessType = {
     text: string,
@@ -78,7 +80,7 @@ export default function GameBody() {
 
     if (isError) {
         return (
-            <div>Something went wrong</div>
+            <ErrorScreen />
         );
     };
 
@@ -156,7 +158,7 @@ export default function GameBody() {
     };
 
     return (
-        <main>
+        <main className={styles.gameBodyMain}>
             {createPortal(
                 <ModalManager />, 
                 document.body
