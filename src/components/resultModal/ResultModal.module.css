@@ -1,0 +1,68 @@
+.closeButton {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.resultModal {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    min-width: 280px;
+}
+
+.statsContainer {
+    display: flex;
+    justify-content: space-around;
+
+    width: 100%;
+}
+
+.statContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat {
+    font-family: "Lilita One";
+}
+
+.topWords {
+    margin-top: 12px;
+}
+
+.pointsSection {
+    margin-top: 8px;
+}
+
+.wordList {
+    display: flex;
+    flex-direction: column;
+
+    padding-left: 12px;
+
+    list-style: inside disc;
+}
+
+.guessed {
+    color: #0090FF;
+}
+
+.cancelButton {
+    align-self: center;
+    padding: .6rem 3rem;
+    margin-top: 2rem;
+
+    color: black;
+    font-family: "Lilita One";
+    font-size: 20px;
+
+    background-color: #D9D9D9;
+    border-radius: 100px;
+}

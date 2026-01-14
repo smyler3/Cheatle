@@ -7,4 +7,10 @@
 
     overflow-x: scroll;
     direction: rtl;
+/* 
+    border: 2px solid var(--grey-1000); */
+}
+
+.lastGuess {
+    color: var(--grey-850);
 }

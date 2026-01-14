@@ -1,23 +1,74 @@
-
-import { TILE_VALUE_COLOURS } from "../../constants/tiles";
+import { TILE_STATE, TILE_VALUE_COLOURS } from "../../constants";
+import type { TileType } from "../../schema/CheatleSchema";
 import styles from "./Tile.module.css";
+import type { LastGuessType } from "../../types/types";
+
+const getAnimationClass = (
+    position: number,
+    lastGuess: LastGuessType,
+    styles: Record<string, string>
+): string => {
+    if (lastGuess.result === TILE_STATE.IDLE) {
+        return '';
+    }
+
+    return lastGuess.tilePositions.includes(position)
+        ? styles[`${lastGuess.result}Guess`]
+        : '';
+};
+
+const getAnimationDelay = (
+    position: number,
+    lastGuess: LastGuessType
+): string => {
+    if (lastGuess.result !== TILE_STATE.CORRECT) {
+        return '0s';
+    }
+
+    const index = lastGuess.tilePositions.indexOf(position);
+    return index === -1 ? '0s' : `${index * 0.06}s`;
+};
+
+const isLastTileAnimated = (
+    position: number,
+    lastGuess: LastGuessType
+): boolean => {
+    return lastGuess.result !== TILE_STATE.IDLE && lastGuess.tilePositions.at(-1) === position;
+}
 
 type TileProps = {
-    tile: Tile,
+    tile: TileType,
     position: number,
-    handleClick: (tile: Tile, position: number) => void;
+    lastGuess: LastGuessType,
+    clearLastGuess: () => void;
+    selectedTiles: boolean[],
+    handleClick: (tile: TileType, position: number) => void;
 };
 
 const Tile = ({ 
     tile, 
     position, 
+    lastGuess,
+    clearLastGuess,
+    selectedTiles,
     handleClick
 }: TileProps) => {
+    const selectedValue = selectedTiles[position] ? "selected" : "default";
+
+    const animationClass = getAnimationClass(position, lastGuess, styles);
+    const animationDelay = getAnimationDelay(position, lastGuess);
+    const shouldClear = isLastTileAnimated(position, lastGuess);
+
     return (
-        <span
-            className={styles.tile}
-            style={{ backgroundColor: TILE_VALUE_COLOURS[tile.value] }}
+        <button
+            id={`title-${position}`}
+            className={`${styles.tile} ${animationClass}`}
+            style={{
+                backgroundColor: TILE_VALUE_COLOURS[tile.value][selectedValue],
+                animationDelay,
+            }}
             onClick={() => handleClick(tile, position)}
+            onAnimationEnd={() => shouldClear && clearLastGuess()}
         >
             <div
                 className={styles.text}
@@ -29,7 +80,7 @@ const Tile = ({
             >
                 {tile.value}
             </div>
-        </span>
+        </button>
     )
 };
 

@@ -1,0 +1,29 @@
+.loadingContainer {
+    display: flex;
+    align-items: flex-end;
+
+    margin: auto;
+}
+
+.loadingDot {
+    font-size: 2rem;
+    animation: bounce 3s ease infinite;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    20% {
+        transform: translateY(-15px);
+    }
+
+    40% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}

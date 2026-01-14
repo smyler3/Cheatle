@@ -1,4 +1,4 @@
-const ADJACENT_LIST: Record<number, number[]> = {
+export const ADJACENT_LIST: Record<number, number[]> = {
   0: [1, 4, 5],
   1: [0, 2, 4, 5, 6],
   2: [1, 3, 5, 6, 7],
@@ -16,5 +16,3 @@ const ADJACENT_LIST: Record<number, number[]> = {
   14: [9, 10, 11, 13, 15],
   15: [10, 11, 14],
 };
-
-export default ADJACENT_LIST;

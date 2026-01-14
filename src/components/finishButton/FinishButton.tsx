@@ -1,0 +1,17 @@
+import styles from "./FinishButton.module.css";
+import { useModal } from "../../hooks/modal/useModal";
+
+const FinishButton = () => {
+    const { openConfirmModal } = useModal();
+
+    return (
+        <button
+            className={styles.button}
+            onClick={openConfirmModal}
+        >
+            FINISH
+        </button>
+    )
+};
+
+export default FinishButton;

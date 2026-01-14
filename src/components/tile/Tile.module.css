@@ -24,3 +24,44 @@
     bottom: 0;
     right: 8px;
 }
+
+.correctGuess {
+    animation: bounce 0.2s ease-in-out 1 forwards;
+}
+
+.incorrectGuess {
+    animation: shake 0.2s ease-in-out forwards;
+}
+
+.correctGuess,
+.incorrectGuess {
+  pointer-events: none;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: scale(1) translateY(0);
+    }
+
+    50% {
+        transform: scale(1.01) translateY(-10px);
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(10px);
+    }
+
+    75% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}

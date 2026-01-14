@@ -3,6 +3,7 @@
     justify-content: space-between;
 
     font-size: 1.4rem;
+    font-family: 'Lilita One';
 
     border-bottom: 1px solid var(--grey-1000);
 }
@@ -15,7 +16,7 @@
 }
 
 .wordList li:nth-child(-n+5) {
-    background-color: var(--blue-100);
+    background-color: var(--primary-100);
     color: var(--grey-1000);
 }
 
@@ -29,13 +30,13 @@
 
 .word {
     font-family: "Figtree", sans-serif;
-    font-size: 20px;
 }
 
 .star {
     padding-left: 4px;
+    height: 12px;
 }
 
 .score {
-    font-size: 20px;
+    font-family: "Lilita One";
 }

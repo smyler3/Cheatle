@@ -1,4 +1,7 @@
-const TILES: Record<string, Tile> = {
+import type { TileType } from "../schema/CheatleSchema";
+import type { tileColourType } from "../types/types";
+
+export const TILES: Record<string, TileType> = {
     "A": { text: "A", value: 1 },
     "B": { text: "B", value: 4 },
     "C": { text: "C", value: 4 },
@@ -15,7 +18,7 @@ const TILES: Record<string, Tile> = {
     "N": { text: "N", value: 1 },
     "O": { text: "O", value: 1 },
     "P": { text: "P", value: 4 },
-    "Q": { text: "Qu", value: 5 },
+    "Q": { text: "QU", value: 5 },
     "R": { text: "R", value: 2 },
     "S": { text: "S", value: 1 },
     "T": { text: "T", value: 1 },
@@ -27,15 +30,32 @@ const TILES: Record<string, Tile> = {
     "Z": { text: "Z", value: 5 },
 };
 
-const TILE_VALUE_COLOURS: Record<number, string> = {
-    1: "var(--grey-700)",
-    2: "var(--green)",
-    3: "var(--blue)",
-    4: "var(--purple)",
-    5: "var(--red)",
-};
+export const NUMBER_OF_UNIQUE_TILES: number = 26;
 
-export {
-    TILES,
-    TILE_VALUE_COLOURS,
+export const TILE_VALUE_COLOURS: Record<number, tileColourType> = {
+    1: 
+    {
+        default: "var(--grey-700)",
+        selected: "var(--grey-850)",
+    },
+    2: 
+    {
+        default: "var(--green-100)",
+        selected: "var(--green-200)",
+    },
+    3:
+    {
+        default: "var(--blue-100)",
+        selected: "var(--blue-200)",
+    }, 
+    4:
+    {
+        default: "var(--purple-100)",
+        selected: "var(--purple-200)",
+    }, 
+    5:
+    {
+        default: "var(--red-100)",
+        selected: "var(--red-200)",
+    },
 };

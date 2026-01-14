@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import styles from "./LiveGuessDisplay.module.css";
 
 type LiveGuessDisplayProps = {
@@ -5,12 +6,21 @@ type LiveGuessDisplayProps = {
 };
 
 const LiveGuessDisplay = ({ guess }: LiveGuessDisplayProps) => {
+    const [lastGuess, setLastGuess] = useState<string>('');
+
+    useEffect(() => {
+        if (guess !== '') {
+            setLastGuess(guess)
+        }
+    }, [guess]);
+    
     return (
-        <div
-            className={styles.guess}
-        >
-            {guess}
-        </div>
+        <input 
+            className={`${styles.guess} ${guess === '' && styles.lastGuess}`}
+            type="text" 
+            value={guess === '' ? lastGuess : guess}
+            readOnly
+        />
     )
 };
 

@@ -1,31 +1,68 @@
 .button {
     position: relative;
+    z-index: 2;
 
     min-width: 44px;
     min-height: 44px;
 
-    padding: 8px 16px;
+    padding: 4px 20px;
 
     font: inherit;
-    color: var(--grey-900);
+    color: black;
 
-    border-radius: 100px;
-    border: 1px solid var(--grey-800);
+    /* border-radius: 100px; */
+    border: 2px solid var(--grey-1000);
+
+    overflow: hidden;
+}
+
+.buttonText {
+    position: relative;
+    left: 15px;
+    z-index: 2;
+
+    /* font-family: "Lilita One"; */
+    font-weight: 600;
 }
 
 .hintProgressIndicator {
     position: absolute;
-    left: 0;
+    left: -20px;
     top: 0;
 
     min-height: 44px;
 
-    border-radius: 100px;
-    background-color: var(--grey-800);
+    /* border-radius: 100px; */
+    background-color: var(--primary-100);
+    transition-property: width;
+    transition-timing-function: ease-out;
+}
+
+.full {
+    background-color: #b2e4f7;
 }
 
 .scoreIncreaseIndicator {
     position: absolute;
     right: 25%;
     top: 25%;
+    z-index: 2;
+    animation: arcFloatAnimation 1.2s forwards;
+}
+
+@keyframes arcFloatAnimation {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 0) scale(0.9);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translate(calc(-50% + 5px), -12px) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(calc(-50% + 7px), -10px) scale(1);
+    }
 }

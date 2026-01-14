@@ -3,21 +3,27 @@
 
     --grey-1000: #1E1E1E;
     --grey-900: #7B7B7B;
+    --grey-850: #bfbebe;
     --grey-800: #D9D9D9;
     --grey-700: #E6E6E6;
 
-    --blue-100: #E5F8FF;
-    --blue-200: #0090FF;
+    --primary-100: #E5F8FF;
+    --primary-150: #B2E4F7;
+    --primary-200: #0090FF;
 
-    --green: #7DE28C;
-    --blue: #7DB8E2;
-    --purple: #B87DE2;
-    --red: #E27D7F;
+    --green-0: #d9f8dc;
+    --green-100: #7DE28C;
+    --green-200: #5FBF6E;
+    --blue-100: #7DB8E2;
+    --blue-200: #5E95C2;
+    --purple-100: #B87DE2;
+    --purple-200: #955DB8;
+    --red-100: #E27D7F;
+    --red-200: #C25E60;
 }
 
 :root {
-  font-family: "Lilita One", "Figtree", system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: "Figtree", system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
 
   color: var(--grey-1000);
@@ -39,6 +45,10 @@
     outline: none;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 #root {
   display: grid;
   grid-template-rows: auto 1fr auto;
@@ -49,6 +59,13 @@
   background-color: white;
 }
 
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Lilita One", "Figtree", system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -57,4 +74,7 @@ h1 {
 button {
     background: none;
     cursor: pointer;
+
+    min-height: 44px;
+    min-width: 44px;
 }
