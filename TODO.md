@@ -1,5 +1,11 @@
 ### Code logic
 
+Add info modal images
+
+Add favicon
+
+have fonts locally
+
 Game shouldn't start until infoModal closed, and loading is finished
 
 Timer pauses when out of tab
@@ -11,8 +17,6 @@ create error page for when things go wrong
 -- just pass some default data
 
 Add half stars logic
-
-have fonts locally
 
 ### Code styling
 

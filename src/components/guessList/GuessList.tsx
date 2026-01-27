@@ -1,5 +1,6 @@
 import { useGameData } from "../../hooks/gameData/useGameData";
 import styles from "./GuessList.module.css";
+import starIcon from "/starIcon.svg";
 
 type GuessListProps = {
     shouldShowScore: boolean,
@@ -31,7 +32,7 @@ const GuessList = ({ shouldShowScore }: GuessListProps) => {
                                 >
                                     {guess.text}
                                     {/* TODO: Add half star logic */}
-                                    {guess.isTopWord && <img src="/starIcon.svg" className={styles.star} />}
+                                    {guess.isTopWord && <img src={starIcon} className={styles.star} />}
                                 </p>
                                 <p
                                     className={styles.score}

@@ -1,5 +1,6 @@
 import { useModal } from "../../hooks/modal/useModal";
 import styles from "./Header.module.css"
+import infoIcon from "/infoIcon.svg";
 
 const Header = () => {
     const { openInfoModal } = useModal();
@@ -20,7 +21,7 @@ const Header = () => {
                     onClick={openInfoModal}
                 >
                     <img
-                        src="/infoIcon.svg"
+                        src={infoIcon}
                         alt=""
                         className={styles.icon}
                     />
