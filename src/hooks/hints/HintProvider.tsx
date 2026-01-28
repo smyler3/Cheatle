@@ -28,7 +28,6 @@ export default function HintProvider({ children } : HintProviderProps) {
 
     const markTopWordAsGuessed = (value: number, topWord: string) => {
         setTopWordHints(prev => {
-            console.log('prev', prev);
             const wordsAtValue = prev.get(value);
             if (!wordsAtValue) return prev;
 

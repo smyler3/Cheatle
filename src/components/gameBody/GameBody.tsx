@@ -111,12 +111,10 @@ export default function GameBody() {
             const isValid = validWords.some(word => word.text === currentWord);
 
             if (isRepeat) {
-                console.log("duplicate");
                 setShowDuplicateModal(true);
             }
             
             if (!isRepeat && isValid) {
-                console.log(currentWord, topWords);
                 const isCurrentATopWord = isTopWord(currentWord, topWords);
 
                 addToCorrectGuesses(isCurrentATopWord);
@@ -150,11 +148,7 @@ export default function GameBody() {
             }));
         }
 
-        // Invalid tile selected
-        else {
-            console.log("invalid selection");
-            // TODO: add invalid selected logic
-        }
+        // Else invalid tile selected
     };
 
     return (
