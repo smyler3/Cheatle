@@ -20,7 +20,7 @@ export default function InfoModal() {
                 <img src={closeIcon} alt="" />
             </button>
             <div className={styles.infoModal}>
-                <h2 className={styles.modalHeading}>How to play</h2>
+                <h2 className={styles.modalHeading}>How to play Cheatle</h2>
                 <p className={styles.tagline}>Find the 5 highest-scoring words in 10 minutes</p>
                 <section className={styles.hintSection}>
                     <h3>Building Words:</h3>
@@ -55,7 +55,7 @@ export default function InfoModal() {
                 >
                     Play
                 </button>
-                <p className={styles.credit}>Inspired by the amazing <a href="" className={styles.creditLink}>Chiddle</a></p>
+                <p className={styles.credit}>Inspired by the amazing <a href="https://www.chiddle.net/" target="_blank" rel="noopener noreferrer" className={styles.creditLink}>Chiddle</a></p>
             </div>
         </>
     )

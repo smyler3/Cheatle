@@ -40,7 +40,9 @@ export default function GameBody() {
     const { openResultModal } = useModal();
     const { correctGuesses, setCorrectGuesses } = useGameData();
 
+    // Previously submitted guess for display purposes
     const [lastGuess, setLastGuess] = useState<LastGuessType>({
+        text: "",
         tilePositions: [],
         result: TILE_STATE.INCORRECT, 
     });
@@ -55,10 +57,11 @@ export default function GameBody() {
     const [showDuplicateModal, setShowDuplicateModal] = useState(false);
 
     const clearLastGuess = () => {
-        setLastGuess({
+        setLastGuess(prev => ({
+            ...prev,
             tilePositions: [], 
             result: "idle",
-        });
+        }));
     };
 
     const endGame = useCallback(() => {
@@ -92,8 +95,28 @@ export default function GameBody() {
 
     const { board, validWords, topWords } = data;
 
+    const handleUndo = () => {
+        const prevPosition = currentGuess.prevTileOrder.at(-1);
+
+        if (prevPosition === undefined) {
+            return;
+        };
+
+        const lastTile = board[prevPosition];
+        const newGuessText = currentGuess.text.slice(0, -lastTile.text.length);
+        const newGuessValue = currentGuess.value - lastTile.value;
+        const newTileOrder = currentGuess.prevTileOrder.slice(0, -1);
+
+        setCurrentGuess(prev => ({
+            text: newGuessText,
+            value: newGuessValue,
+            prevTileOrder: [...newTileOrder],
+            prevTilePositions: {...prev.prevTilePositions, [prevPosition]: false},
+        }))
+    }
+
     const handleTileSelect = (tile: TileType, selectedPosition: number) => {
-        const prevPosition = currentGuess.prevTileOrder.at(-1) || null;
+        const prevPosition = currentGuess.prevTileOrder.at(-1);
         const currentWord = currentGuess.text;
         const currentValue = currentGuess.value;
 
@@ -126,6 +149,7 @@ export default function GameBody() {
             };
 
             setLastGuess({
+                text: currentWord,
                 tilePositions: currentGuess.prevTileOrder,
                 result: (!isRepeat && isValid) ? TILE_STATE.CORRECT : TILE_STATE.INCORRECT,
             });
@@ -139,7 +163,7 @@ export default function GameBody() {
         }
 
         // Adding to guess
-        else if (prevPosition === null || ADJACENT_LIST[prevPosition].includes(selectedPosition)) {
+        else if (prevPosition === undefined || ADJACENT_LIST[prevPosition].includes(selectedPosition)) {
             setCurrentGuess(prev => ({
                 text: prev.text + tile.text,
                 value: prev.value + tile.value,
@@ -170,7 +194,7 @@ export default function GameBody() {
                 <HintButton />
                 <FinishButton />
             </ActionButtons>
-            <LiveGuessDisplay guess={currentGuess.text} />
+            <LiveGuessDisplay guess={currentGuess.text} lastGuess={lastGuess.text} handleUndoClick={handleUndo} />
             <GuessList
                 shouldShowScore={true} 
             />

@@ -7,6 +7,7 @@ export type Guess = {
 };
 
 export type LastGuessType = {
+    text: string,
     tilePositions: number[],
     result: typeof TILE_STATE[keyof typeof TILE_STATE],
 };
