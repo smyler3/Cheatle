@@ -2,7 +2,7 @@ import type React from "react";
 import { TimerContext } from "./useTimer";
 import { useEffect, useState } from "react";
 import { MINUTES_IN_A_GAME, SECONDS_IN_A_MINUTE } from "../../constants";
-import { useCheatleData } from "../useCheatleData";
+import { useCheatleData } from "../cheatleData/useCheatleData";
 
 type TimerProviderProps = {
     children: React.ReactNode,

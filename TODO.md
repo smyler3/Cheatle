@@ -1,5 +1,16 @@
 ### Code logic
 
+--use localstorage for gameState when closing the game
+
+QueryClientProvider
+CheatleDataProvider -- New hook to wrap access to the backend data
+DailyStorageProvider -- New hook to query localStorage with board key and provide source of update truth
+TimerProvider
+GameDataProvider
+HintProvider
+ModalProvider
+UI
+
 Modals
 --Add info modal images
 --Info modal doesn't explain how to physically play (submit etc)
@@ -9,8 +20,6 @@ Modals
 have fonts locally
 
 Game mechanic improvements
---use localstorage for current guesses and reset every midnight/every board
-maybe timer should use Dates and keep current date in local storage?
 --Add half stars logic
 
 Bug?

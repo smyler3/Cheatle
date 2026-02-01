@@ -10,7 +10,7 @@ import { binaryInsertion, isTopWord } from '../../utils/utils';
 import CountdownTimer from '../countdownTimer/CountdownTimer';
 import { ADJACENT_LIST, TILE_STATE } from '../../constants';
 import Tile from '../tile/Tile';
-import { useCheatleData } from '../../hooks/useCheatleData';
+import { useCheatleData } from '../../hooks/cheatleData/useCheatleData';
 import type { TileType } from '../../schema/CheatleSchema';
 import { createPortal } from 'react-dom';
 import ModalManager from '../modalManager/ModalManager';

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { GameDataContext } from "./useGameData";
-import { useCheatleData } from "../useCheatleData";
+import { useCheatleData } from "../cheatleData/useCheatleData";
 import type { Guess } from "../../types/types";
 import { getMaxPossibleScore } from "../../utils/utils";
 

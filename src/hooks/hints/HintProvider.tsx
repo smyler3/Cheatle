@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { HintContext } from "./useHints";
 import { HINT_POINTS_REQUIRED } from "../../constants";
-import { useCheatleData } from "../useCheatleData";
+import { useCheatleData } from "../cheatleData/useCheatleData";
 import { useTimer } from "../timer/useTimer";
 import type { Hint } from "../../schema/CheatleSchema";
 
