@@ -3,6 +3,7 @@ import { TimerContext } from "./useTimer";
 import { useEffect, useState } from "react";
 import { MINUTES_IN_A_GAME, SECONDS_IN_A_MINUTE } from "../../constants";
 import { useCheatleData } from "../cheatleData/useCheatleData";
+import { useLocalStorageData } from "../localStorageData.tsx/useLocalStorageData";
 
 type TimerProviderProps = {
     children: React.ReactNode,
@@ -10,10 +11,11 @@ type TimerProviderProps = {
 
 export const TimerProvider = ({ children }: TimerProviderProps) => {
     const { isLoading } = useCheatleData();
+    const { savedGameState, registerSnapshotGetter } = useLocalStorageData();
 
     const [isTimerStarted, setIsTimerStarted] = useState(false);
-    const [timeRemaining, setTimeRemaining] = useState(SECONDS_IN_A_MINUTE * MINUTES_IN_A_GAME);
-    const [isTimerDone, setIsTimerDone] = useState(false);
+    const [timeRemaining, setTimeRemaining] = useState(savedGameState?.timeRemaining ?? SECONDS_IN_A_MINUTE * MINUTES_IN_A_GAME);
+    const [isTimerDone, setIsTimerDone] = useState(savedGameState?.isTimerDone ?? false);
     
     const minutesRemaining = String(Math.floor(timeRemaining / SECONDS_IN_A_MINUTE));
     const secondsRemaining = String(timeRemaining % SECONDS_IN_A_MINUTE).padStart(2, '0');
@@ -47,6 +49,14 @@ export const TimerProvider = ({ children }: TimerProviderProps) => {
 
         return () => clearInterval(intervalID);
     }, [isTimerStarted, isLoading]);
+
+    // Passes this data to localStorage hook when requested
+    useEffect(() => {
+        registerSnapshotGetter(() => ({
+            timeRemaining,
+            isTimerDone,
+        }));
+    }, [timeRemaining, isTimerDone, registerSnapshotGetter]);
 
     return (
         <TimerContext.Provider value={{

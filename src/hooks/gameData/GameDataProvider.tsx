@@ -3,6 +3,7 @@ import { GameDataContext } from "./useGameData";
 import { useCheatleData } from "../cheatleData/useCheatleData";
 import type { Guess } from "../../types/types";
 import { getMaxPossibleScore } from "../../utils/utils";
+import { useLocalStorageData } from "../localStorageData.tsx/useLocalStorageData";
 
 type GameDataProviderProps = {
     children: React.ReactNode,
@@ -10,8 +11,9 @@ type GameDataProviderProps = {
 
 export const GameDataProvider = ({ children }: GameDataProviderProps) => {
     const { data } = useCheatleData();
+    const { savedGameState, registerSnapshotGetter } = useLocalStorageData();
 
-    const [correctGuesses, setCorrectGuesses] = useState<Guess[]>([]);
+    const [correctGuesses, setCorrectGuesses] = useState<Guess[]>(savedGameState?.correctGuesses ?? []);
     const [maxPossibleScore, setMaxPossibleScore] = useState<number>(Infinity);
     
     useEffect(() => {
@@ -19,6 +21,13 @@ export const GameDataProvider = ({ children }: GameDataProviderProps) => {
             setMaxPossibleScore(getMaxPossibleScore(data.topWords));
         }
     }, [data]);
+
+        // Passes this data to localStorage hook when requested
+    useEffect(() => {
+        registerSnapshotGetter(() => ({
+            correctGuesses,
+        }));
+    }, [correctGuesses, registerSnapshotGetter]);
 
     const score = correctGuesses.slice(0, 5).reduce((score, word) => {
         return score += word.value;
