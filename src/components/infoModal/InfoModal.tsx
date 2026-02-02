@@ -27,7 +27,8 @@ export default function InfoModal() {
                     <ol className={styles.hintList}>
                         <li>3+ letters</li>
                         <li>Adjacent letters only (horizontal, vertical, or diagonal)</li>
-                        <li>Each letter used once per word</li>
+                        <li>Each tile used max once per word</li>
+                        <li>Select an already selected tile to submit your guess</li>
                     </ol>
                     <img src="" alt="" className={styles.image} />
                 </section>
@@ -43,9 +44,9 @@ export default function InfoModal() {
                 <section className={styles.hintSection}>
                     <h3>Hints:</h3>
                     <ol className={styles.hintList}>
-                        <li>Every word you find adds its score toward earning hints</li>
+                        <li>Every word you find adds its length toward earning hints</li>
                         <li>Every 20 total points = 1 hint</li>
-                        <li>A hint lets you reveal one letter from a lowest-scoring top-5 word of your choice</li>
+                        <li>A hint lets you reveal one letter from a top-5 word of your choice</li>
                     </ol>
                     <img src="" alt="" className={styles.image} />
                 </section>
