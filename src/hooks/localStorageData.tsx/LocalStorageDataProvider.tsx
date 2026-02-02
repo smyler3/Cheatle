@@ -20,21 +20,15 @@ export const LocalStorageDataProvider = ({ children }: LocalStorageDataProviderP
         snapshotGetters.current.push(getter);
     };
 
-// savedGameState = {
-//     timeRemaining: number;
-//     hintPoints: number;
-//     hintsUsed: number;
-//     correctGuesses: Guess[];
-//     topWordHints: Record<number, Hint[]>;
-//     isTimerDone: boolean;
-// };
     const convertTopWordHintsToJsonFromMap = (map: Map<number, Hint[]>): Record<number, Hint[]> => {
         return Object.fromEntries(map.entries());
     };
 
     const convertTopWordHintsToMapFromJson = (record: Record<number, Hint[]>): Map<number, Hint[]> => {
         return new Map(
-            Object.entries(record).map(([key, value]) => [Number(key), value])
+            Object.entries(record)
+                .map(([key, value]) => [Number(key), value] as [number, Hint[]])
+                .sort(([a], [b]) => b - a) // descending
         );
     };
 
@@ -49,7 +43,7 @@ export const LocalStorageDataProvider = ({ children }: LocalStorageDataProviderP
             return;
         };
 
-        const boardKey = data.board.join("");
+        const boardKey = data.board.reduce((key, tile) => key += tile.text, "");
         const storedBoardKey = localStorage.getItem("boardKey"); 
         const rawData = localStorage.getItem("gameState");
 
@@ -79,14 +73,13 @@ export const LocalStorageDataProvider = ({ children }: LocalStorageDataProviderP
         const updateLocalStorage = () => {
             if (!data) return;
 
-            const boardKey = data.board.join("");
+            const boardKey = data.board.reduce((key, tile) => key += tile.text, "");
 
             const combinedState = snapshotGetters.current.reduce(
                 (acc, getter) => ({ ...acc, ...getter() }),
                 {} as Partial<gameState>
             );
 
-            // Convert Map before saving
             if (combinedState.topWordHints instanceof Map) {
                 combinedState.topWordHints =
                     convertTopWordHintsToJsonFromMap(combinedState.topWordHints);

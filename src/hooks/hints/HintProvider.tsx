@@ -15,17 +15,28 @@ export default function HintProvider({ children } : HintProviderProps) {
     const { savedGameState, registerSnapshotGetter } = useLocalStorageData();
     const { isTimerDone } = useTimer();
     
-    const [hintPoints, setHintPoints] = useState(savedGameState?.hintPoints ?? 0);
-    const [hintsUsed, setHintsUsed] = useState(savedGameState?.hintsUsed ?? 0);
-    const [topWordHints, setTopWordHints] = useState<Map<number, Hint[]>>(savedGameState?.topWordHints ?? new Map());
+    const [hintPoints, setHintPoints] = useState(0);
+    const [hintsUsed, setHintsUsed] = useState(0);
+    const [topWordHints, setTopWordHints] = useState<Map<number, Hint[]>>(new Map());
 
     useEffect(() => {
-        if (data?.topWords && savedGameState?.topWordHints) {
+        if (savedGameState?.hintPoints) {
+            setHintPoints(savedGameState.hintPoints);
+        };
+
+        if (savedGameState?.hintsUsed) {
+            setHintsUsed(savedGameState.hintsUsed);
+        };
+
+        if (savedGameState?.topWordHints) {
+            setTopWordHints(savedGameState.topWordHints);
+        }
+        else if (data?.topWords) {
             const sortedTopWords = new Map(
                 [...data.topWords.entries()].sort(([a], [b]) => b - a)
             );
             setTopWordHints(sortedTopWords);
-        }
+        };
     }, [data, savedGameState]);
 
     // Passes this data to localStorage hook when requested

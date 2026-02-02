@@ -14,8 +14,8 @@ export const TimerProvider = ({ children }: TimerProviderProps) => {
     const { savedGameState, registerSnapshotGetter } = useLocalStorageData();
 
     const [isTimerStarted, setIsTimerStarted] = useState(false);
-    const [timeRemaining, setTimeRemaining] = useState(savedGameState?.timeRemaining ?? SECONDS_IN_A_MINUTE * MINUTES_IN_A_GAME);
-    const [isTimerDone, setIsTimerDone] = useState(savedGameState?.isTimerDone ?? false);
+    const [timeRemaining, setTimeRemaining] = useState(SECONDS_IN_A_MINUTE * MINUTES_IN_A_GAME);
+    const [isTimerDone, setIsTimerDone] = useState(false);
     
     const minutesRemaining = String(Math.floor(timeRemaining / SECONDS_IN_A_MINUTE));
     const secondsRemaining = String(timeRemaining % SECONDS_IN_A_MINUTE).padStart(2, '0');
@@ -32,6 +32,15 @@ export const TimerProvider = ({ children }: TimerProviderProps) => {
         setIsTimerStarted(false);
         setIsTimerDone(true);
     };
+
+    useEffect(() => {
+        if (savedGameState?.timeRemaining) {
+            setTimeRemaining(savedGameState.timeRemaining);
+        };
+        if (savedGameState?.isTimerDone) {
+            setIsTimerDone(savedGameState.isTimerDone);
+        };
+    }, [savedGameState]);
 
     useEffect(() => {
         const intervalID = setInterval(() => {

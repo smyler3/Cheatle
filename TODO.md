@@ -1,25 +1,5 @@
 ### Code logic
 
-TEST with adding a single variable to saved state at a time
--- TimeRemaining
-then
--- CorrectGuesses
-then
--- HintPoints and HintsUsed
-then
--- topWOrdHints
-
--- Either figure out a way for the localStorage to collect data from all hooks beneath on usebeforeunload/visibilitychange with eventListeners to hidden or create a hook/useEffect under modalProvider which will collect data from everything above and 'publish' it
-
-QueryClientProvider
-CheatleDataProvider -- New hook to wrap access to the backend data
-DailyStorageProvider -- New hook to query localStorage with board key and provide source of update truth
-TimerProvider
-GameDataProvider
-HintProvider
-ModalProvider
-UI
-
 Modals
 --Add info modal images
 <video autoplay muted loop playsinline>

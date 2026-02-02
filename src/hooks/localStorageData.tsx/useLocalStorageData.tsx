@@ -7,15 +7,6 @@ type LocalStorageDataType = {
     registerSnapshotGetter: (getter: () => Partial<gameState>) => void,
 };
 
-// savedGameState = {
-//     timeRemaining: number;
-//     hintPoints: number;
-//     hintsUsed: number;
-//     correctGuesses: Guess[];
-//     topWordHints: Record<number, Hint[]>;
-//     isTimerDone: boolean;
-// };
-
 export const LocalStorageDataContext = createContext<LocalStorageDataType>({} as LocalStorageDataType);
 
 export const useLocalStorageData = () => useContext(LocalStorageDataContext);

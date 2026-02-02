@@ -13,8 +13,14 @@ export const GameDataProvider = ({ children }: GameDataProviderProps) => {
     const { data } = useCheatleData();
     const { savedGameState, registerSnapshotGetter } = useLocalStorageData();
 
-    const [correctGuesses, setCorrectGuesses] = useState<Guess[]>(savedGameState?.correctGuesses ?? []);
+    const [correctGuesses, setCorrectGuesses] = useState<Guess[]>([]);
     const [maxPossibleScore, setMaxPossibleScore] = useState<number>(Infinity);
+
+    useEffect(() => {
+        if (savedGameState?.correctGuesses) {
+            setCorrectGuesses(savedGameState.correctGuesses);
+        };
+    }, [savedGameState]);
     
     useEffect(() => {
         if (data?.topWords) {
