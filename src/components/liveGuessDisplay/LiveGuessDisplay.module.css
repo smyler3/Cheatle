@@ -1,14 +1,22 @@
+.displayContainer {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+
+    max-width: 100%;
+}
+
 .guess {
-    height: 3rem;
+    height: 44px;
+    width: 100%;
 
     text-align: center;
     font-family: "Figtree", sans-serif;
     font-size: 2rem;
 
+    white-space: nowrap;
     overflow-x: scroll;
     direction: rtl;
-/* 
-    border: 2px solid var(--grey-1000); */
 }
 
 .lastGuess {

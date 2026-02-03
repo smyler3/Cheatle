@@ -1,26 +1,28 @@
-import { useEffect, useState } from "react";
 import styles from "./LiveGuessDisplay.module.css";
+import undoIcon from "/undoIcon.svg";
 
 type LiveGuessDisplayProps = {
     guess: string,
+    lastGuess: string,
+    handleUndoClick: () => void,
 };
 
-const LiveGuessDisplay = ({ guess }: LiveGuessDisplayProps) => {
-    const [lastGuess, setLastGuess] = useState<string>('');
-
-    useEffect(() => {
-        if (guess !== '') {
-            setLastGuess(guess)
-        }
-    }, [guess]);
+const LiveGuessDisplay = ({ guess, lastGuess, handleUndoClick }: LiveGuessDisplayProps) => {
     
     return (
-        <input 
-            className={`${styles.guess} ${guess === '' && styles.lastGuess}`}
-            type="text" 
-            value={guess === '' ? lastGuess : guess}
-            readOnly
-        />
+        <div className={styles.displayContainer}>
+            <input 
+                className={`${styles.guess} ${guess === '' && styles.lastGuess}`}
+                type="text" 
+                value={guess === '' ? lastGuess : guess}
+                readOnly
+            />
+            <button
+                onClick={handleUndoClick}
+            >
+                <img src={undoIcon} alt="" />
+            </button>
+        </div>
     )
 };
 

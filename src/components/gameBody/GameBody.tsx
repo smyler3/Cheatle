@@ -10,7 +10,7 @@ import { binaryInsertion, isTopWord } from '../../utils/utils';
 import CountdownTimer from '../countdownTimer/CountdownTimer';
 import { ADJACENT_LIST, TILE_STATE } from '../../constants';
 import Tile from '../tile/Tile';
-import { useCheatleData } from '../../hooks/useCheatleData';
+import { useCheatleData } from '../../hooks/cheatleData/useCheatleData';
 import type { TileType } from '../../schema/CheatleSchema';
 import { createPortal } from 'react-dom';
 import ModalManager from '../modalManager/ModalManager';
@@ -23,6 +23,7 @@ import LoadingScreen from '../loadingScreen/LoadingScreen';
 import DuplicateGuessIndicator from '../duplicateGuessIndicator/DuplicateGuessIndicator';
 import ErrorScreen from '../errorScreen/ErrorScreen';
 import styles from "./GameBody.module.css";
+import { useLocalStorageData } from '../../hooks/localStorageData.tsx/useLocalStorageData';
 
 type CurrentGuessType = {
     text: string,
@@ -34,13 +35,16 @@ type CurrentGuessType = {
 export default function GameBody() {
     const { data, isLoading, isError } = useCheatleData();
     // console.log("error:", error);
+    const { isHydrated } = useLocalStorageData();
     const { stopTimer, isTimerDone } = useTimer();
     const { score, maxPossibleScore } = useGameData();
     const { setHintPoints, markTopWordAsGuessed } = useHints();
     const { openResultModal } = useModal();
     const { correctGuesses, setCorrectGuesses } = useGameData();
 
+    // Previously submitted guess for display purposes
     const [lastGuess, setLastGuess] = useState<LastGuessType>({
+        text: "",
         tilePositions: [],
         result: TILE_STATE.INCORRECT, 
     });
@@ -55,10 +59,11 @@ export default function GameBody() {
     const [showDuplicateModal, setShowDuplicateModal] = useState(false);
 
     const clearLastGuess = () => {
-        setLastGuess({
+        setLastGuess(prev => ({
+            ...prev,
             tilePositions: [], 
             result: "idle",
-        });
+        }));
     };
 
     const endGame = useCallback(() => {
@@ -90,10 +95,37 @@ export default function GameBody() {
         );
     };
 
+    // TODO: is this guard dumb?
+    if (!isHydrated) {
+        return (
+            <LoadingScreen />
+        );
+    }
+
     const { board, validWords, topWords } = data;
 
+    const handleUndo = () => {
+        const prevPosition = currentGuess.prevTileOrder.at(-1);
+
+        if (prevPosition === undefined) {
+            return;
+        };
+
+        const lastTile = board[prevPosition];
+        const newGuessText = currentGuess.text.slice(0, -lastTile.text.length);
+        const newGuessValue = currentGuess.value - lastTile.value;
+        const newTileOrder = currentGuess.prevTileOrder.slice(0, -1);
+
+        setCurrentGuess(prev => ({
+            text: newGuessText,
+            value: newGuessValue,
+            prevTileOrder: [...newTileOrder],
+            prevTilePositions: {...prev.prevTilePositions, [prevPosition]: false},
+        }))
+    }
+
     const handleTileSelect = (tile: TileType, selectedPosition: number) => {
-        const prevPosition = currentGuess.prevTileOrder.at(-1) || null;
+        const prevPosition = currentGuess.prevTileOrder.at(-1);
         const currentWord = currentGuess.text;
         const currentValue = currentGuess.value;
 
@@ -111,12 +143,10 @@ export default function GameBody() {
             const isValid = validWords.some(word => word.text === currentWord);
 
             if (isRepeat) {
-                console.log("duplicate");
                 setShowDuplicateModal(true);
             }
             
             if (!isRepeat && isValid) {
-                console.log(currentWord, topWords);
                 const isCurrentATopWord = isTopWord(currentWord, topWords);
 
                 addToCorrectGuesses(isCurrentATopWord);
@@ -128,6 +158,7 @@ export default function GameBody() {
             };
 
             setLastGuess({
+                text: currentWord,
                 tilePositions: currentGuess.prevTileOrder,
                 result: (!isRepeat && isValid) ? TILE_STATE.CORRECT : TILE_STATE.INCORRECT,
             });
@@ -141,7 +172,7 @@ export default function GameBody() {
         }
 
         // Adding to guess
-        else if (prevPosition === null || ADJACENT_LIST[prevPosition].includes(selectedPosition)) {
+        else if (prevPosition === undefined || ADJACENT_LIST[prevPosition].includes(selectedPosition)) {
             setCurrentGuess(prev => ({
                 text: prev.text + tile.text,
                 value: prev.value + tile.value,
@@ -150,11 +181,7 @@ export default function GameBody() {
             }));
         }
 
-        // Invalid tile selected
-        else {
-            console.log("invalid selection");
-            // TODO: add invalid selected logic
-        }
+        // Else invalid tile selected
     };
 
     return (
@@ -176,7 +203,7 @@ export default function GameBody() {
                 <HintButton />
                 <FinishButton />
             </ActionButtons>
-            <LiveGuessDisplay guess={currentGuess.text} />
+            <LiveGuessDisplay guess={currentGuess.text} lastGuess={lastGuess.text} handleUndoClick={handleUndo} />
             <GuessList
                 shouldShowScore={true} 
             />

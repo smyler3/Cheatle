@@ -1,4 +1,5 @@
 import { ModalName, TILE_STATE } from "../constants";
+import type { Hint } from "../schema/CheatleSchema";
 
 export type Guess = {
     text: string,
@@ -7,6 +8,7 @@ export type Guess = {
 };
 
 export type LastGuessType = {
+    text: string,
     tilePositions: number[],
     result: typeof TILE_STATE[keyof typeof TILE_STATE],
 };
@@ -19,3 +21,12 @@ export type tileColourType = {
     default: string,
     selected: string,
 };
+
+export type gameState = {
+    timeRemaining: number;
+    isTimerDone: boolean;
+    hintPoints: number;
+    hintsUsed: number;
+    topWordHints: Map<number, Hint[]>;
+    correctGuesses: Guess[];
+}

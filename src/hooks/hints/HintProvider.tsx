@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { HintContext } from "./useHints";
 import { HINT_POINTS_REQUIRED } from "../../constants";
-import { useCheatleData } from "../useCheatleData";
+import { useCheatleData } from "../cheatleData/useCheatleData";
 import { useTimer } from "../timer/useTimer";
 import type { Hint } from "../../schema/CheatleSchema";
+import { useLocalStorageData } from "../localStorageData.tsx/useLocalStorageData";
 
 type HintProviderProps = {
     children: React.ReactNode,
@@ -11,24 +12,44 @@ type HintProviderProps = {
 
 export default function HintProvider({ children } : HintProviderProps) {
     const { data } = useCheatleData();
+    const { savedGameState, registerSnapshotGetter } = useLocalStorageData();
     const { isTimerDone } = useTimer();
     
     const [hintPoints, setHintPoints] = useState(0);
-    const [topWordHints, setTopWordHints] = useState<Map<number, Hint[]>>(new Map());
     const [hintsUsed, setHintsUsed] = useState(0);
+    const [topWordHints, setTopWordHints] = useState<Map<number, Hint[]>>(new Map());
 
     useEffect(() => {
-        if (data?.topWords) {
+        if (savedGameState?.hintPoints) {
+            setHintPoints(savedGameState.hintPoints);
+        };
+
+        if (savedGameState?.hintsUsed) {
+            setHintsUsed(savedGameState.hintsUsed);
+        };
+
+        if (savedGameState?.topWordHints) {
+            setTopWordHints(savedGameState.topWordHints);
+        }
+        else if (data?.topWords) {
             const sortedTopWords = new Map(
                 [...data.topWords.entries()].sort(([a], [b]) => b - a)
             );
             setTopWordHints(sortedTopWords);
-        }
-    }, [data])
+        };
+    }, [data, savedGameState]);
+
+    // Passes this data to localStorage hook when requested
+    useEffect(() => {
+        registerSnapshotGetter(() => ({
+            hintPoints,
+            hintsUsed,
+            topWordHints,
+        }));
+    }, [hintPoints, hintsUsed, topWordHints, registerSnapshotGetter]);
 
     const markTopWordAsGuessed = (value: number, topWord: string) => {
         setTopWordHints(prev => {
-            console.log('prev', prev);
             const wordsAtValue = prev.get(value);
             if (!wordsAtValue) return prev;
 

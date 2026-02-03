@@ -1,25 +1,26 @@
 ### Code logic
 
-Add info modal images
-
-Add favicon
+Modals
+--modals should cancel background scroll
+--When modal opened while page isn't scrolling, edge of screen content is hidden, and this also affects background scrolling hidden logic
 
 have fonts locally
 
-Game shouldn't start until infoModal closed, and loading is finished
+Game mechanic improvements
+--Add half stars logic
 
-Timer pauses when out of tab
+Bug?
+--Timer pauses when out of tab
+--Add favicon
+--After loading finishes, info modal scrolled back to the top
 
-use localstorage for current guesses and reset every midnight/every board
-maybe timer should use Dates and keep current date in local storage?
+A11y
+--alt tags on images
 
-create error page for when things go wrong
--- just pass some default data
-
-Add half stars logic
+create error page for when things go wrong (pass some default data)?
 
 ### Code styling
 
-change font size on smaller screens
+change font size everywhere
 
 Redesign hints available/points for the hints modal

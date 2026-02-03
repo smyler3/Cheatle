@@ -10,8 +10,6 @@ export default function HintModal() {
     const { hintPoints, topWordHints, handleUseHint } = useHints();
     
     const numberOfHints = Math.floor(hintPoints / HINT_POINTS_REQUIRED);
-    
-    console.log("topWordHints:", topWordHints);
 
     return (
         <>
@@ -31,7 +29,6 @@ export default function HintModal() {
                 </div>
                 {Array.from(topWordHints.entries()).map(([valueStr, words]) => {
                     const value = Number(valueStr);
-                    console.log("haha", value, words);
 
                     return (
                         <section key={value}>

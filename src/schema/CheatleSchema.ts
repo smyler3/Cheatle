@@ -19,13 +19,12 @@ const HintSchema = z.object ({
   isGuessed: z.boolean(),
 });
 
-const TopWordSchema = 
-  z.record(z.string(), z.array(HintSchema))
+const TopWordSchema = z.record(z.string(), z.array(HintSchema))
   .transform(obj => {
     return new Map<number, Hint[]>(
       Object.entries(obj).map(([k, v]) => [Number(k), v])
     )
-  });
+});
 
 export const CheatleResponseSchema = z.object({
   board: z.array(TileSchema),
