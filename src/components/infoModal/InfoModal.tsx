@@ -2,6 +2,11 @@ import { useModal } from "../../hooks/modal/useModal";
 import { useTimer } from "../../hooks/timer/useTimer";
 import styles from "./InfoModal.module.css";
 import closeIcon from "/closeIcon.svg";
+import howToPlayMP4 from "/ezgif.com-optimize.mp4";
+import howToPlayWebm from "/ezgif.com-optimize.webm";
+import scoreExample from "/score.svg";
+import hintVideoMP4 from "/hintVideo.mp4";
+import hintVideoWebm from "/hintVideo.webm";
 
 export default function InfoModal() {
     const { isTimerStarted, startTimer } = useTimer();
@@ -30,7 +35,16 @@ export default function InfoModal() {
                         <li>Each tile used max once per word</li>
                         <li>Select an already selected tile to submit your guess</li>
                     </ol>
-                    <img src="" alt="" className={styles.image} />
+                    <video 
+                        className={styles.video}
+                        autoPlay 
+                        muted 
+                        loop 
+                        playsInline
+                    >
+                        <source src={howToPlayWebm} type="video/webm"></source>
+                        <source src={howToPlayMP4} type="video/mp4"></source>
+                    </video>
                 </section>
                 <section className={styles.hintSection}>
                     <h3>Scoring:</h3>
@@ -38,8 +52,9 @@ export default function InfoModal() {
                         <li>Each letter has a value</li>
                         <li>A word's score = the sum of it's letters</li>
                         <li>Your final score = your best 5 words only</li>
+                        <li>Top 5 answers are marked with a star</li>
                     </ol>
-                    <img src="" alt="" className={styles.image} />
+                    <img src={scoreExample} alt="" className={styles.image} />
                 </section>
                 <section className={styles.hintSection}>
                     <h3>Hints:</h3>
@@ -48,7 +63,16 @@ export default function InfoModal() {
                         <li>Every 20 total points = 1 hint</li>
                         <li>A hint lets you reveal one letter from a top-5 word of your choice</li>
                     </ol>
-                    <img src="" alt="" className={styles.image} />
+                    <video 
+                        className={styles.video}
+                        autoPlay 
+                        muted 
+                        loop 
+                        playsInline
+                    >
+                        <source src={hintVideoWebm} type="video/webm"></source>
+                        <source src={hintVideoMP4} type="video/mp4"></source>
+                    </video>
                 </section>
                 <button 
                     className={styles.playButton}

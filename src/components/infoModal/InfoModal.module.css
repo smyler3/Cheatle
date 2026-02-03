@@ -44,11 +44,12 @@
     margin-top: 8px;
 }
 
-.image {
+.image, 
+video {
     height: 140px;
     margin-top: 8px;
 
-    background-color: rgb(230, 230, 230);
+    background-color: white;
 }
 
 .playButton {
