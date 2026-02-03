@@ -2,11 +2,11 @@ import { useModal } from "../../hooks/modal/useModal";
 import { useTimer } from "../../hooks/timer/useTimer";
 import styles from "./InfoModal.module.css";
 import closeIcon from "/closeIcon.svg";
-import howToPlayMP4 from "/ezgif.com-optimize.mp4";
-import howToPlayWebm from "/ezgif.com-optimize.webm";
-import scoreExample from "/score.svg";
-import hintVideoMP4 from "/hintVideo.mp4";
-import hintVideoWebm from "/hintVideo.webm";
+import howToPlayMP4 from "/howToPlay.mp4";
+import howToPlayWebm from "/howToPlay.webm";
+import scoreExample from "/scoreExample.svg";
+import hintVideoMP4 from "/hints.mp4";
+import hintVideoWebm from "/hints.webm";
 
 export default function InfoModal() {
     const { isTimerStarted, startTimer } = useTimer();

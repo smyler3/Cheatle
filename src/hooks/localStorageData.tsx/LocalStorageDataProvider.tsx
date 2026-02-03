@@ -82,8 +82,8 @@ export const LocalStorageDataProvider = ({ children }: LocalStorageDataProviderP
 
             if (combinedState.topWordHints instanceof Map) {
                 combinedState.topWordHints =
-                    convertTopWordHintsToJsonFromMap(combinedState.topWordHints);
-            }
+                    convertTopWordHintsToJsonFromMap(combinedState.topWordHints) as unknown as Map<number, Hint[]>;
+            } 
 
             localStorage.setItem("boardKey", boardKey);
             localStorage.setItem("gameState", JSON.stringify(combinedState));
