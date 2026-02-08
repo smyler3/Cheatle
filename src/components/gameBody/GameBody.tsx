@@ -33,8 +33,7 @@ type CurrentGuessType = {
 };
 
 export default function GameBody() {
-    const { data, isLoading, isError } = useCheatleData();
-    // console.log("error:", error);
+    const { data, isLoading } = useCheatleData();
     const { isHydrated } = useLocalStorageData();
     const { stopTimer, isTimerDone } = useTimer();
     const { score, maxPossibleScore } = useGameData();
@@ -82,12 +81,6 @@ export default function GameBody() {
             endGame();
         };
     }, [score, maxPossibleScore, endGame]);
-
-    if (isError) {
-        return (
-            <ErrorScreen />
-        );
-    };
 
     if (isLoading || !data) {
         return (

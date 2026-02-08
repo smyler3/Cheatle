@@ -4,7 +4,6 @@ import type { fetchCheatleData } from "../fetchCheatleData";
 type CheatleDataContextType = {
     data: Awaited<ReturnType<typeof fetchCheatleData>> | undefined,
     isLoading: boolean,
-    isError: boolean,
 };
 
 export const CheatleDataContext = createContext<CheatleDataContextType>({} as CheatleDataContextType);
