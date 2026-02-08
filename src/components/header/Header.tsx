@@ -22,7 +22,7 @@ const Header = () => {
                 >
                     <img
                         src={infoIcon}
-                        alt=""
+                        alt="Info Icon"
                         className={styles.icon}
                     />
                 </button>

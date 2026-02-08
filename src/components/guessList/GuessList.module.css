@@ -26,6 +26,8 @@
     width: 100%;
 
     padding: 4px 12px;
+
+    font-size: var(--guess-font-size);
 }
 
 .word {

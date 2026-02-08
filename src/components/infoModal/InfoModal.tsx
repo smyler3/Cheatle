@@ -22,7 +22,7 @@ export default function InfoModal() {
     return (
         <>
             <button className={styles.closeButton} onClick={handleCloseModal}>
-                <img src={closeIcon} alt="" />
+                <img src={closeIcon} alt="Close Icon" />
             </button>
             <div className={styles.infoModal}>
                 <h2 className={styles.modalHeading}>How to play Cheatle</h2>
@@ -54,7 +54,7 @@ export default function InfoModal() {
                         <li>Your final score = your best 5 words only</li>
                         <li>Top 5 answers are marked with a star</li>
                     </ol>
-                    <img src={scoreExample} alt="" className={styles.image} />
+                    <img src={scoreExample} alt="Example of score section" className={styles.image} />
                 </section>
                 <section className={styles.hintSection}>
                     <h3>Hints:</h3>

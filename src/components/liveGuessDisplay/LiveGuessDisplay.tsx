@@ -20,7 +20,7 @@ const LiveGuessDisplay = ({ guess, lastGuess, handleUndoClick }: LiveGuessDispla
             <button
                 onClick={handleUndoClick}
             >
-                <img src={undoIcon} alt="" />
+                <img src={undoIcon} alt="Undo Icon" />
             </button>
         </div>
     )

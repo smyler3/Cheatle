@@ -15,7 +15,7 @@ export default function ConfirmModal() {
     return (
         <>
             <button className={styles.closeButton} onClick={closeModal}>
-                <img src={closeIcon} alt="" />
+                <img src={closeIcon} alt="Close Icon" />
             </button>
             <div className={styles.confirmModal}>
                 <h2 className={styles.modalHeading}>Finish game?</h2>
