@@ -14,14 +14,14 @@ export default function HintModal() {
     return (
         <>
             <button className={styles.closeButton} onClick={closeModal}>
-                <img src={closeIcon} alt="" />
+                <img src={closeIcon} alt="Close Icon" />
             </button>
             <div className={styles.hintModal}>
                 <h2>Hints</h2>
                 <p>
                     Use hints to reveal letters from the top 5 words one at a time.
                     <br /><br />
-                    You gain one hint for every 20 points earned from entered words.
+                    Every word you find adds its length to your hint points. You gain one hint for every {HINT_POINTS_REQUIRED} hint points earned. 
                 </p>
                 <div className={styles.hintPointsContainer}>
                     <p>{hintPoints}/{HINT_POINTS_REQUIRED}</p>
@@ -32,7 +32,7 @@ export default function HintModal() {
 
                     return (
                         <section key={value}>
-                            <h3>{value} points</h3>
+                            <p className={styles.pointSectionHeader}>{value} points</p>
                             <ol className={styles.hintsList}>
                                 {words.map((hint: Hint, index: number) => {
                                     const shouldShowHintButton = hint.revealedText.length < hint.text.length;

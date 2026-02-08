@@ -21,7 +21,6 @@ import { useModal } from '../../hooks/modal/useModal';
 import type { LastGuessType } from '../../types/types';
 import LoadingScreen from '../loadingScreen/LoadingScreen';
 import DuplicateGuessIndicator from '../duplicateGuessIndicator/DuplicateGuessIndicator';
-import ErrorScreen from '../errorScreen/ErrorScreen';
 import styles from "./GameBody.module.css";
 import { useLocalStorageData } from '../../hooks/localStorageData.tsx/useLocalStorageData';
 
@@ -33,8 +32,7 @@ type CurrentGuessType = {
 };
 
 export default function GameBody() {
-    const { data, isLoading, isError } = useCheatleData();
-    // console.log("error:", error);
+    const { data, isLoading } = useCheatleData();
     const { isHydrated } = useLocalStorageData();
     const { stopTimer, isTimerDone } = useTimer();
     const { score, maxPossibleScore } = useGameData();
@@ -82,12 +80,6 @@ export default function GameBody() {
             endGame();
         };
     }, [score, maxPossibleScore, endGame]);
-
-    if (isError) {
-        return (
-            <ErrorScreen />
-        );
-    };
 
     if (isLoading || !data) {
         return (

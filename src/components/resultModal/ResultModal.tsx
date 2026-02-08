@@ -1,3 +1,4 @@
+import { HINT_POINTS_REQUIRED } from "../../constants";
 import { useGameData } from "../../hooks/gameData/useGameData";
 import { useHints } from "../../hooks/hints/useHints";
 import { useModal } from "../../hooks/modal/useModal";
@@ -9,40 +10,40 @@ import closeIcon from "/closeIcon.svg";
 export default function ResultModal() {
     const { score, maxPossibleScore } = useGameData();
     const { minutesUsed, secondsUsed } = useTimer();
-    const { hintsUsed, topWordHints } = useHints();
+    const { hintsUsed, topWordHints, hintPoints } = useHints();
     const { closeModal } = useModal();
 
     return (
         <>
             <button className={styles.closeButton} onClick={closeModal}>
-                <img src={closeIcon} alt="" />
+                <img src={closeIcon} alt="Close Icon" />
             </button>
             <div className={styles.resultModal}>
             <h2 className={styles.modalHeading}>Results</h2>
             <div className={styles.statsContainer}>
                 <span className={styles.statContainer}>
                     <div className={styles.stat}>{score} / {maxPossibleScore}</div>
-                    <p>Score</p>
+                    <p className={styles.statDescription}>Score</p>
                 </span>
                 <span className={styles.statContainer}>
                     <div className={styles.stat}>
                         {minutesUsed}:{secondsUsed}
                     </div>
-                    <p>Time</p>
+                    <p className={styles.statDescription}>Time</p>
                 </span>
                 <span className={styles.statContainer}>
-                    <div className={styles.stat}>{hintsUsed}</div>
-                    <p>Hints</p>
+                    <div className={styles.stat}>{hintsUsed} / {hintsUsed + Math.floor(hintPoints / HINT_POINTS_REQUIRED)}</div>
+                    <p className={styles.statDescription}>Hints</p>
                 </span>
             </div>
             <div className={styles.topWords}>
-                <h3>Highest scoring words:</h3>
+                <h3 className={styles.topWordsHeader}>Highest scoring words:</h3>
                 {Array.from(topWordHints.entries()).map(([valueStr, words]) => {
                     const value = Number(valueStr);
 
                     return (
                         <section key={value} className={styles.pointsSection}>
-                            <h4>{value} points</h4>
+                            <p className={styles.pointSectionHeader}>{value} points</p>
                             <ol className={styles.wordList}>
                                 {words.map((hint: Hint, index: number) => {
                                     const wasGuessed = hint.revealedText === hint.text;

@@ -1,6 +1,7 @@
 import { fetchCheatleData } from "../fetchCheatleData";
 import { useQuery } from "@tanstack/react-query";
 import { CheatleDataContext } from "./useCheatleData";
+import defaultData from "../../constants/defaultData";
 
 type CheatleDataProviderProps = {
     children: React.ReactNode,
@@ -13,19 +14,13 @@ export const CheatleDataProvider = ({ children }: CheatleDataProviderProps) => {
         refetchOnWindowFocus: false,
     });
 
-    // // Example boardKey derivation
-    // const boardKey = useMemo(() => {
-    //     if (!query.data?.board) return null;
-
-    //     return query.data.board.join("");
-    // }, [query.data]);
+    const data = query.isError ? defaultData : query.data;
 
     return (
         <CheatleDataContext.Provider
             value={{
-                data: query.data,
+                data: data,
                 isLoading: query.isLoading,
-                isError: query.isError,
             }}
         >
             {children}

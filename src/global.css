@@ -1,4 +1,6 @@
 :root {
+    --guess-font-size: 1.25rem;
+
     --white: #ffffff;
 
     --grey-1000: #1E1E1E;
@@ -57,7 +59,7 @@ h4 {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 3.2rem;
   line-height: 1.1;
 }
 
