@@ -21,7 +21,6 @@ import { useModal } from '../../hooks/modal/useModal';
 import type { LastGuessType } from '../../types/types';
 import LoadingScreen from '../loadingScreen/LoadingScreen';
 import DuplicateGuessIndicator from '../duplicateGuessIndicator/DuplicateGuessIndicator';
-import ErrorScreen from '../errorScreen/ErrorScreen';
 import styles from "./GameBody.module.css";
 import { useLocalStorageData } from '../../hooks/localStorageData.tsx/useLocalStorageData';
 
