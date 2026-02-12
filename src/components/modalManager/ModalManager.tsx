@@ -1,4 +1,4 @@
-import { Activity } from "react";
+import { Activity, useRef } from "react";
 import HintModal from "../hintModal/HintModal";
 import InfoModal from "../infoModal/InfoModal";
 import ResultModal from "../resultModal/ResultModal";
@@ -9,6 +9,8 @@ import ConfirmModal from "../confirmModal/ConfirmModal";
 
 export default function ModalManager() {
     const { modalInfo } = useModal();
+    const modalBackgroundRef = useRef<HTMLDivElement | null>(null);
+
     const shouldShowInfoModal = modalInfo.modalToShow === ModalName.InfoModal;
     const shouldShowHintModal = modalInfo.modalToShow === ModalName.HintModal;
     const shouldShowConfirmModal = modalInfo.modalToShow === ModalName.ConfirmModal;
@@ -16,7 +18,7 @@ export default function ModalManager() {
 
     return (
         modalInfo.shouldShowModal && (
-        <div className={styles.modalBackground}>
+        <div className={styles.modalBackground} ref={modalBackgroundRef}>
             <dialog className={styles.modalContainer}>
                 <Activity mode={shouldShowInfoModal ? "visible" : "hidden"} >
                     <InfoModal />
@@ -28,7 +30,7 @@ export default function ModalManager() {
                     <ConfirmModal />
                 </Activity>
                 <Activity mode={shouldShowResultModal ? "visible" : "hidden"} >
-                    <ResultModal />
+                    <ResultModal backgroundRef={modalBackgroundRef} />
                 </Activity>
             </dialog>
         </div>

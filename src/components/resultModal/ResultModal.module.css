@@ -41,6 +41,23 @@
     font-size: 1.125rem;
 }
 
+.toggleSpoilersButton {
+    align-self: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    width: fit-content;
+    padding: 8px 16px;
+    
+    font-family: "Lilita One";
+    font-size: 1.125rem;
+
+    border: 2px solid var(--grey-1000);
+}
+
 .topWords {
     margin-top: 12px;
 }
