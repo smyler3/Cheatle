@@ -3,13 +3,12 @@ import { useHints } from "../../hooks/hints/useHints";
 import { useModal } from "../../hooks/modal/useModal";
 import styles from "./HintButton.module.css";
 import { useGameData } from "../../hooks/gameData/useGameData";
+import { HINT_POINTS_REQUIRED } from "../../constants";
 
 type indicatorType = {
     id: string, 
     value: number
 };
-
-const POINTS_FOR_HINT = 25;
 
 const HintButton = () => {
   const { hintPoints } = useHints();
@@ -57,10 +56,10 @@ const HintButton = () => {
       ))}
 
       <span
-        className={`${styles.hintProgressIndicator} ${hintPoints >= POINTS_FOR_HINT && styles.full}`}
+        className={`${styles.hintProgressIndicator} ${hintPoints >= HINT_POINTS_REQUIRED && styles.full}`}
         style={{
-          width: `calc(${Math.min(1.2, hintPoints / POINTS_FOR_HINT) * 100}% + 20px)`,
-          transitionDuration: `${Math.min(1, hintPoints / POINTS_FOR_HINT) * 1.5}s`,
+          width: `calc(${Math.min(1.2, hintPoints / HINT_POINTS_REQUIRED) * 100}% + 20px)`,
+          transitionDuration: `${Math.min(1, hintPoints / HINT_POINTS_REQUIRED) * 1.5}s`,
         }}
       />
     </button>
