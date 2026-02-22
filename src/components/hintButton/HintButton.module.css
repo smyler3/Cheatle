@@ -10,7 +10,6 @@
     font: inherit;
     color: black;
 
-    /* border-radius: 100px; */
     border: 2px solid var(--grey-1000);
 
     overflow: hidden;
@@ -21,7 +20,6 @@
     left: 15px;
     z-index: 2;
 
-    /* font-family: "Lilita One"; */
     font-weight: 600;
 }
 
@@ -32,7 +30,6 @@
 
     min-height: 44px;
 
-    /* border-radius: 100px; */
     background-color: var(--primary-100);
     transition-property: width;
     transition-timing-function: ease-out;

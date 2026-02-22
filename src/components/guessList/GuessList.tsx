@@ -30,7 +30,6 @@ const GuessList = ({ shouldShowScore }: GuessListProps) => {
                                     className={styles.word}
                                 >
                                     {guess.text}
-                                    {/* TODO: Add half star logic */}
                                     {guess.isTopWord && <img src={starIcon} className={styles.star} />}
                                 </p>
                                 <p
