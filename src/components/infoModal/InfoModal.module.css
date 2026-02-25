@@ -50,12 +50,12 @@ video {
     margin-top: 8px;
     margin-bottom: 40px;
 
-    background-color: white;
+    background-color: var(--white);
 }
 
 .playButton {
     padding: .6rem 3rem;
-    color: white;
+    color: var(--white);
     font-family: "Lilita One";
     font-size: 1.25rem;
 

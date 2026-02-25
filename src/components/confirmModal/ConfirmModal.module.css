@@ -36,7 +36,7 @@
     padding: .6rem 3rem;
     margin-top: 2rem;
 
-    color: black;
+    color: var(--grey-1000);
     font-family: "Lilita One";
     font-size: 1.25rem;
 
@@ -48,7 +48,7 @@
     padding: .6rem 3rem;
     margin-top: 2rem;
 
-    color: white;
+    color: var(--white);
     font-family: "Lilita One";
     font-size: 1.25rem;
 

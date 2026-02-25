@@ -8,7 +8,7 @@
     padding: 4px 20px;
 
     font: inherit;
-    color: black;
+    color: var(--grey-1000);
 
     border: 2px solid var(--grey-1000);
 

@@ -55,6 +55,7 @@
     font: inherit;
     font-family: "Lilita One";
     font-size: 1.125rem;
+    color: var(--grey-1000);
 
     border: 2px solid var(--grey-1000);
 }
@@ -101,7 +102,7 @@
     padding: .6rem 3rem;
     margin-top: 2rem;
 
-    color: black;
+    color: var(--grey-1000);
     font-family: "Lilita One";
     font-size: 1.25rem;
 
