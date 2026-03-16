@@ -14,3 +14,17 @@ export const fetchCheatleData = async (): Promise<CheatleResponse> => {
 
     return res;
 };
+
+export const postCheatleDone = async (): Promise<void> => {
+    const base = import.meta.env.VITE_API_URL!;
+    const API_URL = new URL('/cheatle-api', base).toString();
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+    }
+    const response = await fetch(API_URL, requestOptions);
+
+    if (!response.ok) {
+        throw new Error("Network request failed");
+    };
+}

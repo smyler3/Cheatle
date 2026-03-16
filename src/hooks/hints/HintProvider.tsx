@@ -57,7 +57,7 @@ export default function HintProvider({ children } : HintProviderProps) {
             if (wordIndex === -1) return prev;
 
             const updatedHints = wordsAtValue.map((word, index) =>
-                index === wordIndex ? { ...word, revealedText: word.text, isGuessed: true } : word
+                index === wordIndex ? { ...word, isGuessed: true } : word
             );
 
             const updatedTopWordHints = new Map(prev).set(value, updatedHints);
