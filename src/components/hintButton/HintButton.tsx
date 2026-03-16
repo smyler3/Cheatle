@@ -18,6 +18,8 @@ const HintButton = () => {
   const [oldHintPoints, setOldHintPoints] = useState(0);
   const [indicators, setIndicators] = useState<indicatorType[]>([]);
 
+  const numberOfHints = Math.floor(hintPoints / HINT_POINTS_REQUIRED);
+
   useEffect(() => {
     const diff = hintPoints - oldHintPoints;
     if (diff <= 0) return;
@@ -43,7 +45,16 @@ const HintButton = () => {
       className={styles.button}
       onClick={openHintModal}
     >
-      <span className={styles.buttonText}>HINT</span>
+      <div className={styles.contentWrapper}>
+            <span className={styles.buttonText}>HINT</span>
+            <span
+                className={styles.numberOfHintsIndicator}
+            >
+                {Array.from({ length: numberOfHints }, (_, index) => (
+                    <span key={index} className={styles.dotIndicator}></span>
+                ))}
+            </span>
+      </div>
 
       {indicators.map(({ id, value }) => (
         <span

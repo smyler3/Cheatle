@@ -35,16 +35,17 @@ export default function HintModal() {
                             <p className={styles.pointSectionHeader}>{value} points</p>
                             <ol className={styles.hintsList}>
                                 {words.map((hint: Hint, index: number) => {
-                                    const shouldShowHintButton = hint.revealedText.length < hint.text.length;
+                                    const isWordRevealed = hint.isGuessed || hint.revealedText.length >= hint.text.length;
                                     const areHintsAvailable = numberOfHints > 0;
+
                                     return (
                                         <li key={index} className={styles.hintItem}>
                                             <p 
                                                 className={ `${styles.hintText} ${hint.isGuessed && styles.guessedHintText}`}
                                             >
-                                                {hint.revealedText.length < hint.text.length ? `${hint.revealedText}...` : hint.revealedText}
+                                                {isWordRevealed ? hint.text : `${hint.revealedText}...`}
                                             </p>
-                                            {shouldShowHintButton && 
+                                            {!isWordRevealed && 
                                                 <button 
                                                     className={styles.hintButton}
                                                     onClick={() => handleUseHint(value, index)}

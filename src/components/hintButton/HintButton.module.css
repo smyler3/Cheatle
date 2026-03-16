@@ -15,12 +15,29 @@
     overflow: hidden;
 }
 
-.buttonText {
+.contentWrapper {
     position: relative;
-    left: 15px;
+    z-index: 2;
+}
+
+.buttonText {
     z-index: 2;
 
     font-weight: 600;
+}
+
+.numberOfHintsIndicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.dotIndicator {
+    height: 2px;
+    width: 12px;
+
+    background-color: var(--grey-1000);
 }
 
 .hintProgressIndicator {
@@ -36,7 +53,7 @@
 }
 
 .full {
-    background-color: #b2e4f7;
+    background-color: var(--primary-150);
 }
 
 .scoreIncreaseIndicator {

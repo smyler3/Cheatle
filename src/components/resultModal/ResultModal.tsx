@@ -70,10 +70,19 @@ export default function ResultModal({ backgroundRef }: ResultModalProps) {
                             <p className={styles.pointSectionHeader}>{value} points</p>
                             <ol className={styles.wordList}>
                                 {words.map((hint: Hint, index: number) => {
-                                    const wasGuessed = hint.revealedText === hint.text;
+                                    const wasGuessed = hint.isGuessed;
+
                                     return (
                                         <li key={index} className={`${wasGuessed && styles.guessed}`}>
-                                            {shouldHideSpoilers ? "..." : hint.text}
+                                            {shouldHideSpoilers 
+                                                ? "..." 
+                                                : (
+                                                    <>
+                                                    <span className={styles.hintText}>{hint.revealedText}</span>
+                                                    <span>{hint.text.replace(hint.revealedText, '')}</span>
+                                                    </>
+                                                )
+                                            }
                                         </li>
                                     )
                                 })}

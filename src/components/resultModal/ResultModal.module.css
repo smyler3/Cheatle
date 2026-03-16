@@ -97,6 +97,10 @@
     color: #0090FF;
 }
 
+.hintText {
+    text-decoration: underline dotted 3px;
+}
+
 .cancelButton {
     align-self: center;
     padding: .6rem 3rem;

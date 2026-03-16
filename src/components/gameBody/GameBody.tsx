@@ -23,6 +23,7 @@ import LoadingScreen from '../loadingScreen/LoadingScreen';
 import DuplicateGuessIndicator from '../duplicateGuessIndicator/DuplicateGuessIndicator';
 import styles from "./GameBody.module.css";
 import { useLocalStorageData } from '../../hooks/localStorageData.tsx/useLocalStorageData';
+import { postCheatleDone } from '../../hooks/fetchCheatleData';
 
 type CurrentGuessType = {
     text: string,
@@ -43,6 +44,7 @@ export default function GameBody() {
     // Previously submitted guess for display purposes
     const [lastGuess, setLastGuess] = useState<LastGuessType>({
         text: "",
+        value: "",
         tilePositions: [],
         result: TILE_STATE.INCORRECT, 
     });
@@ -65,9 +67,9 @@ export default function GameBody() {
     };
 
     const endGame = useCallback(() => {
-        stopTimer();
         openResultModal();
-    }, [stopTimer, openResultModal]);
+        postCheatleDone();
+    }, [openResultModal]);
 
     useEffect(() => {
         if (isTimerDone) {
@@ -77,9 +79,9 @@ export default function GameBody() {
 
     useEffect(() => {
         if (score === maxPossibleScore) {
-            endGame();
+            stopTimer();
         };
-    }, [score, maxPossibleScore, endGame]);
+    }, [score, maxPossibleScore, stopTimer]);
 
     if (isLoading || !data) {
         return (
@@ -98,6 +100,10 @@ export default function GameBody() {
 
     const handleUndo = () => {
         const prevPosition = currentGuess.prevTileOrder.at(-1);
+
+        if (isTimerDone) {
+            return;
+        };
 
         if (prevPosition === undefined) {
             return;
@@ -151,6 +157,7 @@ export default function GameBody() {
 
             setLastGuess({
                 text: currentWord,
+                value: String(currentValue),
                 tilePositions: currentGuess.prevTileOrder,
                 result: (!isRepeat && isValid) ? TILE_STATE.CORRECT : TILE_STATE.INCORRECT,
             });
@@ -195,7 +202,13 @@ export default function GameBody() {
                 <HintButton />
                 <FinishButton />
             </ActionButtons>
-            <LiveGuessDisplay guess={currentGuess.text} lastGuess={lastGuess.text} handleUndoClick={handleUndo} />
+            <LiveGuessDisplay 
+                guess={currentGuess.text}
+                value={currentGuess.value} 
+                lastGuess={lastGuess.text} 
+                lastValue={lastGuess.value}
+                handleUndoClick={handleUndo} 
+            />
             <GuessList
                 shouldShowScore={true} 
             />
