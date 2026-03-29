@@ -22,7 +22,7 @@ export const ModalName = {
 
 // Tile status
 export const TILE_STATE = {
-  CORRECT: 'correct',
-  INCORRECT: 'incorrect',
-  IDLE: 'idle',
+  CORRECT: "correct",
+  INCORRECT: "incorrect",
+  IDLE: "idle",
 };
