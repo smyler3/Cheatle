@@ -9,8 +9,8 @@ const CountdownTimer = () => {
         <div
             className={`
                 ${styles.countdownTimer}
-                ${timeRemaining <= INITIAL_CLOCK_WARNING_THRESHOLD && styles.lastMinute}
-                ${timeRemaining <= FINAL_CLOCK_WARNING_THRESHOLD && styles.lastThreeMinutes}
+                ${timeRemaining <= INITIAL_CLOCK_WARNING_THRESHOLD && timeRemaining > FINAL_CLOCK_WARNING_THRESHOLD && styles.lastThreeMinutes}
+                ${timeRemaining <= FINAL_CLOCK_WARNING_THRESHOLD && styles.lastMinute}
             `}
         >
             {minutesRemaining}:{secondsRemaining}
