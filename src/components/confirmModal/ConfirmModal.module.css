@@ -1,59 +1,61 @@
 .closeButton {
-    position: absolute;
-    right: 0;
-    top: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .confirmModal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-height: 100%;
-    overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  min-width: 280px;
+
+  overflow-y: auto;
 }
 
 .modalHeading {
-    align-self: flex-start;
+  align-self: flex-start;
 }
 
 .tagline {
-    margin: 0.6rem 0;
+  margin: 0.6rem 0;
 
-    font-size: 1.1rem;
-    font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
 .buttonContainer {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    
-    margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  margin-top: 2rem;
 }
 
 .cancelButton,
 .finishButton {
-    padding: 0.6rem 3rem;
+  padding: 0.6rem 3rem;
 
-    font-family: "Lilita One";
-    font-size: 1.25rem;
+  font-family: "Lilita One";
+  font-size: 1.25rem;
 
-    border-radius: 100px;
+  border-radius: 100px;
 }
 
 .cancelButton {
-    color: var(--grey-1000);
+  color: var(--grey-1000);
 
-    background-color: #d9d9d9;
+  background-color: #d9d9d9;
 }
 
 .finishButton {
-    color: var(--white);
+  color: var(--white);
 
-    background-color: #0090ff;
+  background-color: #0090ff;
 }
