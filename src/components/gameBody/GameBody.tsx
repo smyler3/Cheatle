@@ -24,6 +24,7 @@ import DuplicateGuessIndicator from '../duplicateGuessIndicator/DuplicateGuessIn
 import styles from "./GameBody.module.css";
 import { useLocalStorageData } from '../../hooks/localStorageData.tsx/useLocalStorageData';
 import { postCheatleDone } from '../../hooks/fetchCheatleData';
+import ResultsButton from '../resultsButton/ResultsButton';
 
 type CurrentGuessType = {
     text: string,
@@ -199,8 +200,14 @@ export default function GameBody() {
                 })}
             </GameBoard>
             <ActionButtons>
-                <HintButton />
-                <FinishButton />
+                {isTimerDone ? (
+                    <ResultsButton />
+                ) : (
+                    <>
+                        <HintButton />
+                        <FinishButton />
+                    </>
+                )}
             </ActionButtons>
             <LiveGuessDisplay 
                 guess={currentGuess.text}

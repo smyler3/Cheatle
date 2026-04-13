@@ -13,6 +13,7 @@
 
     background-color: #00000025;
     z-index: 2;
+    overscroll-behavior-y: none;
 }
 
 .modalContainer {
