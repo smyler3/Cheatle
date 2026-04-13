@@ -1,0 +1,12 @@
+.button {
+    min-width: 44px;
+    min-height: 44px;
+
+    padding: 4px 20px;
+
+    font: inherit;
+    font-weight: 600;
+    color: var(--grey-1000);
+
+    border: 2px solid var(--grey-1000);
+}
