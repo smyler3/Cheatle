@@ -58,6 +58,7 @@ export default function GameBody() {
         }
     );
     const [showDuplicateModal, setShowDuplicateModal] = useState(false);
+    const [duplicateGuessCount, setDuplicateGuessCount] = useState(0);
 
     const clearLastGuess = () => {
         setLastGuess(prev => ({
@@ -142,6 +143,7 @@ export default function GameBody() {
             const isValid = validWords.some(word => word.text === currentWord);
 
             if (isRepeat) {
+                setDuplicateGuessCount(prev => prev + 1);
                 setShowDuplicateModal(true);
             }
             
@@ -191,7 +193,7 @@ export default function GameBody() {
                 document.body
             )}
             <CountdownTimer />
-            <DuplicateGuessIndicator showDuplicateModal={showDuplicateModal} setShowDuplicateModal={setShowDuplicateModal} />
+            <DuplicateGuessIndicator key={duplicateGuessCount} showDuplicateModal={showDuplicateModal} setShowDuplicateModal={setShowDuplicateModal} />
             <GameBoard>
                 {board.map((tile, index) => {
                     return (

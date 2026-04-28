@@ -20,11 +20,11 @@ export default function HintProvider({ children } : HintProviderProps) {
     const [topWordHints, setTopWordHints] = useState<Map<number, Hint[]>>(new Map());
 
     useEffect(() => {
-        if (savedGameState?.hintPoints) {
+        if (savedGameState?.hintPoints !== undefined) {
             setHintPoints(savedGameState.hintPoints);
         };
 
-        if (savedGameState?.hintsUsed) {
+        if (savedGameState?.hintsUsed !== undefined) {
             setHintsUsed(savedGameState.hintsUsed);
         };
 

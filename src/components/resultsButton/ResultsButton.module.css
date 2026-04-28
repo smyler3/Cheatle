@@ -1,6 +1,7 @@
 .button {
     min-width: 44px;
     min-height: 44px;
+    width: 100%;
 
     padding: 4px 20px;
 

@@ -1,5 +1,8 @@
 .actionButtons {
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 12px;
+}
+
+.actionButtons > button:nth-child(2) {
+    margin-left: 12px;
 }

@@ -44,22 +44,28 @@ export const LocalStorageDataProvider = ({ children }: LocalStorageDataProviderP
         };
 
         const boardKey = data.board.reduce((key, tile) => key += tile.text, "");
-        const storedBoardKey = localStorage.getItem("boardKey"); 
         const rawData = localStorage.getItem("gameState");
 
-        if (storedBoardKey !== boardKey || !rawData) {
+        if (!rawData) {
             clearLocalStorage();
             return;
         }
 
         try {
             const parsedData = JSON.parse(rawData);
-            const topWordHintsMap = parsedData.topWordHints 
-                ? convertTopWordHintsToMapFromJson(parsedData.topWordHints)
+            const { savedBoardKey, savedGameState } = parsedData;
+
+            if (savedBoardKey !== boardKey) {
+                clearLocalStorage();
+                return;
+            };
+
+            const topWordHintsMap = savedGameState.topWordHints 
+                ? convertTopWordHintsToMapFromJson(savedGameState.topWordHints)
                 : new Map();
 
             setSavedGameState({
-                ...parsedData,
+                ...savedGameState,
                 topWordHints: topWordHintsMap,
             });
             setIsHydrated(true);
@@ -83,10 +89,14 @@ export const LocalStorageDataProvider = ({ children }: LocalStorageDataProviderP
             if (combinedState.topWordHints instanceof Map) {
                 combinedState.topWordHints =
                     convertTopWordHintsToJsonFromMap(combinedState.topWordHints) as unknown as Map<number, Hint[]>;
-            } 
+            };
 
-            localStorage.setItem("boardKey", boardKey);
-            localStorage.setItem("gameState", JSON.stringify(combinedState));
+            const saveData = {
+                boardKey,
+                gameState: combinedState,
+            };
+
+            localStorage.setItem("gameState", JSON.stringify(saveData));
         };
 
         const handleSave = () => updateLocalStorage();

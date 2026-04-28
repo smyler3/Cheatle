@@ -34,11 +34,11 @@ export const TimerProvider = ({ children }: TimerProviderProps) => {
     };
 
     useEffect(() => {
-        if (savedGameState?.timeRemaining) {
+        if (savedGameState?.timeRemaining !== undefined) {
             setTimeRemaining(savedGameState.timeRemaining);
         };
         if (savedGameState?.isTimerDone) {
-            setIsTimerDone(savedGameState.isTimerDone);
+            stopTimer();
         };
     }, [savedGameState]);
 
