@@ -92,8 +92,8 @@ export const LocalStorageDataProvider = ({ children }: LocalStorageDataProviderP
             };
 
             const saveData = {
-                boardKey,
-                gameState: combinedState,
+                savedBoardKey: boardKey,
+                savedGameState: combinedState,
             };
 
             localStorage.setItem("gameState", JSON.stringify(saveData));
