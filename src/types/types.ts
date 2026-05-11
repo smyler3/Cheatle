@@ -18,12 +18,12 @@ export type ModalNameType = (typeof ModalName)[keyof typeof ModalName];
 
 export type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
 
-export type tileColourType = {
+export type TileColourType = {
     default: string,
     selected: string,
 };
 
-export type gameState = {
+export type GameStateType = {
     timeRemaining: number;
     isTimerDone: boolean;
     hintPoints: number;

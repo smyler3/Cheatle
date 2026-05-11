@@ -1,5 +1,5 @@
 import type { TileType } from "../schema/CheatleSchema";
-import type { tileColourType } from "../types/types";
+import type { TileColourType } from "../types/types";
 
 export const TILES: Record<string, TileType> = {
     "A": { text: "A", value: 1 },
@@ -32,7 +32,7 @@ export const TILES: Record<string, TileType> = {
 
 export const NUMBER_OF_UNIQUE_TILES: number = 26;
 
-export const TILE_VALUE_COLOURS: Record<number, tileColourType> = {
+export const TILE_VALUE_COLOURS: Record<number, TileColourType> = {
     1: 
     {
         default: "var(--grey-700)",
