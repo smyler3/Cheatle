@@ -1,0 +1,59 @@
+import { type Dispatch, type SetStateAction, useState } from "react";
+import type { Guess } from "../types/types";
+import type { TopWords, Word } from "../schema/CheatleSchema";
+import { REQUIRED_TOP_WORDS } from "../constants";
+import useGetSavedGameState from "./useGetSavedGameState";
+
+type UseGuessProps = {
+    boardKey: string,
+    topWords: TopWords,
+};
+
+type UseGuessType = {
+    score: number,
+    maxPossibleScore: number,
+    correctGuesses: Guess[],
+    setCorrectGuesses: Dispatch<SetStateAction<Guess[]>>,
+};
+
+export const getMaxPossibleScore = (topWords: Map<number, Word[]>): number => {
+    let count = 0;
+    let maxPossibleScore = 0;
+
+    const reversedTopWords = new Map(
+        [...topWords.entries()].sort(([a], [b]) => b - a)
+    );
+
+    reversedTopWords.forEach(valueGroup => {
+        for (let i = 0; i < valueGroup.length; i += 1) {
+            if (count <= REQUIRED_TOP_WORDS) {
+                maxPossibleScore += valueGroup[i].value;
+                count += 1;
+            }
+            else {
+                return maxPossibleScore;
+            }
+        };
+    });
+
+    return maxPossibleScore;
+};
+
+export const useGuesses = ({ boardKey, topWords }: UseGuessProps): UseGuessType => {
+    const { savedGameState } = useGetSavedGameState({ boardKey });
+
+    const [correctGuesses, setCorrectGuesses] = useState<Guess[]>(savedGameState?.correctGuesses ?? []);
+
+    const maxPossibleScore = getMaxPossibleScore(topWords);
+
+    const score = correctGuesses.slice(0, 5).reduce((score, word) => {
+        return score += word.value;
+    }, 0);
+
+    return {
+        correctGuesses,
+        setCorrectGuesses,
+        maxPossibleScore,
+        score,
+    }
+}

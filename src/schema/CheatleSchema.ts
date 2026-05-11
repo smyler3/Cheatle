@@ -19,7 +19,7 @@ const HintSchema = z.object ({
   isGuessed: z.boolean(),
 });
 
-const TopWordSchema = z.record(z.string(), z.array(HintSchema))
+const TopWordsSchema = z.record(z.string(), z.array(HintSchema))
   .transform(obj => {
     return new Map<number, Hint[]>(
       Object.entries(obj).map(([k, v]) => [Number(k), v])
@@ -29,11 +29,12 @@ const TopWordSchema = z.record(z.string(), z.array(HintSchema))
 export const CheatleResponseSchema = z.object({
   board: z.array(TileSchema),
   validWords: z.array(WordSchema),
-  topWords: TopWordSchema,
+  topWords: TopWordsSchema,
 });
 
 export type TileValue = z.infer<typeof TileValueSchema>;
 export type TileType = z.infer<typeof TileSchema>;
 export type Word = z.infer<typeof WordSchema>;
 export type Hint = z.infer<typeof HintSchema>;
+export type TopWords = z.infer<typeof TopWordsSchema>;
 export type CheatleResponse = z.infer<typeof CheatleResponseSchema>;
