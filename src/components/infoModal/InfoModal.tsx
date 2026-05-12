@@ -1,5 +1,4 @@
 import { useModal } from "../../hooks/modal/useModal";
-import { useTimer } from "../../hooks/timer/useTimer";
 import styles from "./InfoModal.module.css";
 import closeIcon from "/closeIcon.svg";
 import howToPlayMP4 from "/howToPlay.mp4";
@@ -7,9 +6,10 @@ import howToPlayWebm from "/howToPlay.webm";
 import scoreExample from "/scoreExample.svg";
 import hintVideoMP4 from "/hints.mp4";
 import hintVideoWebm from "/hints.webm";
+import { useGameState } from "../../hooks/gameState/useGameState";
 
 export default function InfoModal() {
-    const { isTimerStarted, startTimer } = useTimer();
+    const { isTimerStarted, startTimer } = useGameState();
     const { closeModal } = useModal(); 
 
     const handleCloseModal = () => {

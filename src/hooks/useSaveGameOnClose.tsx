@@ -1,9 +1,15 @@
 import { useEffect } from "react";
 
-// Needs typing
+// Needs proper typing
+type useSaveGameOnCloseProps = {
+    boardKey: string,
+    timerData: any,
+    hintData: any,
+    guessData: any,
+};
 
 // Save game data before exiting the app
-export default function useSaveOnClose({ boardKey, timerData, hintData, guessData }) {
+export default function useSaveGameOnClose({ boardKey, timerData, hintData, guessData }: useSaveGameOnCloseProps) {
     // Maybe move higher to avoid constantly re-running this
     useEffect(() => {
         const updateLocalStorage = () => {
@@ -42,5 +48,5 @@ export default function useSaveOnClose({ boardKey, timerData, hintData, guessDat
             window.removeEventListener("beforeunload", handleSave);
             document.removeEventListener("visibilitychange", visibilityHandler);
         };
-    }, [boardKey, hintData, timerData, guessData]);
+    }, [boardKey, hintData.hintPoints, hintData.hintsUsed, hintData.topWordHints, timerData.timeRemaining, timerData.isTimerDone, guessData.correctGuesses]);
 }

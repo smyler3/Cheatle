@@ -46,3 +46,6 @@ Noted while working:
 - Make sure that the whole hook isn't getting re-run every second or every call
 
 - Refresh the loading screen
+
+- Fill in the home page content, may need new data from the server too
+-- Change play to resume or results based on savedGameState

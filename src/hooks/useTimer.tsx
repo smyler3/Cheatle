@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { MINUTES_IN_A_GAME, SECONDS_IN_A_MINUTE } from "../constants";
-import useGetSavedGameState from "./useGetSavedGameState";
+import type { GameStateType } from "../types/types";
 
 type UseTimerProps = {
-    boardKey: string,
+    savedGameState: GameStateType | null,
 }
 
 type UseTimerType = {
@@ -18,9 +18,7 @@ type UseTimerType = {
     stopTimer: () => void,
 };
 
-export const useTimer = ({ boardKey }: UseTimerProps): UseTimerType => {
-    const { savedGameState } = useGetSavedGameState({ boardKey });
-
+export const useTimer = ({ savedGameState }: UseTimerProps): UseTimerType => {
     const [isTimerStarted, setIsTimerStarted] = useState(false);
     const [timeRemaining, setTimeRemaining] = useState(savedGameState?.timeRemaining ?? SECONDS_IN_A_MINUTE * MINUTES_IN_A_GAME);
     const [isTimerDone, setIsTimerDone] = useState(savedGameState?.isTimerDone ?? false);

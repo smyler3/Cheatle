@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { HINT_POINTS_REQUIRED } from "../constants";
-import type { Hint, TopWords } from "../schema/CheatleSchema";
-import type { StateSetter } from "../types/types";
-import useGetSavedGameState from "./useGetSavedGameState";
+import type { Hint } from "../schema/CheatleSchema";
+import type { GameStateType, StateSetter } from "../types/types";
+import { useFetchedData } from "./fetchedData/useFetchedData";
 
 type UseHintProps = {
-    boardKey: string,
+    savedGameState: GameStateType | null,
     isTimerDone: boolean,
-    topWords: TopWords,
 };
 
 type UseHintType = {
@@ -19,22 +18,17 @@ type UseHintType = {
     handleUseHint: (value: number, wordIndex: number) => void,
 };
 
-export default function useHints({ boardKey, isTimerDone, topWords } : UseHintProps): UseHintType {
-    const { savedGameState } = useGetSavedGameState({ boardKey });
+export default function useHints({ savedGameState, isTimerDone } : UseHintProps): UseHintType {
+    const { topWords } = useFetchedData();
 
     const [hintPoints, setHintPoints] = useState(savedGameState?.hintPoints ?? 0);
     const [hintsUsed, setHintsUsed] = useState(savedGameState?.hintsUsed ?? 0);
-    const [topWordHints, setTopWordHints] = useState<Map<number, Hint[]>>(new Map());
-
-    if (savedGameState?.topWordHints) {
-        setTopWordHints(savedGameState.topWordHints);
-    }
-    else {
-        const sortedTopWords = new Map<number, Hint[]>(
+    const [topWordHints, setTopWordHints] = useState<Map<number, Hint[]>>(
+        savedGameState?.topWordHints ?? 
+        new Map<number, Hint[]>(
             [...topWords.entries()].sort(([a], [b]) => b - a)
-        );
-        setTopWordHints(sortedTopWords);
-    };
+        )
+    );
 
     const markTopWordAsGuessed = (value: number, topWord: string) => {
         setTopWordHints(prev => {

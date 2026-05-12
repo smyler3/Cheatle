@@ -1,12 +1,11 @@
 import { type Dispatch, type SetStateAction, useState } from "react";
-import type { Guess } from "../types/types";
-import type { TopWords, Word } from "../schema/CheatleSchema";
+import type { GameStateType, Guess } from "../types/types";
+import type { Word } from "../schema/CheatleSchema";
 import { REQUIRED_TOP_WORDS } from "../constants";
-import useGetSavedGameState from "./useGetSavedGameState";
+import { useFetchedData } from "./fetchedData/useFetchedData";
 
 type UseGuessProps = {
-    boardKey: string,
-    topWords: TopWords,
+    savedGameState: GameStateType | null,
 };
 
 type UseGuessType = {
@@ -39,8 +38,8 @@ export const getMaxPossibleScore = (topWords: Map<number, Word[]>): number => {
     return maxPossibleScore;
 };
 
-export const useGuesses = ({ boardKey, topWords }: UseGuessProps): UseGuessType => {
-    const { savedGameState } = useGetSavedGameState({ boardKey });
+export const useGuesses = ({ savedGameState }: UseGuessProps): UseGuessType => {
+    const { topWords } = useFetchedData();
 
     const [correctGuesses, setCorrectGuesses] = useState<Guess[]>(savedGameState?.correctGuesses ?? []);
 

@@ -10,19 +10,14 @@ import { binaryInsertion, isTopWord } from '../../utils/utils';
 import CountdownTimer from '../countdownTimer/CountdownTimer';
 import { ADJACENT_LIST, TILE_STATE } from '../../constants';
 import Tile from '../tile/Tile';
-import { useCheatleData } from '../../hooks/cheatleData/useCheatleData';
-import type { TileType } from '../../schema/CheatleSchema';
+import type { TileType, TopWords, Word } from '../../schema/CheatleSchema';
 import { createPortal } from 'react-dom';
 import ModalManager from '../modalManager/ModalManager';
-import { useHints } from '../../hooks/hints/useHints';
-import { useGameData } from '../../hooks/gameData/useGameData';
-import { useTimer } from '../../hooks/timer/useTimer';
+import { useGameState } from '../../hooks/gameState/useGameState';
 import { useModal } from '../../hooks/modal/useModal';
 import type { LastGuessType } from '../../types/types';
-import LoadingScreen from '../loadingScreen/LoadingScreen';
 import DuplicateGuessIndicator from '../duplicateGuessIndicator/DuplicateGuessIndicator';
 import styles from "./GameBody.module.css";
-import { useLocalStorageData } from '../../hooks/localStorageData.tsx/useLocalStorageData';
 import { postCheatleDone } from '../../hooks/fetchCheatleData';
 import ResultsButton from '../resultsButton/ResultsButton';
 
@@ -33,14 +28,24 @@ type CurrentGuessType = {
     prevTilePositions: boolean[];
 };
 
-export default function GameBody() {
-    const { data, isLoading } = useCheatleData();
-    const { isHydrated } = useLocalStorageData();
-    const { stopTimer, isTimerDone } = useTimer();
-    const { score, maxPossibleScore } = useGameData();
-    const { setHintPoints, markTopWordAsGuessed } = useHints();
+type GameBodyProps = {
+    board: TileType[],
+    validWords: Word[],
+    topWords: TopWords,
+}
+
+export default function GameBody({ board, validWords, topWords }: GameBodyProps) {
+    const { 
+        stopTimer, 
+        isTimerDone, 
+        setHintPoints, 
+        markTopWordAsGuessed, 
+        score, 
+        maxPossibleScore, 
+        correctGuesses, 
+        setCorrectGuesses 
+    } = useGameState();
     const { openResultModal } = useModal();
-    const { correctGuesses, setCorrectGuesses } = useGameData();
 
     // Previously submitted guess for display purposes
     const [lastGuess, setLastGuess] = useState<LastGuessType>({
@@ -73,6 +78,7 @@ export default function GameBody() {
         postCheatleDone();
     }, [openResultModal]);
 
+    // Do these need to be useEffects?
     useEffect(() => {
         if (isTimerDone) {
             endGame();
@@ -84,21 +90,6 @@ export default function GameBody() {
             stopTimer();
         };
     }, [score, maxPossibleScore, stopTimer]);
-
-    if (isLoading || !data) {
-        return (
-            <LoadingScreen />
-        );
-    };
-
-    // TODO: is this guard dumb?
-    if (!isHydrated) {
-        return (
-            <LoadingScreen />
-        );
-    }
-
-    const { board, validWords, topWords } = data;
 
     const handleUndo = () => {
         const prevPosition = currentGuess.prevTileOrder.at(-1);
