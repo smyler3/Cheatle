@@ -1,10 +1,10 @@
+import { useGameState } from "../../hooks/gameState/useGameState";
 import { useModal } from "../../hooks/modal/useModal";
-import { useTimer } from "../../hooks/timer/useTimer";
 import styles from "./ConfirmModal.module.css";
 import closeIcon from "/closeIcon.svg";
 
 export default function ConfirmModal() {
-    const { stopTimer } = useTimer();
+    const { stopTimer } = useGameState();
     const { closeModal, openResultModal } = useModal(); 
 
     const handleFinishClick = () => {

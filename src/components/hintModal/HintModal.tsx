@@ -1,5 +1,5 @@
 import { HINT_POINTS_REQUIRED } from "../../constants";
-import { useHints } from "../../hooks/hints/useHints";
+import { useGameState } from "../../hooks/gameState/useGameState";
 import { useModal } from "../../hooks/modal/useModal";
 import type { Hint } from "../../schema/CheatleSchema";
 import styles from "./HintModal.module.css";
@@ -7,7 +7,7 @@ import closeIcon from "/closeIcon.svg";
 
 export default function HintModal() {
     const { closeModal } = useModal();
-    const { hintPoints, topWordHints, handleUseHint } = useHints();
+    const { hintPoints, topWordHints, handleUseHint } = useGameState();
     
     const numberOfHints = Math.floor(hintPoints / HINT_POINTS_REQUIRED);
 

@@ -8,7 +8,7 @@ type ModalProviderProps = {
 };
 
 export const ModalProvider = ({ children }: ModalProviderProps) => {
-    const [modalInfo, setModalInfo] = useState<{ shouldShowModal: boolean, modalToShow: ModalNameType | null}>({ shouldShowModal: true, modalToShow: ModalName.InfoModal });
+    const [modalInfo, setModalInfo] = useState<{ shouldShowModal: boolean, modalToShow: ModalNameType | null}>({ shouldShowModal: false, modalToShow: null });
 
     const openInfoModal = () => {
         setModalInfo({ shouldShowModal: true, modalToShow: ModalName.InfoModal });

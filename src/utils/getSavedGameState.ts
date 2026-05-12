@@ -1,10 +1,6 @@
 import type { GameStateType } from "../types/types";
 import type { Hint } from "../schema/CheatleSchema";
 
-type UseLocalStorageProps = {
-    boardKey: string,
-};
-
 const convertTopWordHintsToMapFromJson = (record: Map<number, Hint[]>): Map<number, Hint[]> => {
     return new Map(
         Object.entries(record)
@@ -14,13 +10,12 @@ const convertTopWordHintsToMapFromJson = (record: Map<number, Hint[]>): Map<numb
 };
 
 // Need to use state or a provider to prevent re-calling this over and over?
-export default function useGetSavedGameState({ boardKey }: UseLocalStorageProps) {
+export default function getSavedGameState(boardKey: string) {
     const rawData: string | null = localStorage.getItem("gameState");
     let savedBoardKey: string | null = null;
     let savedGameState: GameStateType | null = null;
 
     if (!rawData) {
-        localStorage.clear();
         return { savedGameState };
     }
 
@@ -30,7 +25,6 @@ export default function useGetSavedGameState({ boardKey }: UseLocalStorageProps)
         savedGameState = parsedData?.savedGameState;
 
         if (savedBoardKey !== boardKey) {
-            localStorage.clear();
             return { savedGameState };
         };
 
@@ -43,14 +37,13 @@ export default function useGetSavedGameState({ boardKey }: UseLocalStorageProps)
             typeof savedGameState.hintsUsed !== "number" ||
             !Array.isArray(savedGameState.correctGuesses)
         ) {
-            localStorage.clear();
             return { savedGameState };
         }
 
         const topWordHintsMap = convertTopWordHintsToMapFromJson(savedGameState.topWordHints)
         savedGameState = {...savedGameState, topWordHints: topWordHintsMap};
     } catch {
-        localStorage.clear();
+        return { savedGameState };
     }
 
     return { savedGameState }
