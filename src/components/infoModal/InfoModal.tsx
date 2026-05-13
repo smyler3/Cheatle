@@ -19,7 +19,7 @@ export default function InfoModal() {
                 <h2 className={styles.modalHeading}>How to play</h2>
                 <p className={styles.tagline}>Spell words using the tiles on the board.</p>
                 <section className={styles.hintSection}>
-                    <h3>Building Words:</h3>
+                    <h3>Spelling Words:</h3>
                     <ol className={styles.hintList}>
                         <li>Tap any tile on the board, then tap adjacent tiles to spell a word.</li>
                         <li>Each tile on the board can only be used once per word.</li>

@@ -9,7 +9,7 @@ type UseHintProps = {
     isTimerDone: boolean,
 };
 
-type UseHintType = {
+export type UseHintType = {
     hintPoints: number,
     setHintPoints: StateSetter<number>,
     topWordHints: Map<number, Hint[]>,

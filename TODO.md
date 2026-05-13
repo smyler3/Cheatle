@@ -1,21 +1,23 @@
 ### Code logic
 Add an indicator for words under min length like duplicate guess.
-Prevent button text being selectable
-
-Move to a new home-page format that has a play/how to play button.
--- Render updated how to play modal
--- or
--- Render the board wrapped inside of a getData hook, a gameState hook, and a modalHook
--- Add a new loading spinner if the board is waiting on data.
--- If an error occurs, set the data to default data.
 
 The new getData hook will refresh the whole app if new data is found. 
 
-If the game has been finished already, display results on the home screen too?
-
 Add a submit button to the textbox
 
-Clicking the cheatle button at the top now brings you back to home
+Add a pause button?
+
+Make the spoilers button a slider?
+
+Add the list of all possible words, maybe as a toggle option?
+
+Add a new loading spinner
+
+The action button in home page is buggy when rehydrating
+
+Get date and puzzle # from api
+
+Fix the how to play gif
 
 
 The game currently has no pattern to refresh when data changes
@@ -25,9 +27,6 @@ The game currently has no pattern to refresh when data changes
 
 Game mechanic improvements
 --Add half stars logic
-
-Bug?
---After loading finishes, info modal scrolled back to the top
 
 ------------------------------------------------
 
@@ -51,16 +50,4 @@ Noted while working:
 -- Change play to resume or results based on savedGameState
 
 
-
-
-I think this is my solution:
-
-I will create a UI component, it purely decides whether to render the game or the home screen.
-
-When we toggle between them we will need to pause/start the game, this might need a useEffect on render? This will need to also check that the game hasn't already ended before trying to start it for example.
-
-It will need an internal state: shouldShowGame and if it's true it renders the game, otherwise it renders the home screen. This will need to be exposed via a context I think because the header will need to use it to toggle as well as Home. I want the logic that handles the timer stuff as well as the toggle to live within the UI component or likely in the new context hook I need to create.
-
-Then the Home component can also read from the gameState hook or maybe somewhere else to see if the game has previously been started or not then it can render Play or Resume or Results. We might need a new variable isTimerPaused? to check this. The UI render hook shouldn't care about timer stuff tbh
-
-So make a new UI component, make a new hook that triggers what should render. Add a new timer variable for pausing. And then write functions to control toggling this on and off. And pass them to the Play and Home Button. Potentially they will just use the toggle logic and the two pages themselves should handle the pausing and starting of the timer with useEffects
+I think isTimerStarted/Paused/Done can be combined into a single variable? which has states neverStarted, running, paused, done.

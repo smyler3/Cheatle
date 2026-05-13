@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { useHints } from "../../hooks/hints/useHints";
 import { useModal } from "../../hooks/modal/useModal";
 import styles from "./HintButton.module.css";
-import { useGameData } from "../../hooks/gameData/useGameData";
 import { HINT_POINTS_REQUIRED } from "../../constants";
+import { useGameState } from "../../hooks/gameState/useGameState";
 
 type indicatorType = {
     id: string, 
@@ -11,9 +10,8 @@ type indicatorType = {
 };
 
 const HintButton = () => {
-  const { hintPoints } = useHints();
+  const { hintPoints, correctGuesses } = useGameState();
   const { openHintModal } = useModal();
-  const { correctGuesses } = useGameData();
 
   const [oldHintPoints, setOldHintPoints] = useState(0);
   const [indicators, setIndicators] = useState<indicatorType[]>([]);

@@ -9,7 +9,6 @@ const convertTopWordHintsToMapFromJson = (record: Map<number, Hint[]>): Map<numb
     );
 };
 
-// Need to use state or a provider to prevent re-calling this over and over?
 export default function getSavedGameState(boardKey: string) {
     const rawData: string | null = localStorage.getItem("gameState");
     let savedBoardKey: string | null = null;

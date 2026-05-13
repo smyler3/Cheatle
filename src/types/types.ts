@@ -24,6 +24,8 @@ export type TileColourType = {
 };
 
 export type GameStateType = {
+    isTimerStarted: boolean,
+    isTimerPaused: boolean,
     timeRemaining: number;
     isTimerDone: boolean;
     hintPoints: number;

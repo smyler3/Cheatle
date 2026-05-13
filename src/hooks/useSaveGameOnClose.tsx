@@ -1,20 +1,23 @@
 import { useEffect } from "react";
+import type { UseTimerType } from "./useTimer";
+import type { UseHintType } from "./useHints";
+import type { UseGuessType } from "./useGuesses";
 
-// Needs proper typing
 type useSaveGameOnCloseProps = {
     boardKey: string,
-    timerData: any,
-    hintData: any,
-    guessData: any,
+    timerData: UseTimerType,
+    hintData: UseHintType,
+    guessData: UseGuessType,
 };
 
 // Save game data before exiting the app
 export default function useSaveGameOnClose({ boardKey, timerData, hintData, guessData }: useSaveGameOnCloseProps) {
-    // Maybe move higher to avoid constantly re-running this
     useEffect(() => {
         const updateLocalStorage = () => {
             const combinedState = {
                 timeRemaining: timerData.timeRemaining,
+                isTimerStarted: timerData.isTimerStarted,
+                isTimerPaused: timerData.isTimerDone,
                 isTimerDone: timerData.isTimerDone,
                 
                 hintPoints: hintData.hintPoints,
@@ -48,5 +51,5 @@ export default function useSaveGameOnClose({ boardKey, timerData, hintData, gues
             window.removeEventListener("beforeunload", handleSave);
             document.removeEventListener("visibilitychange", visibilityHandler);
         };
-    }, [boardKey, hintData.hintPoints, hintData.hintsUsed, hintData.topWordHints, timerData.timeRemaining, timerData.isTimerDone, guessData.correctGuesses]);
+    }, [boardKey, hintData.hintPoints, hintData.hintsUsed, hintData.topWordHints, timerData.isTimerStarted, timerData.isTimerPaused, timerData.timeRemaining, timerData.isTimerDone, guessData.correctGuesses]);
 }

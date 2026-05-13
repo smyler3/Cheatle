@@ -1,9 +1,9 @@
 import styles from "./CountdownTimer.module.css";
 import { FINAL_CLOCK_WARNING_THRESHOLD, INITIAL_CLOCK_WARNING_THRESHOLD } from "../../constants";
-import { useTimer } from "../../hooks/timer/useTimer";
+import { useGameState } from "../../hooks/gameState/useGameState";
 
 const CountdownTimer = () => {
-    const { timeRemaining, minutesRemaining, secondsRemaining } = useTimer();
+    const { timeRemaining, minutesRemaining, secondsRemaining } = useGameState();
 
     return (
         <div
