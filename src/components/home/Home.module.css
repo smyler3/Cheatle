@@ -1,25 +1,100 @@
 .homeMain {
-    align-self: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    flex: 1;
 
-    max-width: 400px;
+    align-self: flex-start;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    justify-items: center;
+
     width: 100%;
+    max-width: 400px;
     height: 100%;
+    max-height: 1000px;
     padding: 12px 12px 48px;
     margin: auto;
-    margin-top: 0;
-    margin-bottom: 40px;
 
     font: inherit;
 }
 
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+
+    width: 100%;
+}
+
 .logo {
-    height: 200px;
+    align-self: center;
+
+    height: 80px;
     aspect-ratio: 1 / 1;
 }
 
+.headingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: min-content;
+}
+
+.heading1 {
+    width: min-content;
+    margin-right: 100px;
+
+    text-align: left;
+}
+
 .heading2 {
-    text-align: end;
+    margin-left: 100px;
+
+    font-family: 'Figtree';
+    font-weight: 500;
+    font-size: 20px;
+    white-space: nowrap;
+    text-align: right;
+    line-height: 0.4;
+}
+
+.heroText {
+    max-width: 400px;
+
+    font-size: 24px;
+    text-align: center;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.cancelButton,
+.finishButton {
+  padding: 0.6rem 3rem;
+
+  font-family: "Lilita One";
+  font-size: 1.25rem;
+
+  border-radius: 100px;
+}
+
+.cancelButton {
+  color: var(--grey-1000);
+
+  background-color: #d9d9d9;
+}
+
+.finishButton {
+  color: var(--white);
+
+  background-color: #0090ff;
+}
+
+.puzzleInfo {
+    font-weight: bold;
 }

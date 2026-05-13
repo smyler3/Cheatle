@@ -49,3 +49,18 @@ Noted while working:
 
 - Fill in the home page content, may need new data from the server too
 -- Change play to resume or results based on savedGameState
+
+
+
+
+I think this is my solution:
+
+I will create a UI component, it purely decides whether to render the game or the home screen.
+
+When we toggle between them we will need to pause/start the game, this might need a useEffect on render? This will need to also check that the game hasn't already ended before trying to start it for example.
+
+It will need an internal state: shouldShowGame and if it's true it renders the game, otherwise it renders the home screen. This will need to be exposed via a context I think because the header will need to use it to toggle as well as Home. I want the logic that handles the timer stuff as well as the toggle to live within the UI component or likely in the new context hook I need to create.
+
+Then the Home component can also read from the gameState hook or maybe somewhere else to see if the game has previously been started or not then it can render Play or Resume or Results. We might need a new variable isTimerPaused? to check this. The UI render hook shouldn't care about timer stuff tbh
+
+So make a new UI component, make a new hook that triggers what should render. Add a new timer variable for pausing. And then write functions to control toggling this on and off. And pass them to the Play and Home Button. Potentially they will just use the toggle logic and the two pages themselves should handle the pausing and starting of the timer with useEffects
