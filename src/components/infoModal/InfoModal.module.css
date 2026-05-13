@@ -33,6 +33,7 @@
 
     width: 100%;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .hintList {
@@ -48,18 +49,19 @@
 video {
     height: 140px;
     margin-top: 8px;
-    margin-bottom: 40px;
 
     background-color: var(--white);
 }
 
-.playButton {
+.cancelButton {
     padding: .6rem 3rem;
-    color: var(--white);
+    margin-top: 40px;
+
+    color: var(--grey-1000);
     font-family: "Lilita One";
     font-size: 1.25rem;
 
-    background-color: #0090FF;
+    background-color: #D9D9D9;
     border-radius: 100px;
 }
 
