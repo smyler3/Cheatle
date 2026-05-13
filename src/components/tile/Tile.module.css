@@ -19,6 +19,8 @@
     font-family: "Figtree", sans-serif;
     font-size: 2.4rem;
     color: var(--grey-1000);
+
+    user-select: none;
 }
 
 .value {
@@ -27,6 +29,8 @@
     right: 8px;
 
     color: var(--grey-1000);
+
+    user-select: none;
 }
 
 .correctGuess {

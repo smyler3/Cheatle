@@ -73,8 +73,8 @@
   gap: 12px;
 }
 
-.cancelButton,
-.finishButton {
+.howToPlayButton,
+.actionButton {
   padding: 0.6rem 3rem;
 
   font-family: "Lilita One";
@@ -83,16 +83,16 @@
   border-radius: 100px;
 }
 
-.cancelButton {
+.howToPlayButton {
   color: var(--grey-1000);
 
-  background-color: #d9d9d9;
+  background-color: var(--grey-800);
 }
 
-.finishButton {
+.actionButton {
   color: var(--white);
 
-  background-color: #0090ff;
+  background-color: var(--primary-200);
 }
 
 .puzzleInfo {

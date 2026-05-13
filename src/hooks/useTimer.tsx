@@ -6,8 +6,9 @@ type UseTimerProps = {
     savedGameState: GameStateType | null,
 }
 
-type UseTimerType = {
+export type UseTimerType = {
     isTimerStarted: boolean,
+    isTimerPaused: boolean,
     timeRemaining: number,
     isTimerDone: boolean,
     minutesRemaining: string,
@@ -15,11 +16,13 @@ type UseTimerType = {
     minutesUsed: string,
     secondsUsed: string,
     startTimer: () => void,
+    pauseTimer: () => void,
     stopTimer: () => void,
 };
 
 export const useTimer = ({ savedGameState }: UseTimerProps): UseTimerType => {
-    const [isTimerStarted, setIsTimerStarted] = useState(false);
+    const [isTimerStarted, setIsTimerStarted] = useState(savedGameState?.isTimerStarted ?? false);
+    const [isTimerPaused, setIsTimerPaused] = useState(savedGameState?.isTimerPaused ?? false);
     const [timeRemaining, setTimeRemaining] = useState(savedGameState?.timeRemaining ?? SECONDS_IN_A_MINUTE * MINUTES_IN_A_GAME);
     const [isTimerDone, setIsTimerDone] = useState(savedGameState?.isTimerDone ?? false);
     
@@ -31,12 +34,19 @@ export const useTimer = ({ savedGameState }: UseTimerProps): UseTimerType => {
     const startTimer = () => {
         if (!isTimerDone) {
             setIsTimerStarted(true);
+            setIsTimerPaused(false);
+        }
+    };
+
+    const pauseTimer = () => {
+        if (isTimerStarted && !isTimerDone) {
+            setIsTimerPaused(true);
         }
     };
 
     useEffect(() => {
         const intervalID = setInterval(() => {
-            if (isTimerStarted) {
+            if (isTimerStarted && !isTimerPaused && !isTimerDone) {
                 setTimeRemaining((prev) => {
                     if (prev <= 0) {
                         setIsTimerDone(true);
@@ -49,15 +59,16 @@ export const useTimer = ({ savedGameState }: UseTimerProps): UseTimerType => {
         }, 1000);
 
         return () => clearInterval(intervalID);
-    }, [isTimerStarted]);
+    }, [isTimerStarted, isTimerPaused, isTimerDone]);
 
     const stopTimer = () => {
-        setIsTimerStarted(false);
+        setIsTimerPaused(false);
         setIsTimerDone(true);
     };
 
     return {
         isTimerStarted,
+        isTimerPaused,
         timeRemaining,
         isTimerDone,
         minutesRemaining,
@@ -65,6 +76,7 @@ export const useTimer = ({ savedGameState }: UseTimerProps): UseTimerType => {
         minutesUsed,
         secondsUsed,
         startTimer,
+        pauseTimer,
         stopTimer,
     };
 };

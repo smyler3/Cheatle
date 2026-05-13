@@ -10,7 +10,7 @@ import { binaryInsertion, isTopWord } from '../../utils/utils';
 import CountdownTimer from '../countdownTimer/CountdownTimer';
 import { ADJACENT_LIST, TILE_STATE } from '../../constants';
 import Tile from '../tile/Tile';
-import type { TileType, TopWords, Word } from '../../schema/CheatleSchema';
+import type { TileType } from '../../schema/CheatleSchema';
 import { createPortal } from 'react-dom';
 import ModalManager from '../modalManager/ModalManager';
 import { useGameState } from '../../hooks/gameState/useGameState';
@@ -20,6 +20,7 @@ import DuplicateGuessIndicator from '../duplicateGuessIndicator/DuplicateGuessIn
 import styles from "./GameBody.module.css";
 import { postCheatleDone } from '../../hooks/fetchCheatleData';
 import ResultsButton from '../resultsButton/ResultsButton';
+import { useFetchedData } from '../../hooks/fetchedData/useFetchedData';
 
 type CurrentGuessType = {
     text: string,
@@ -28,14 +29,10 @@ type CurrentGuessType = {
     prevTilePositions: boolean[];
 };
 
-type GameBodyProps = {
-    board: TileType[],
-    validWords: Word[],
-    topWords: TopWords,
-}
-
-export default function GameBody({ board, validWords, topWords }: GameBodyProps) {
+export default function GameBody() {
+    const { board, validWords, topWords } = useFetchedData();
     const { 
+        startTimer,
         stopTimer, 
         isTimerDone, 
         setHintPoints, 
@@ -77,6 +74,11 @@ export default function GameBody({ board, validWords, topWords }: GameBodyProps)
         openResultModal();
         postCheatleDone();
     }, [openResultModal]);
+
+    // Start the game every time you enter this page
+    useEffect(() => {
+        startTimer();
+    }, [startTimer]);
 
     // Do these need to be useEffects?
     useEffect(() => {

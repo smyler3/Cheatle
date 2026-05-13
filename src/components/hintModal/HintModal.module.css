@@ -55,7 +55,7 @@
 }
 
 .guessedHintText {
-    color: #0090FF;
+    color: var(--primary-200);
 }
 
 .hintButton {
@@ -65,7 +65,7 @@
     color: var(--white);
     font-family: "Lilita One";
 
-    background-color: #0090FF;
+    background-color: var(--primary-200);
     border-radius: 100px;
 }
 .hintButton:disabled {
@@ -83,6 +83,6 @@
     font-family: "Lilita One";
     font-size: 1.25rem;
 
-    background-color: #D9D9D9;
+    background-color: var(--grey-800);
     border-radius: 100px;
 }

@@ -8,7 +8,7 @@ type UseGuessProps = {
     savedGameState: GameStateType | null,
 };
 
-type UseGuessType = {
+export type UseGuessType = {
     score: number,
     maxPossibleScore: number,
     correctGuesses: Guess[],

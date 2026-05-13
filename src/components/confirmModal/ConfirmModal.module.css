@@ -51,11 +51,11 @@
 .cancelButton {
   color: var(--grey-1000);
 
-  background-color: #d9d9d9;
+  background-color: var(--grey-800);
 }
 
 .finishButton {
   color: var(--white);
 
-  background-color: #0090ff;
+  background-color: var(--primary-200);
 }

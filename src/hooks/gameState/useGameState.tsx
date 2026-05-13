@@ -1,30 +1,9 @@
-import { createContext, useContext, type Dispatch, type SetStateAction } from "react";
-import type { Guess, StateSetter } from "../../types/types";
-import type { Hint } from "../../schema/CheatleSchema";
+import { createContext, useContext } from "react";
+import type { UseHintType } from "../useHints";
+import type { UseTimerType } from "../useTimer";
+import type { UseGuessType } from "../useGuesses";
 
-type GameStateType = {
-    score: number,
-    maxPossibleScore: number,
-    correctGuesses: Guess[],
-    setCorrectGuesses: Dispatch<SetStateAction<Guess[]>>,
-
-    hintPoints: number,
-    setHintPoints: StateSetter<number>,
-    topWordHints: Map<number, Hint[]>,
-    hintsUsed: number,
-    markTopWordAsGuessed: (value: number, topWord: string) => void,
-    handleUseHint: (value: number, wordIndex: number) => void,
-
-    isTimerStarted: boolean,
-    timeRemaining: number,
-    isTimerDone: boolean,
-    minutesRemaining: string,
-    secondsRemaining: string,
-    minutesUsed: string,
-    secondsUsed: string,
-    startTimer: () => void,
-    stopTimer: () => void,
-};
+type GameStateType = UseHintType & UseTimerType & UseGuessType;
 
 export const GameStateContext = createContext<GameStateType>({} as GameStateType);
 

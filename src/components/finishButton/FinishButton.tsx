@@ -1,10 +1,10 @@
 import styles from "./FinishButton.module.css";
 import { useModal } from "../../hooks/modal/useModal";
-import { useTimer } from "../../hooks/timer/useTimer";
+import { useGameState } from "../../hooks/gameState/useGameState";
 
 const FinishButton = () => {
+    const { isTimerDone } = useGameState();
     const { openConfirmModal, openResultModal } = useModal();
-    const { isTimerDone } = useTimer();
 
     return (
         <button

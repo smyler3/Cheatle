@@ -15,7 +15,6 @@ export const GameStateProvider = ({ children }: GameDataProviderProps) => {
     const { boardKey } = useFetchedData();
     const { savedGameState } = getSavedGameState(boardKey);
 
-    // Returned null?
     if (!savedGameState) {
         localStorage.clear();
     }

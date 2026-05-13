@@ -1,4 +1,4 @@
-import { useGameData } from "../../hooks/gameData/useGameData";
+import { useGameState } from "../../hooks/gameState/useGameState";
 import styles from "./GuessList.module.css";
 import starIcon from "/starIcon.svg";
 
@@ -7,7 +7,7 @@ type GuessListProps = {
 };
 
 const GuessList = ({ shouldShowScore }: GuessListProps) => {
-    const { correctGuesses, score, maxPossibleScore } = useGameData();
+    const { correctGuesses, score, maxPossibleScore } = useGameState();
 
     return (
         <div>

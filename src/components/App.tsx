@@ -4,13 +4,9 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchCheatleData } from "../hooks/fetchCheatleData";
 import { GameStateProvider } from "../hooks/gameState/GameStateProvider";
 import { ModalProvider } from "../hooks/modal/ModalProvider";
-import LoadingScreen from "./loadingScreen/LoadingScreen";
-import Home from './home/Home';
 import FetchedDataProvider from '../hooks/fetchedData/FetchedDataProvider';
-import Footer from './footer/Footer';
-import { useState } from 'react';
-import Header from './header/Header';
-import GameBody from './gameBody/GameBody';
+import ScreenManager from './ScreenManager';
+import ScreenProvider from '../hooks/setScreen/ScreenProvider';
 
 const queryClient = new QueryClient();
 
@@ -23,8 +19,6 @@ export default function App() {
 }
 
 function AppContent() {
-    const [shouldShowGame, setShouldShowGame] = useState(false);
-
     const query = useQuery({
         queryKey: ["cheatle"],
         queryFn: () => fetchCheatleData(),
@@ -46,16 +40,9 @@ function AppContent() {
         <FetchedDataProvider isError={isError} data={data}>
             <GameStateProvider>
                 <ModalProvider>
-                    {/* Either control home or game rendering from here, or do it down in a shared parent component */}
-                    {shouldShowGame 
-                        ? <Home /> 
-                        : <>
-                            <Header />
-                            {/* <GameBody /> */}
-                            <Footer />
-                        </>
-                    }
-
+                    <ScreenProvider>
+                        <ScreenManager />
+                    </ScreenProvider>
                 </ModalProvider>
             </GameStateProvider>
         </FetchedDataProvider>
