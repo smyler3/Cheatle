@@ -11,7 +11,6 @@ export type UseHintType = {
     hintPoints: number,
     setHintPoints: StateSetter<number>,
     hintsUsed: number,
-    // markWordAsGuessed: (value: number, topWord: string) => void,
     handleUseHint: (value: number, wordIndex: number) => void,
 };
 

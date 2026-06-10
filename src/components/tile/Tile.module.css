@@ -41,11 +41,6 @@
     animation: shake 0.2s ease-in-out forwards;
 }
 
-.correctGuess,
-.incorrectGuess {
-  pointer-events: none;
-}
-
 @keyframes bounce {
     0%, 100% {
         transform: scale(1) translateY(0);

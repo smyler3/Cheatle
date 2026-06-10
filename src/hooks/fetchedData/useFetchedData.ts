@@ -4,7 +4,6 @@ import type { TileType, Word } from "../../schema/CheatleSchema";
 type FetchedData = {
     board: TileType[],
     validWords: Word[],
-    // topWords: TopWords,
     maxPossibleScore: number,
     minTopWordValue: number,
     puzzleCount: number,

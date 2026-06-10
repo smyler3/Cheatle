@@ -14,19 +14,12 @@ import { createPortal } from 'react-dom';
 import ModalManager from '../modalManager/ModalManager';
 import { useGameState } from '../../hooks/gameState/useGameState';
 import { useModal } from '../../hooks/modal/useModal';
-import type { LastGuessType, WordSubset, ValidWordsMap } from '../../types/types';
+import type { LastGuessType, WordSubset, ValidWordsMap, CurrentGuessType } from '../../types/types';
 import DuplicateGuessIndicator from '../duplicateGuessIndicator/DuplicateGuessIndicator';
 import styles from "./GameBody.module.css";
 import { postCheatleDone } from '../../hooks/fetchCheatleData';
 import ResultsButton from '../resultsButton/ResultsButton';
 import { useFetchedData } from '../../hooks/fetchedData/useFetchedData';
-
-type CurrentGuessType = {
-    text: string,
-    value: number,
-    prevTileOrder: number[];
-    prevTilePositions: boolean[];
-};
 
 export default function GameBody() {
     const { board, maxPossibleScore } = useFetchedData();
@@ -141,7 +134,7 @@ export default function GameBody() {
             }
             
             if (!isRepeat && !isTooSmall && isValid) {
-                // Add the correct guess
+                // Adding the correct guess
                 setValidWordsMap(prev => {
                     const innerWordMap = prev.get(currentValue);
         

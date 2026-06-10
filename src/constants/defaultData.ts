@@ -153,24 +153,6 @@ const defaultData: Awaited<ReturnType<typeof fetchCheatleData>> = {
         { text: 'LOUT', value: 7, revealedText: '', isGuessed: false },
         { text: 'LOT', value: 4, revealedText: '', isGuessed: false },
     ],
-    // topWords: new Map([
-    //     [15, [
-    //         { text: 'DEBUG', value: 15, revealedText: '', isGuessed: false },
-    //         { text: 'GLADDEN', value: 15, revealedText: '', isGuessed: false },
-    //     ]],
-    //     [13, [
-    //         { text: 'LUBED', value: 13, revealedText: '', isGuessed: false }
-    //     ]],
-    //     [12, [
-    //         { text: 'BULLA', value: 12, revealedText: '', isGuessed: false },
-    //         { text: 'TUBED', value: 12, revealedText: '', isGuessed: false },
-    //         { text: 'BUNG', value: 12, revealedText: '', isGuessed: false },
-    //         { text: 'NEBULA', value: 12, revealedText: '', isGuessed: false },
-    //         { text: 'FOUND', value: 12, revealedText: '', isGuessed: false },
-    //         { text: 'DEBUT', value: 12, revealedText: '', isGuessed: false },
-    //         { text: 'LAGUNE', value: 12, revealedText: '', isGuessed: false }
-    //     ]],
-    // ]),
     maxPossibleScore: 67,
     minTopWordValue: 12,
     puzzleCount: 141,

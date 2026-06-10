@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import type { UseTimerType } from "./useTimer";
 import type { UseHintType } from "./useHints";
-// import type { UseGuessType } from "./useGuesses";
 import type { UseValidWordsType } from "./useValidWords";
 import type { GameStateSaveType, ValidWordsMap } from "../types/types";
 
@@ -10,7 +9,6 @@ type useSaveGameOnCloseProps = {
     validWordsData: UseValidWordsType,
     timerData: UseTimerType,
     hintData: UseHintType,
-    // guessData: UseGuessType,
 };
 
 const convertValidWordsMapToJson = (validWordsMap: ValidWordsMap) => {
@@ -29,6 +27,7 @@ export default function useSaveGameOnClose({ boardKey, validWordsData, timerData
             const combinedState: GameStateSaveType = {
                 validWordsMap: convertValidWordsMapToJson(validWordsData.validWordsMap),
                 topGuesses: validWordsData.topGuesses,
+                correctGuessCount: validWordsData.correctGuessCount,
 
                 isTimerStarted: timerData.isTimerStarted,
                 isTimerPaused: timerData.isTimerDone,
@@ -37,9 +36,6 @@ export default function useSaveGameOnClose({ boardKey, validWordsData, timerData
                 
                 hintPoints: hintData.hintPoints,
                 hintsUsed: hintData.hintsUsed,
-                // topWordHints: Object.fromEntries(hintData.topWordHints.entries()),
-
-                // correctGuesses: guessData.correctGuesses,
             }
 
             const saveData = {
@@ -66,5 +62,5 @@ export default function useSaveGameOnClose({ boardKey, validWordsData, timerData
             window.removeEventListener("beforeunload", handleSave);
             document.removeEventListener("visibilitychange", visibilityHandler);
         };
-    }, [boardKey, validWordsData.validWordsMap, validWordsData.topGuesses, hintData.hintPoints, hintData.hintsUsed, timerData.isTimerStarted, timerData.isTimerPaused, timerData.timeRemaining, timerData.isTimerDone]);
+    }, [boardKey, validWordsData.validWordsMap, validWordsData.topGuesses, validWordsData.correctGuessCount, hintData.hintPoints, hintData.hintsUsed, timerData.isTimerStarted, timerData.isTimerPaused, timerData.timeRemaining, timerData.isTimerDone]);
 }
