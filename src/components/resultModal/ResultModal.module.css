@@ -60,47 +60,6 @@
     border: 2px solid var(--grey-1000);
 }
 
-.topWords {
-    margin-top: 12px;
-}
-
-.topWordsHeader {
-    padding-bottom: 4px;
-    border-bottom: 1px solid;
-
-    font-family: "Lilita One";
-    font-size: 1.25rem;
-}
-
-.pointSectionHeader {
-    font-family: "Lilita One";
-    font-size: 1.25rem;
-    font-weight: bold;
-}
-
-.pointsSection {
-    margin-top: 8px;
-}
-
-.wordList {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-
-    padding-left: 8px;
-
-    font-size: var(--guess-font-size);
-    list-style: inside disc;
-}
-
-.guessed {
-    color: var(--primary-200);
-}
-
-.hintText {
-    text-decoration: underline dotted 1px;
-}
-
 .cancelButton {
     align-self: center;
     padding: .6rem 3rem;

@@ -1,3 +1,4 @@
+import { useFetchedData } from "../../hooks/fetchedData/useFetchedData";
 import { useGameState } from "../../hooks/gameState/useGameState";
 import styles from "./GuessList.module.css";
 import starIcon from "/starIcon.svg";
@@ -7,7 +8,19 @@ type GuessListProps = {
 };
 
 const GuessList = ({ shouldShowScore }: GuessListProps) => {
-    const { correctGuesses, score, maxPossibleScore } = useGameState();
+    const { maxPossibleScore, minTopWordValue } = useFetchedData();
+    const { validWordsMap, score } = useGameState();
+    
+    const guessedWords = [];
+
+    // Get all guessedWords
+    for (const [value, words] of validWordsMap.entries()) {
+        for (const [text, subset] of words.entries()) {
+            if (subset.isGuessed) {
+                guessedWords.push({ text: text, value: value})
+            }
+        }
+    };
 
     return (
         <div>
@@ -20,7 +33,8 @@ const GuessList = ({ shouldShowScore }: GuessListProps) => {
                 </div>
             }
             <ol className={styles.wordList}>
-                {correctGuesses.map(guess => {
+                {/* Need to create an array by going through validWordsMap and finding all isGuessed words then using that */}
+                {guessedWords.map(guess => {
                         return (
                             <li 
                                 key={guess.text}
@@ -30,7 +44,7 @@ const GuessList = ({ shouldShowScore }: GuessListProps) => {
                                     className={styles.word}
                                 >
                                     {guess.text}
-                                    {guess.isTopWord && <img src={starIcon} className={styles.star} />}
+                                    {guess.value >= minTopWordValue && <img src={starIcon} className={styles.star} />}
                                 </p>
                                 <p
                                     className={styles.score}

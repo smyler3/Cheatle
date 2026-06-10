@@ -1,30 +1,45 @@
 import { useEffect } from "react";
 import type { UseTimerType } from "./useTimer";
 import type { UseHintType } from "./useHints";
-import type { UseGuessType } from "./useGuesses";
+// import type { UseGuessType } from "./useGuesses";
+import type { UseValidWordsType } from "./useValidWords";
+import type { GameStateSaveType, ValidWordsMap } from "../types/types";
 
 type useSaveGameOnCloseProps = {
     boardKey: string,
+    validWordsData: UseValidWordsType,
     timerData: UseTimerType,
     hintData: UseHintType,
-    guessData: UseGuessType,
+    // guessData: UseGuessType,
+};
+
+const convertValidWordsMapToJson = (validWordsMap: ValidWordsMap) => {
+    return Array.from(validWordsMap.entries()).map(
+        ([value, words]) => [
+            value,
+            Array.from(words.entries())
+        ]
+    );
 };
 
 // Save game data before exiting the app
-export default function useSaveGameOnClose({ boardKey, timerData, hintData, guessData }: useSaveGameOnCloseProps) {
+export default function useSaveGameOnClose({ boardKey, validWordsData, timerData, hintData }: useSaveGameOnCloseProps) {
     useEffect(() => {
         const updateLocalStorage = () => {
-            const combinedState = {
-                timeRemaining: timerData.timeRemaining,
+            const combinedState: GameStateSaveType = {
+                validWordsMap: convertValidWordsMapToJson(validWordsData.validWordsMap),
+                topGuesses: validWordsData.topGuesses,
+
                 isTimerStarted: timerData.isTimerStarted,
                 isTimerPaused: timerData.isTimerDone,
                 isTimerDone: timerData.isTimerDone,
+                timeRemaining: timerData.timeRemaining,
                 
                 hintPoints: hintData.hintPoints,
                 hintsUsed: hintData.hintsUsed,
-                topWordHints: Object.fromEntries(hintData.topWordHints.entries()),
+                // topWordHints: Object.fromEntries(hintData.topWordHints.entries()),
 
-                correctGuesses: guessData.correctGuesses,
+                // correctGuesses: guessData.correctGuesses,
             }
 
             const saveData = {
@@ -51,5 +66,5 @@ export default function useSaveGameOnClose({ boardKey, timerData, hintData, gues
             window.removeEventListener("beforeunload", handleSave);
             document.removeEventListener("visibilitychange", visibilityHandler);
         };
-    }, [boardKey, hintData.hintPoints, hintData.hintsUsed, hintData.topWordHints, timerData.isTimerStarted, timerData.isTimerPaused, timerData.timeRemaining, timerData.isTimerDone, guessData.correctGuesses]);
+    }, [boardKey, validWordsData.validWordsMap, validWordsData.topGuesses, hintData.hintPoints, hintData.hintsUsed, timerData.isTimerStarted, timerData.isTimerPaused, timerData.timeRemaining, timerData.isTimerDone]);
 }

@@ -1,22 +1,26 @@
 import { useState } from "react";
 import { HINT_POINTS_REQUIRED } from "../../constants";
 import { useModal } from "../../hooks/modal/useModal";
-import type { Hint } from "../../schema/CheatleSchema";
 import styles from "./ResultModal.module.css";
 import closeIcon from "/closeIcon.svg";
 import hideIcon from "/hideIcon.svg";
 import showIcon from "/showIcon.svg";
 import { useGameState } from "../../hooks/gameState/useGameState";
+import TopWordsResults from "../topWordsResults/TopWordsResults";
+import AllWordsResults from "../allWordsResults/AllWordsResults";
+import { useFetchedData } from "../../hooks/fetchedData/useFetchedData";
 
 interface ResultModalProps {
     backgroundRef: React.RefObject<HTMLDivElement | null>
 }
 
 export default function ResultModal({ backgroundRef }: ResultModalProps) {
-    const { score, maxPossibleScore, minutesUsed, secondsUsed, hintsUsed, topWordHints, hintPoints } = useGameState();
+    const { maxPossibleScore } = useFetchedData();
+    const { score, minutesUsed, secondsUsed, hintsUsed, hintPoints } = useGameState();
     const { closeModal } = useModal();
 
     const [shouldHideSpoilers, setShouldHideSpoilers] = useState(false);
+    const [shouldShowTopWords, setShouldShowTopWords] = useState(true);
 
     if (backgroundRef.current) {
         backgroundRef.current.style.backgroundColor = shouldHideSpoilers ? "#000000AA" : "#00000025";
@@ -56,37 +60,20 @@ export default function ResultModal({ backgroundRef }: ResultModalProps) {
                 />
                 <p>{shouldHideSpoilers ? "Show Spoilers" : "Hide Spoilers"}</p>
             </button>
-            <div className={styles.topWords}>
-                <h3 className={styles.topWordsHeader}>Highest scoring words:</h3>
-                {Array.from(topWordHints.entries()).map(([valueStr, words]) => {
-                    const value = Number(valueStr);
-
-                    return (
-                        <section key={value} className={styles.pointsSection}>
-                            <p className={styles.pointSectionHeader}>{value} points</p>
-                            <ol className={styles.wordList}>
-                                {words.map((hint: Hint, index: number) => {
-                                    const wasGuessed = hint.isGuessed;
-
-                                    return (
-                                        <li key={index} className={`${wasGuessed && styles.guessed}`}>
-                                            {shouldHideSpoilers 
-                                                ? "..." 
-                                                : (
-                                                    <>
-                                                    <span className={styles.hintText}>{hint.revealedText}</span>
-                                                    <span>{hint.text.replace(hint.revealedText, '')}</span>
-                                                    </>
-                                                )
-                                            }
-                                        </li>
-                                    )
-                                })}
-                            </ol>
-                        </section>
-                    )
-                })}
+            <div className={styles.resultsTabContainer}>
+                <button 
+                    className={`${styles.resultsTab} ${shouldShowTopWords && styles.activeTab}`}
+                    onClick={() => setShouldShowTopWords(true)}
+                >Top 5</button>
+                <button 
+                    className={`${styles.resultsTab} ${!shouldShowTopWords && styles.activeTab}`}
+                    onClick={() => setShouldShowTopWords(false)}
+                >All</button>
             </div>
+            {shouldShowTopWords 
+                ? <TopWordsResults shouldHideSpoilers={shouldHideSpoilers} />
+                : <AllWordsResults /> 
+            }
             <button 
                 className={styles.cancelButton}
                 onClick={closeModal}
