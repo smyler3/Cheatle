@@ -1,11 +1,11 @@
-import type { GameStateType } from "../types/types";
-import type { Hint } from "../schema/CheatleSchema";
+import type { GameStateType, ValidWordsMap, WordSubset } from "../types/types";
 
-const convertTopWordHintsToMapFromJson = (record: Map<number, Hint[]>): Map<number, Hint[]> => {
+const convertValidWordsMapFromJson = (entries: [number, [string, WordSubset][]][]): ValidWordsMap => {
     return new Map(
-        Object.entries(record)
-            .map(([key, value]) => [Number(key), value] as [number, Hint[]])
-            .sort(([a], [b]) => b - a) // descending
+        entries.map(([value, words]) => [
+            value,
+            new Map(words),
+        ])
     );
 };
 
@@ -30,17 +30,20 @@ export default function getSavedGameState(boardKey: string) {
         // Type safety
         if (
             !savedGameState ||
+            !Array.isArray(savedGameState.validWordsMap) ||
+            !Array.isArray(savedGameState.topGuesses) || 
+            typeof savedGameState.isTimerStarted !== "boolean" ||
+            typeof savedGameState.isTimerPaused !== "boolean" ||
             typeof savedGameState.timeRemaining !== "number" ||
             typeof savedGameState.isTimerDone !== "boolean" ||
             typeof savedGameState.hintPoints !== "number" ||
-            typeof savedGameState.hintsUsed !== "number" ||
-            !Array.isArray(savedGameState.correctGuesses)
+            typeof savedGameState.hintsUsed !== "number"
         ) {
             return { savedGameState };
         }
 
-        const topWordHintsMap = convertTopWordHintsToMapFromJson(savedGameState.topWordHints)
-        savedGameState = {...savedGameState, topWordHints: topWordHintsMap};
+        const validWordsMap = convertValidWordsMapFromJson(savedGameState.validWordsMap);
+        savedGameState = {...savedGameState, validWordsMap};
     } catch {
         return { savedGameState };
     }

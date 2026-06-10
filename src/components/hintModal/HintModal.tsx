@@ -1,15 +1,19 @@
 import { HINT_POINTS_REQUIRED } from "../../constants";
+import { useFetchedData } from "../../hooks/fetchedData/useFetchedData";
 import { useGameState } from "../../hooks/gameState/useGameState";
 import { useModal } from "../../hooks/modal/useModal";
-import type { Hint } from "../../schema/CheatleSchema";
+import type { WordSubset } from "../../types/types";
 import styles from "./HintModal.module.css";
 import closeIcon from "/closeIcon.svg";
 
 export default function HintModal() {
+    const { minTopWordValue } = useFetchedData();
+    const { validWordsMap, hintPoints, handleUseHint } = useGameState();
     const { closeModal } = useModal();
-    const { hintPoints, topWordHints, handleUseHint } = useGameState();
     
     const numberOfHints = Math.floor(hintPoints / HINT_POINTS_REQUIRED);
+    // Only looks at words which can be a top x word
+    const topWordHints = new Map([...validWordsMap.entries()].filter(([key]) => Number(key) >= minTopWordValue));
 
     return (
         <>
@@ -34,16 +38,17 @@ export default function HintModal() {
                         <section key={value}>
                             <p className={styles.pointSectionHeader}>{value} points</p>
                             <ol className={styles.hintsList}>
-                                {words.map((hint: Hint, index: number) => {
-                                    const isWordRevealed = hint.isGuessed || hint.revealedText.length >= hint.text.length;
+                                {Array.from(words.entries()).map(([text, wordSubset]: [text: string, wordSubset: WordSubset], index) => {
+                                    const { revealedText, isGuessed } = wordSubset;
+                                    const isWordRevealed = isGuessed || revealedText.length >= text.length;
                                     const areHintsAvailable = numberOfHints > 0;
 
                                     return (
                                         <li key={index} className={styles.hintItem}>
                                             <p 
-                                                className={ `${styles.hintText} ${hint.isGuessed && styles.guessedHintText}`}
+                                                className={ `${styles.hintText} ${isGuessed && styles.guessedHintText}`}
                                             >
-                                                {isWordRevealed ? hint.text : `${hint.revealedText}...`}
+                                                {isWordRevealed ? text : `${revealedText}...`}
                                             </p>
                                             {!isWordRevealed && 
                                                 <button 

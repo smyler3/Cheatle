@@ -10,7 +10,8 @@ type indicatorType = {
 };
 
 const HintButton = () => {
-  const { hintPoints, correctGuesses } = useGameState();
+  // Need to start using some internal state instead? Otherwise useGuesses might need to keep some state on each guess?
+  const { correctGuessCount, hintPoints } = useGameState();
   const { openHintModal } = useModal();
 
   const [oldHintPoints, setOldHintPoints] = useState(0);
@@ -25,13 +26,13 @@ const HintButton = () => {
     setIndicators((prev) => [
       ...prev,
       {
-        id: `indicator-${correctGuesses.length}`,
+        id: `indicator-${correctGuessCount}`,
         value: diff,
       },
     ]);
 
     setOldHintPoints(hintPoints);
-  }, [hintPoints, correctGuesses, oldHintPoints]);
+  }, [hintPoints, correctGuessCount, oldHintPoints]);
 
   const handleAnimationEnd = (id: string) => {
     setIndicators((prev) => prev.filter((i) => i.id !== id));

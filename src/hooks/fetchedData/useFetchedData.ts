@@ -1,10 +1,14 @@
 import { createContext, useContext } from "react";
-import type { TileType, TopWords, Word } from "../../schema/CheatleSchema";
+import type { TileType, Word } from "../../schema/CheatleSchema";
 
 type FetchedData = {
     board: TileType[],
     validWords: Word[],
-    topWords: TopWords,
+    // topWords: TopWords,
+    maxPossibleScore: number,
+    minTopWordValue: number,
+    puzzleCount: number,
+    puzzleDate: string,
     boardKey: string,
 }
 

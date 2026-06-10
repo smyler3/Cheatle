@@ -6,16 +6,15 @@ import GuessList from '../guessList/GuessList';
 import HintButton from '../hintButton/HintButton';
 import LiveGuessDisplay from '../liveGuessDisplay/LiveGuessDisplay';
 import FinishButton from '../finishButton/FinishButton';
-import { binaryInsertion, isTopWord } from '../../utils/utils';
 import CountdownTimer from '../countdownTimer/CountdownTimer';
-import { ADJACENT_LIST, TILE_STATE } from '../../constants';
+import { ADJACENT_LIST, MIN_WORD_LENGTH, TILE_STATE } from '../../constants';
 import Tile from '../tile/Tile';
 import type { TileType } from '../../schema/CheatleSchema';
 import { createPortal } from 'react-dom';
 import ModalManager from '../modalManager/ModalManager';
 import { useGameState } from '../../hooks/gameState/useGameState';
 import { useModal } from '../../hooks/modal/useModal';
-import type { LastGuessType } from '../../types/types';
+import type { LastGuessType, WordSubset, ValidWordsMap } from '../../types/types';
 import DuplicateGuessIndicator from '../duplicateGuessIndicator/DuplicateGuessIndicator';
 import styles from "./GameBody.module.css";
 import { postCheatleDone } from '../../hooks/fetchCheatleData';
@@ -30,17 +29,15 @@ type CurrentGuessType = {
 };
 
 export default function GameBody() {
-    const { board, validWords, topWords } = useFetchedData();
+    const { board, maxPossibleScore } = useFetchedData();
+    const { validWordsMap, setValidWordsMap } = useGameState();
     const { 
         startTimer,
         stopTimer, 
         isTimerDone, 
         setHintPoints, 
-        markTopWordAsGuessed, 
+        setCorrectGuessCount,
         score, 
-        maxPossibleScore, 
-        correctGuesses, 
-        setCorrectGuesses 
     } = useGameState();
     const { openResultModal } = useModal();
 
@@ -60,6 +57,7 @@ export default function GameBody() {
         }
     );
     const [showDuplicateModal, setShowDuplicateModal] = useState(false);
+    // const [showTooSmallModal, setShowTooSmallModal] = useState(false);
     const [duplicateGuessCount, setDuplicateGuessCount] = useState(0);
 
     const clearLastGuess = () => {
@@ -118,13 +116,9 @@ export default function GameBody() {
     }
 
     const handleTileSelect = (tile: TileType, selectedPosition: number) => {
-        const prevPosition = currentGuess.prevTileOrder.at(-1);
-        const currentWord = currentGuess.text;
-        const currentValue = currentGuess.value;
-
-        const addToCorrectGuesses = (isTopWord: boolean): void => {
-            setCorrectGuesses(prev => binaryInsertion({...currentGuess, "isTopWord": isTopWord }, prev));
-        }
+        const prevPosition: number | undefined = currentGuess.prevTileOrder.at(-1);
+        const currentText: string = currentGuess.text;
+        const currentValue: number = currentGuess.value;
 
         if (isTimerDone) {
             return;
@@ -132,27 +126,42 @@ export default function GameBody() {
 
         // Submitting guess
         if (currentGuess.prevTilePositions[selectedPosition] === true) {
-            const isRepeat = correctGuesses.filter(guess => guess.text === currentWord).length > 0;
-            const isValid = validWords.some(word => word.text === currentWord);
+            const guess = validWordsMap.get(currentValue)?.get(currentText);
+            const isRepeat = guess?.isGuessed;
+            const isTooSmall = currentText.length < MIN_WORD_LENGTH;
+            const isValid = guess;
 
             if (isRepeat) {
                 setDuplicateGuessCount(prev => prev + 1);
                 setShowDuplicateModal(true);
             }
+
+            if (isTooSmall) {
+                // Add stuff here
+            }
             
-            if (!isRepeat && isValid) {
-                const isCurrentATopWord = isTopWord(currentWord, topWords);
-
-                addToCorrectGuesses(isCurrentATopWord);
+            if (!isRepeat && !isTooSmall && isValid) {
+                // Add the correct guess
+                setValidWordsMap(prev => {
+                    const innerWordMap = prev.get(currentValue);
+        
+                    if (!innerWordMap) {
+                        return prev;
+                    };
+        
+                    const newWord: WordSubset = { revealedText: currentText, isGuessed: true };
+        
+                    const updatedInnerWordMap: Map<string, WordSubset> = new Map(innerWordMap.set(currentText, newWord));
+                    const updatedValidWords: ValidWordsMap = new Map(prev).set(currentValue, updatedInnerWordMap);
+        
+                    return updatedValidWords;
+                })
+                setCorrectGuessCount(prev => prev += 1);
                 setHintPoints(prev => prev + currentGuess.text.length);
-
-                if (isCurrentATopWord) {
-                    markTopWordAsGuessed(currentValue, currentWord);
-                }
             };
 
             setLastGuess({
-                text: currentWord,
+                text: currentText,
                 value: String(currentValue),
                 tilePositions: currentGuess.prevTileOrder,
                 result: (!isRepeat && isValid) ? TILE_STATE.CORRECT : TILE_STATE.INCORRECT,

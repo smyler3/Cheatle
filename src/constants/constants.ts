@@ -26,3 +26,6 @@ export const TILE_STATE = {
   INCORRECT: "incorrect",
   IDLE: "idle",
 };
+
+// Words
+export const MIN_WORD_LENGTH = 3;

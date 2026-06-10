@@ -6,14 +6,14 @@ import { useModal } from "../../hooks/modal/useModal";
 import { useEffect } from "react";
 import { useGameState } from "../../hooks/gameState/useGameState";
 import { useScreen } from "../../hooks/setScreen/useScreen";
+import { useFetchedData } from "../../hooks/fetchedData/useFetchedData";
 
 export default function Home() {
+    const { puzzleCount, puzzleDate } = useFetchedData();
     const { isTimerPaused, isTimerDone, pauseTimer } = useGameState();
     const { openInfoModal } = useModal();
     const { showGameScreen } = useScreen();
     
-    const puzzleCount = "141";
-    const puzzleDate = "11/05/2026";
     const actionButtonCopy = isTimerDone 
     ? "Results" : isTimerPaused ? "Resume" : "Play";
 

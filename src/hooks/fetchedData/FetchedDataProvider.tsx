@@ -13,10 +13,10 @@ export default function FetchedDataProvider({ isError, data, children }: Fetched
     const fetchedData: CheatleResponse = isError || data == undefined ? defaultData : data;
     const boardKey: string = fetchedData.board.reduce((key, tile) => key += tile.text, "");
 
-    const { board, validWords, topWords } = fetchedData;
+    const { board, validWords, maxPossibleScore, minTopWordValue, puzzleCount, puzzleDate } = fetchedData;
 
     return (
-        <FetchedDataContext.Provider value={{ board, validWords, topWords, boardKey}}>
+        <FetchedDataContext.Provider value={{ board, validWords, maxPossibleScore, minTopWordValue, puzzleCount, puzzleDate, boardKey}}>
             {children}
         </FetchedDataContext.Provider>
     )
