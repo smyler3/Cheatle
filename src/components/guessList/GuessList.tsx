@@ -10,10 +10,10 @@ type GuessListProps = {
 const GuessList = ({ shouldShowScore }: GuessListProps) => {
     const { maxPossibleScore, minTopWordValue } = useFetchedData();
     const { validWordsMap, score } = useGameState();
-    
+
     const guessedWords = [];
 
-    // Get all guessedWords
+    // Collect all guessed words
     for (const [value, words] of validWordsMap.entries()) {
         for (const [text, subset] of words.entries()) {
             if (subset.isGuessed) {
@@ -33,7 +33,6 @@ const GuessList = ({ shouldShowScore }: GuessListProps) => {
                 </div>
             }
             <ol className={styles.wordList}>
-                {/* Need to create an array by going through validWordsMap and finding all isGuessed words then using that */}
                 {guessedWords.map(guess => {
                         return (
                             <li 

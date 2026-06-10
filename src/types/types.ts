@@ -1,11 +1,4 @@
 import { ModalName, TILE_STATE } from "../constants";
-// import type { Hint } from "../schema/CheatleSchema";
-
-export type Guess = {
-    text: string,
-    value: number,
-    isTopWord: boolean,
-};
 
 export type WordSubset = {
   revealedText: string,
@@ -30,8 +23,21 @@ export type TileColourType = {
     selected: string,
 };
 
+export type CurrentGuessType = {
+    text: string,
+    value: number,
+    prevTileOrder: number[];
+    prevTilePositions: boolean[];
+};
+
+export type IndicatorType = {
+    id: string, 
+    value: number
+};
+
 interface BaseGameStateType {
     topGuesses: number[];
+    correctGuessCount: number;
     isTimerStarted: boolean;
     isTimerPaused: boolean;
     timeRemaining: number;
@@ -42,8 +48,6 @@ interface BaseGameStateType {
 
 export type GameStateType = BaseGameStateType & {
     validWordsMap: ValidWordsMap;
-    // topWordHints: Map<number, Hint[]>;
-    // correctGuesses: Guess[];
 }
 
 export type GameStateSaveType = BaseGameStateType & {

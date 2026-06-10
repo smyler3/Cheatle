@@ -1,7 +1,6 @@
 import { GameStateContext } from "./useGameState";
 import useHints from "../useHints";
 import { useTimer } from "../useTimer";
-// import { useGuesses } from "../useGuesses";
 import { useFetchedData } from "../fetchedData/useFetchedData";
 import { useMemo } from "react";
 import getSavedGameState from "../../utils/getSavedGameState";
@@ -23,7 +22,6 @@ export const GameStateProvider = ({ children }: GameDataProviderProps) => {
     const validWordsData = useValidWords({ savedGameState });
     const timerData = useTimer({ savedGameState });
     const hintData = useHints({ savedGameState, isTimerDone: timerData.isTimerDone, setValidWordsMap: validWordsData.setValidWordsMap });
-    // const guessData = useGuesses({ savedGameState });
 
     // Every time the user quits, their data will be saved for when they rejoin
     useSaveGameOnClose({ boardKey, validWordsData, timerData, hintData });
@@ -32,7 +30,6 @@ export const GameStateProvider = ({ children }: GameDataProviderProps) => {
         ...validWordsData,
         ...timerData,
         ...hintData,
-        // ...guessData,
     }), [validWordsData, timerData, hintData]);
 
     return (

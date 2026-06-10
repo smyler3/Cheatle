@@ -3,19 +3,14 @@ import { useModal } from "../../hooks/modal/useModal";
 import styles from "./HintButton.module.css";
 import { HINT_POINTS_REQUIRED } from "../../constants";
 import { useGameState } from "../../hooks/gameState/useGameState";
-
-type indicatorType = {
-    id: string, 
-    value: number
-};
+import type { IndicatorType } from "../../types/types";
 
 const HintButton = () => {
-  // Need to start using some internal state instead? Otherwise useGuesses might need to keep some state on each guess?
   const { correctGuessCount, hintPoints } = useGameState();
   const { openHintModal } = useModal();
 
   const [oldHintPoints, setOldHintPoints] = useState(0);
-  const [indicators, setIndicators] = useState<indicatorType[]>([]);
+  const [indicators, setIndicators] = useState<IndicatorType[]>([]);
 
   const numberOfHints = Math.floor(hintPoints / HINT_POINTS_REQUIRED);
 

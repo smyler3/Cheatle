@@ -32,6 +32,7 @@ export default function getSavedGameState(boardKey: string) {
             !savedGameState ||
             !Array.isArray(savedGameState.validWordsMap) ||
             !Array.isArray(savedGameState.topGuesses) || 
+            typeof savedGameState.correctGuessCount !== "number" ||
             typeof savedGameState.isTimerStarted !== "boolean" ||
             typeof savedGameState.isTimerPaused !== "boolean" ||
             typeof savedGameState.timeRemaining !== "number" ||
