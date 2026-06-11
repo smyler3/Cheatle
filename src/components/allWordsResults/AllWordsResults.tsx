@@ -2,7 +2,11 @@ import { useFetchedData } from "../../hooks/fetchedData/useFetchedData";
 import { useGameState } from "../../hooks/gameState/useGameState";
 import styles from "./AllWordsResults.module.css";
 
-export default function AllWordsResults() {
+type AllWordsResultsProps = {
+    shouldHideSpoilers: boolean;
+};
+
+export default function AllWordsResults({ shouldHideSpoilers }: AllWordsResultsProps) {
   const { validWords } = useFetchedData();
   const { validWordsMap } = useGameState();
   let totalGuessedCount = 0;
@@ -35,7 +39,7 @@ export default function AllWordsResults() {
               {wordsArray.map(([text, subset]) => {
                 return (
                   <li className={`${subset.isGuessed && styles.guessed}`}>
-                    {text}
+                    {shouldHideSpoilers ? "..." : text}
                   </li>
                 );
               })}

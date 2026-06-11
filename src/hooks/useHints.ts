@@ -47,6 +47,7 @@ export default function useHints({ savedGameState, isTimerDone, setValidWordsMap
             const newWord = { 
                 ...oldWord,
                 revealedText: oldWord.revealedText + nextTile,
+                hintsUsed: oldWord.hintsUsed + nextTile.length,
             }
 
             const updatedInnerWordMap: Map<string, WordSubset> = new Map(innerWordMap.set(text, newWord));

@@ -24,7 +24,7 @@ export default function TopWordsResults({ shouldHideSpoilers }: TopWordsResultsP
                         <p className={styles.pointSectionHeader}>{value} points</p>
                         <ol className={styles.wordList}>
                             {Array.from(words.entries()).map(([text, hint]: [text: string, wordSubset: WordSubset]) => {
-                                const { revealedText, isGuessed: wasGuessed } = hint;
+                                const { isGuessed: wasGuessed, hintsUsed } = hint;
 
                                 return (
                                     <li key={text} className={`${wasGuessed && styles.guessed}`}>
@@ -32,8 +32,8 @@ export default function TopWordsResults({ shouldHideSpoilers }: TopWordsResultsP
                                             ? "..." 
                                             : (
                                                 <>
-                                                <span className={styles.hintText}>{revealedText}</span>
-                                                <span>{text.replace(revealedText, '')}</span>
+                                                <span className={styles.hintText}>{text.slice(0, hintsUsed)}</span>
+                                                <span>{text.slice(hintsUsed)}</span>
                                                 </>
                                             )
                                         }
