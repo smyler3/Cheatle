@@ -28,7 +28,7 @@ function AppContent() {
 
     const { isLoading, isError, data } = query;
 
-    if (true) {
+    if (isLoading) {
         return (
             <LoadingScreen />
         );

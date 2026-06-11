@@ -1,36 +1,89 @@
 .loadingMain {
-    display: flex;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-    margin: auto;
+  margin: auto;
+  width: 100vw;
+  height: 100vh;
 }
 
 .loadingContainer {
-    display: flex;
-    align-items: flex-end;
-
-    margin: auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
 }
 
 .loadingDot {
-    font-size: 2rem;
-    animation: bounce 3s infinite;
+  font-size: 2rem;
+  animation: bounce 3s infinite;
 }
 
+/* keep your original bounce if you already have it */
 @keyframes bounce {
-    0% {
-        transform: translateY(0);
-    }
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(-6px); opacity: 1; }
+}
 
-    20% {
-        transform: translateY(-10px);
-    }
+/* --- GRID --- */
 
-    40% {
-        transform: translateY(0);
-    }
+.spinner {
+  width: 90px;
+  height: 90px;
 
-    100% {
-        transform: translateY(0);
-    }
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 4px;
+
+  perspective: 900px;
+  margin-top: 24px;
+}
+
+.cell {
+  background: var(--c);
+
+  transform: scale(0) rotateX(90deg);
+  opacity: 0;
+
+  animation: snakePingPong 2.6s infinite ease-in-out;
+  animation-delay: calc(var(--rev) * 0.12s);
+
+  transform-origin: center;
+}
+
+@keyframes snakePingPong {
+  0% {
+    transform: scale(0) rotateX(90deg);
+    opacity: 0;
+  }
+
+  /* build phase */
+  25% {
+    transform: scale(1.05) rotateX(0deg);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1) rotateX(0deg);
+    opacity: 1;
+  }
+
+  /* hold */
+  60% {
+    transform: scale(1) rotateX(0deg);
+    opacity: 1;
+  }
+
+  /* collapse phase (reverse visually via timing offset) */
+  85% {
+    transform: scale(0) rotateX(90deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(0) rotateX(90deg);
+    opacity: 0;
+  }
 }
