@@ -21,11 +21,12 @@ const createValidWordsMap = (validWords: Word[]) => {
     const validWordsMap: ValidWordsMap = new Map();
 
     validWords.forEach(word => {
-        const { text, value, revealedText, isGuessed } = word;
+        const { text, value } = word;
 
         const wordSubset: WordSubset = {
-            revealedText,
-            isGuessed
+            revealedText: "",
+            isGuessed: false,
+            hintsUsed: 0,
         };
 
         const innerWordMap = validWordsMap.get(value);

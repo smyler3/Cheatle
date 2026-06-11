@@ -3,6 +3,7 @@ import { GUESS_ERRORS, ModalName, TILE_STATE } from "../constants";
 export type WordSubset = {
   revealedText: string,
   isGuessed: boolean,
+  hintsUsed: number,
 };
 
 export type ValidWordsMap = Map<number, Map<string, WordSubset>>;
@@ -44,6 +45,7 @@ interface BaseGameStateType {
     isTimerDone: boolean;
     hintPoints: number;
     hintsUsed: number;
+    apiVersion: number;
 }
 
 export type GameStateType = BaseGameStateType & {

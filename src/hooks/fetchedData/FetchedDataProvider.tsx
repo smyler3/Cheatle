@@ -1,3 +1,4 @@
+import { CURRENT_API_VERSION } from "../../constants";
 import defaultData from "../../constants/defaultData";
 import type { CheatleResponse } from "../../schema/CheatleSchema";
 import type { fetchCheatleData } from "../fetchCheatleData";
@@ -10,13 +11,14 @@ type FetchedDataProviderProps = {
 }
 
 export default function FetchedDataProvider({ isError, data, children }: FetchedDataProviderProps) {
-    const fetchedData: CheatleResponse = isError || data == undefined ? defaultData : data;
+    const invalidData = isError || data == undefined || data.apiVersion !== CURRENT_API_VERSION;
+    const fetchedData: CheatleResponse = invalidData ? defaultData : data;
     const boardKey: string = fetchedData.board.reduce((key, tile) => key += tile.text, "");
 
-    const { board, validWords, maxPossibleScore, minTopWordValue, puzzleCount, puzzleDate } = fetchedData;
+    const { board, validWords, maxPossibleScore, minTopWordValue, puzzleCount, puzzleDate, apiVersion } = fetchedData;
 
     return (
-        <FetchedDataContext.Provider value={{ board, validWords, maxPossibleScore, minTopWordValue, puzzleCount, puzzleDate, boardKey}}>
+        <FetchedDataContext.Provider value={{ board, validWords, maxPossibleScore, minTopWordValue, puzzleCount, puzzleDate, apiVersion, boardKey}}>
             {children}
         </FetchedDataContext.Provider>
     )

@@ -10,8 +10,6 @@ const TileSchema = z.object({
 const WordSchema = z.object({
   text: z.string(),
   value: z.number().int(),
-  revealedText: z.string(),
-  isGuessed: z.boolean(),
 });
 
 export const CheatleResponseSchema = z.object({
@@ -21,6 +19,7 @@ export const CheatleResponseSchema = z.object({
   minTopWordValue: z.number().int(),
   puzzleCount: z.number().int(),
   puzzleDate: z.string(),
+  apiVersion: z.number().int(),
 });
 
 export type TileValue = z.infer<typeof TileValueSchema>;

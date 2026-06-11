@@ -91,7 +91,7 @@ export default function ResultModal({ backgroundRef }: ResultModalProps) {
         {shouldShowTopWords ? (
           <TopWordsResults shouldHideSpoilers={shouldHideSpoilers} />
         ) : (
-          <AllWordsResults />
+          <AllWordsResults shouldHideSpoilers={shouldHideSpoilers} />
         )}
         <button className={styles.cancelButton} onClick={closeModal}>
           Close

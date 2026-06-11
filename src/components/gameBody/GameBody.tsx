@@ -22,7 +22,7 @@ import { useFetchedData } from '../../hooks/fetchedData/useFetchedData';
 import IncorrectDetailsBanner from '../incorrectDetailsBanner/IncorrectDetailsBanner';
 
 export default function GameBody() {
-    const { board, maxPossibleScore, minTopWordValue } = useFetchedData();
+    const { board, maxPossibleScore } = useFetchedData();
     const { validWordsMap, setValidWordsMap } = useGameState();
     const { 
         addToTopGuesses,
@@ -134,8 +134,14 @@ export default function GameBody() {
                 if (!innerWordMap) {
                     return prev;
                 };
+
+                const oldWord = innerWordMap.get(currentText);
+
+                if (!oldWord) {
+                    return prev;
+                }
     
-                const newWord: WordSubset = { revealedText: currentText, isGuessed: true };
+                const newWord: WordSubset = { ...oldWord, revealedText: currentText, isGuessed: true };
     
                 const updatedInnerWordMap: Map<string, WordSubset> = new Map(innerWordMap.set(currentText, newWord));
                 const updatedValidWords: ValidWordsMap = new Map(prev).set(currentValue, updatedInnerWordMap);

@@ -33,3 +33,6 @@ export const GUESS_ERRORS = {
   DUPLICATE: "DUPLICATE",
   TOO_SMALL: "TOO SMALL",
 } as const;
+
+// API
+export const CURRENT_API_VERSION = 2;

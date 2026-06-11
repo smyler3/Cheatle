@@ -21,7 +21,7 @@
   justify-content: space-around;
 
   width: 100%;
-  padding: 20px 0;
+  padding: 20px 0 0;
 }
 
 .statContainer {
@@ -44,13 +44,14 @@
 .toggleSpoilersButton {
   align-self: center;
 
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
-  justify-content: center;
   gap: 8px;
 
-  width: fit-content;
+  width: 200px;
   padding: 8px 16px;
+  margin: 20px 0;
 
   font: inherit;
   font-family: "Lilita One";
@@ -68,9 +69,9 @@
 .resultsTab {
   font-family: "Lilita One";
   font-size: 1.25rem;
-  color: var(--grey-800);
+  color: var(--grey-850);
 
-  border-bottom: 2px solid var(--grey-800);
+  border-bottom: 2px solid var(--grey-850);
 }
 
 .activeTab {

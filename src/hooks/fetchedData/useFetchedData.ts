@@ -8,6 +8,7 @@ type FetchedData = {
     minTopWordValue: number,
     puzzleCount: number,
     puzzleDate: string,
+    apiVersion: number,
     boardKey: string,
 }
 

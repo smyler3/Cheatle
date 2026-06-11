@@ -6,6 +6,7 @@ import type { GameStateSaveType, ValidWordsMap } from "../types/types";
 
 type useSaveGameOnCloseProps = {
     boardKey: string,
+    apiVersion: number,
     validWordsData: UseValidWordsType,
     timerData: UseTimerType,
     hintData: UseHintType,
@@ -21,10 +22,12 @@ const convertValidWordsMapToJson = (validWordsMap: ValidWordsMap) => {
 };
 
 // Save game data before exiting the app
-export default function useSaveGameOnClose({ boardKey, validWordsData, timerData, hintData }: useSaveGameOnCloseProps) {
+export default function useSaveGameOnClose({ boardKey, apiVersion, validWordsData, timerData, hintData }: useSaveGameOnCloseProps) {
     useEffect(() => {
         const updateLocalStorage = () => {
             const combinedState: GameStateSaveType = {
+                apiVersion,
+
                 validWordsMap: convertValidWordsMapToJson(validWordsData.validWordsMap),
                 topGuesses: validWordsData.topGuesses,
                 correctGuessCount: validWordsData.correctGuessCount,
@@ -62,5 +65,5 @@ export default function useSaveGameOnClose({ boardKey, validWordsData, timerData
             window.removeEventListener("beforeunload", handleSave);
             document.removeEventListener("visibilitychange", visibilityHandler);
         };
-    }, [boardKey, validWordsData.validWordsMap, validWordsData.topGuesses, validWordsData.correctGuessCount, hintData.hintPoints, hintData.hintsUsed, timerData.isTimerStarted, timerData.isTimerPaused, timerData.timeRemaining, timerData.isTimerDone]);
+    }, [boardKey, apiVersion, validWordsData.validWordsMap, validWordsData.topGuesses, validWordsData.correctGuessCount, hintData.hintPoints, hintData.hintsUsed, timerData.isTimerStarted, timerData.isTimerPaused, timerData.timeRemaining, timerData.isTimerDone]);
 }

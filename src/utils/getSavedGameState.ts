@@ -1,3 +1,4 @@
+import { CURRENT_API_VERSION } from "../constants";
 import type { GameStateType, ValidWordsMap, WordSubset } from "../types/types";
 
 const convertValidWordsMapFromJson = (entries: [number, [string, WordSubset][]][]): ValidWordsMap => {
@@ -15,7 +16,7 @@ export default function getSavedGameState(boardKey: string) {
     let savedGameState: GameStateType | null = null;
 
     if (!rawData) {
-        return { savedGameState };
+        return { savedGameState: null };
     }
 
     try {
@@ -24,7 +25,7 @@ export default function getSavedGameState(boardKey: string) {
         savedGameState = parsedData?.savedGameState;
 
         if (savedBoardKey !== boardKey) {
-            return { savedGameState };
+            return { savedGameState: null };
         };
 
         // Type safety
@@ -38,15 +39,20 @@ export default function getSavedGameState(boardKey: string) {
             typeof savedGameState.timeRemaining !== "number" ||
             typeof savedGameState.isTimerDone !== "boolean" ||
             typeof savedGameState.hintPoints !== "number" ||
-            typeof savedGameState.hintsUsed !== "number"
+            typeof savedGameState.hintsUsed !== "number" ||
+            typeof savedGameState.apiVersion !== "number"
         ) {
-            return { savedGameState };
+            return { savedGameState: null };
+        }
+
+        if (savedGameState.apiVersion !== CURRENT_API_VERSION) {
+            return { savedGameState: null };
         }
 
         const validWordsMap = convertValidWordsMapFromJson(savedGameState.validWordsMap);
         savedGameState = {...savedGameState, validWordsMap};
     } catch {
-        return { savedGameState };
+        return { savedGameState: null };
     }
 
     return { savedGameState }
