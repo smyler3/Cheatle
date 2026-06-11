@@ -1,4 +1,4 @@
-import { Activity, useRef } from "react";
+import { Activity, useEffect, useRef } from "react";
 import HintModal from "../hintModal/HintModal";
 import InfoModal from "../infoModal/InfoModal";
 import ResultModal from "../resultModal/ResultModal";
@@ -15,6 +15,15 @@ export default function ModalManager() {
     const shouldShowHintModal = modalInfo.modalToShow === ModalName.HintModal;
     const shouldShowConfirmModal = modalInfo.modalToShow === ModalName.ConfirmModal;
     const shouldShowResultModal = modalInfo.modalToShow === ModalName.ResultModal;
+
+    // Prevent scrolling of background when modals are open
+    useEffect(() => {
+        document.body.style.overflow = modalInfo.shouldShowModal ? "hidden" : "";
+
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [modalInfo.shouldShowModal]);
 
     return (
         modalInfo.shouldShowModal && (

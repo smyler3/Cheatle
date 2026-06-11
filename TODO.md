@@ -1,14 +1,12 @@
 ### Code logic
-Add new AllWords result page
--- Now how to play modal is smaller?
-
 Add a new loading spinner
 
-The action button in home page is buggy when rehydrating
-
-Get correct data from backend api
-
 Fix the how to play gif
+
+Test with playwright before merging
+-- Seems fine sans some boldness issues
+
+The action button in home page is buggy when rehydrating
 
 Game mechanic improvements
 --Add half stars logic
