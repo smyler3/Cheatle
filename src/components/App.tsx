@@ -7,6 +7,7 @@ import { ModalProvider } from "../hooks/modal/ModalProvider";
 import FetchedDataProvider from '../hooks/fetchedData/FetchedDataProvider';
 import ScreenManager from './ScreenManager';
 import ScreenProvider from '../hooks/setScreen/ScreenProvider';
+import LoadingScreen from './loadingScreen/LoadingScreen';
 
 const queryClient = new QueryClient();
 
@@ -25,16 +26,13 @@ function AppContent() {
         refetchOnWindowFocus: false,
     });
 
-    // const { isLoading, isError, data } = query;
+    const { isLoading, isError, data } = query;
 
-    // if (isLoading) {
-    //     return (
-    //         <LoadingScreen />
-    //     );
-    // };
-
-    const isError = true;
-    const data = undefined;
+    if (true) {
+        return (
+            <LoadingScreen />
+        );
+    };
 
     return (
         <FetchedDataProvider isError={isError} data={data}>

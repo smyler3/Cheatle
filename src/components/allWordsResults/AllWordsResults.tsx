@@ -38,7 +38,7 @@ export default function AllWordsResults({ shouldHideSpoilers }: AllWordsResultsP
             <ul className={styles.wordList}>
               {wordsArray.map(([text, subset]) => {
                 return (
-                  <li className={`${subset.isGuessed && styles.guessed}`}>
+                  <li key={text} className={`${subset.isGuessed && styles.guessed}`}>
                     {shouldHideSpoilers ? "..." : text}
                   </li>
                 );
