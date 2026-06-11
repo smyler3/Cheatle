@@ -1,6 +1,6 @@
 .displayContainer {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr auto auto;
     align-items: center;
 
     max-width: 100%;

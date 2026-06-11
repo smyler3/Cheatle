@@ -29,3 +29,7 @@ export const TILE_STATE = {
 
 // Words
 export const MIN_WORD_LENGTH = 3;
+export const GUESS_ERRORS = {
+  DUPLICATE: "DUPLICATE",
+  TOO_SMALL: "TOO SMALL",
+} as const;

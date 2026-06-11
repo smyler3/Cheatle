@@ -1,4 +1,4 @@
-import { ModalName, TILE_STATE } from "../constants";
+import { GUESS_ERRORS, ModalName, TILE_STATE } from "../constants";
 
 export type WordSubset = {
   revealedText: string,
@@ -53,3 +53,5 @@ export type GameStateType = BaseGameStateType & {
 export type GameStateSaveType = BaseGameStateType & {
     validWordsMap: (number | [string, WordSubset][])[][];
 }
+
+export type GuessErrorsType = (typeof GUESS_ERRORS)[keyof typeof GUESS_ERRORS];
