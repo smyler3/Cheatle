@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import type { Word } from "../schema/CheatleSchema";
 import type { GameStateType, StateSetter, ValidWordsMap,  WordSubset } from "../types/types";
 import { useFetchedData } from "./fetchedData/useFetchedData";
@@ -11,7 +11,7 @@ export type UseValidWordsType = {
     validWordsMap: ValidWordsMap,
     setValidWordsMap: StateSetter<ValidWordsMap>;
     topGuesses: number[];
-    setTopGuesses: StateSetter<number[]>;
+    addToTopGuesses: (newValue: number) => void;
     correctGuessCount: number;
     setCorrectGuessCount: StateSetter<number>;
     score: number;
@@ -49,19 +49,31 @@ export default function useValidWords({ savedGameState }: UseValidWordsProps) {
     );
     const [topGuesses, setTopGuesses] = useState<number[]>(
         savedGameState?.topGuesses ??
-        []
+        new Array(5).fill(0)
     );
     const [correctGuessCount, setCorrectGuessCount] = useState(0);
+    const score = useMemo(
+        () => topGuesses.reduce((score, value) => score += value, 0),
+        [topGuesses]
+    );
 
-    const score: number = topGuesses.reduce((score, value) => {
-        return score += value;
-    }, 0);
+    // Ensures only the top 5 words are used
+    const handleAddTopGuesses = (newValue: number) => {
+        for (let i = 0; i < topGuesses.length; i += 1) {
+            const value = topGuesses[i];
+
+            if (newValue >= value) {
+                setTopGuesses(prev => [...prev.slice(0, i), newValue, ...prev.slice(i, 4)]);
+                return;
+            }
+        }
+    }
 
     return {
         validWordsMap,
         setValidWordsMap,
         topGuesses,
-        setTopGuesses,
+        addToTopGuesses: handleAddTopGuesses,
         correctGuessCount,
         setCorrectGuessCount,
         score,

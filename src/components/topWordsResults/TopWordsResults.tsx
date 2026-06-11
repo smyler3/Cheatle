@@ -16,7 +16,6 @@ export default function TopWordsResults({ shouldHideSpoilers }: TopWordsResultsP
     
     return (
         <div className={styles.topWords}>
-            <h3 className={styles.topWordsHeader}>Highest scoring words:</h3>
             {Array.from(topWordHints.entries()).map(([valueStr, words]) => {
                 const value = Number(valueStr);
 

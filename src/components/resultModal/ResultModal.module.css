@@ -1,74 +1,92 @@
 .closeButton {
-    position: absolute;
-    right: 0;
-    top: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .resultModal {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 
-    min-width: 280px;
+  min-width: 280px;
 }
 
 .statsContainer {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 
-    width: 100%;
-    padding: 20px 0;
+  width: 100%;
+  padding: 20px 0;
 }
 
 .statContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    width: 100%;
+  width: 100%;
 }
 
 .stat {
-    font-family: "Lilita One";
-    font-size: 1.25rem;
+  font-family: "Lilita One";
+  font-size: 1.25rem;
 }
 
 .statDescription {
-    font-size: 1.125rem;
+  font-size: 1.125rem;
 }
 
 .toggleSpoilersButton {
-    align-self: center;
+  align-self: center;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 
-    width: fit-content;
-    padding: 8px 16px;
-    
-    font: inherit;
-    font-family: "Lilita One";
-    font-size: 1.125rem;
-    color: var(--grey-1000);
+  width: fit-content;
+  padding: 8px 16px;
 
-    border: 2px solid var(--grey-1000);
+  font: inherit;
+  font-family: "Lilita One";
+  font-size: 1.125rem;
+  color: var(--grey-1000);
+
+  border: 2px solid var(--grey-1000);
+}
+
+.resultsTabContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.resultsTab {
+  font-family: "Lilita One";
+  font-size: 1.25rem;
+  color: var(--grey-800);
+
+  border-bottom: 2px solid var(--grey-800);
+}
+
+.activeTab {
+  color: var(--primary-200);
+  border-color: var(--primary-200);
 }
 
 .cancelButton {
-    align-self: center;
-    padding: .6rem 3rem;
-    margin-top: 2rem;
+  align-self: center;
+  padding: 0.6rem 3rem;
+  margin-top: 2rem;
 
-    color: var(--grey-1000);
-    font-family: "Lilita One";
-    font-size: 1.25rem;
+  color: var(--grey-1000);
+  font-family: "Lilita One";
+  font-size: 1.25rem;
 
-    background-color: var(--grey-800);
-    border-radius: 100px;
+  background-color: var(--grey-800);
+  border-radius: 100px;
 }

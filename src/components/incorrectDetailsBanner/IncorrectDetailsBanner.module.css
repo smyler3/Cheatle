@@ -1,4 +1,4 @@
-.duplicateGuessContainer {
+.incorrectBannerContainer {
     position: fixed;
     display: none;
     top: 130px;

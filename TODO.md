@@ -1,15 +1,17 @@
 ### Code logic
-Add an indicator for words under min length like duplicate guess.
+Add new AllWords result page
+-- Now how to play modal is smaller?
+
+Top Words Results now shoes all guessed words as having all hints used
+-- Change valid words to have revealedText, isGuessed, and hintsUsed? Then use hintsUsed for end screen results
+
+Need to improve INP score
 
 The new getData hook will refresh the whole app if new data is found. 
-
-Add a submit button to the textbox
 
 Add a pause button?
 
 Make the spoilers button a slider?
-
-Add the list of all possible words, maybe as a toggle option?
 
 Add a new loading spinner
 

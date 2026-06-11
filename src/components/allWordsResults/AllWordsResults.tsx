@@ -1,38 +1,51 @@
-// import { useFetchedData } from "../../hooks/fetchedData/useFetchedData";
+import { useFetchedData } from "../../hooks/fetchedData/useFetchedData";
+import { useGameState } from "../../hooks/gameState/useGameState";
+import styles from "./AllWordsResults.module.css";
 
 export default function AllWordsResults() {
-    // const { validWords } = useFetchedData();
+  const { validWords } = useFetchedData();
+  const { validWordsMap } = useGameState();
+  let totalGuessedCount = 0;
 
-    // const sortedWords = new Map();
+  // Collect all guessed words
+  for (const [, words] of validWordsMap.entries()) {
+    for (const [, subset] of words.entries()) {
+      if (subset.isGuessed) {
+        totalGuessedCount += 1;
+      }
+    }
+  }
 
-    // // Memo this as it's quite expensive I think? and can we get it into a single definition + creation?
-    // validWords.map((text, value) => {
-    //     if (sortedWords.has(value)) {
-    //         sortedWords[value].append(text);
-    //     }
-    //     else {
-    //         sortedWords[value] = [text];
-    //     }
-    // })
+  return (
+    <div className={styles.allWords}>
+      {Array.from(validWordsMap.entries()).map(([value, words]) => {
+        const wordsArray = Array.from(words.entries());
+        const guessCount = wordsArray.reduce(
+          (guessedWords, [, subset]) =>
+            guessedWords + (subset.isGuessed ? 1 : 0),
+          0,
+        );
 
-    return (
-        <div>
-            <p>Total words (40 / 100) </p>
-            {/* {sortedWords.forEach((value) => {
+        return (
+          <section className={styles.pointsSection}>
+            <p className={styles.pointSectionHeader}>
+              {value} points ({guessCount}/{wordsArray.length})
+            </p>
+            <ul className={styles.wordList}>
+              {wordsArray.map(([text, subset]) => {
                 return (
-                    <section>
-                        <p>{value} points (3/6)</p>
-                        <ul>
-                            <li>Hemler</li>
-                            <li>Smither</li>
-                            <li>Hemler</li>
-                            <li>Smither</li>
-                            <li>Hemler</li>
-                            <li>Smither</li>
-                        </ul>
-                    </section>
-                )
-            })} */}
-        </div>
-    )
+                  <li className={`${subset.isGuessed && styles.guessed}`}>
+                    {text}
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        );
+      })}
+      <p className={styles.totalCount}>
+        <span className={styles.totalValues}>({totalGuessedCount} / {validWords.length})</span>
+      </p>
+    </div>
+  );
 }
