@@ -16,6 +16,7 @@
 
 .title {
     font-size: 2rem;
+    color: var(--grey-1000);
 }
 
 .button {

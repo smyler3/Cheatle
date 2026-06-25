@@ -8,7 +8,6 @@
 
     width: 100vw;
     height: 100dvh;
-    padding: 2rem;
 
     background-color: #00000025;
     z-index: 2;
@@ -24,11 +23,7 @@
     max-width: 500px;
 
     max-height: 85dvh;
-    padding: 2rem 1.4rem;
     margin: auto;
-
-    overflow-y: auto;  
-    scrollbar-gutter: stable;
 }
 
 @media screen and (width < 500px) {

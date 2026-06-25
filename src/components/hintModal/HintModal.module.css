@@ -14,7 +14,11 @@
     gap: 12px;
 
     min-width: 280px;
-    height: 85dvh;
+    min-height: 85dvh;
+    padding: 2rem 1.4rem;
+
+    overflow-y: auto;  
+    scrollbar-gutter: stable;
 }
 
 .hintPointsContainer {
