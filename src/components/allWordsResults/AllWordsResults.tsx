@@ -9,36 +9,46 @@ type AllWordsResultsProps = {
 export default function AllWordsResults({ shouldHideSpoilers }: AllWordsResultsProps) {
   const { validWords } = useFetchedData();
   const { validWordsMap } = useGameState();
-  let totalGuessedCount = 0;
+  const groupedWordsByLength = new Map();
 
-  // Collect all guessed words
   for (const [, words] of validWordsMap.entries()) {
-    for (const [, subset] of words.entries()) {
-      if (subset.isGuessed) {
-        totalGuessedCount += 1;
+    for (const [text, subset] of words.entries()) {
+      const textLength = text.length;
+      const isGuessed = subset.isGuessed;
+
+      if (!groupedWordsByLength.has(textLength)) {
+        groupedWordsByLength.set(textLength, {
+          words: new Map(),
+          guessedCount: 0
+        });
       }
-    }
-  }
+        
+      groupedWordsByLength.get(textLength).words.set(text, isGuessed);
+
+      if (isGuessed) {
+        groupedWordsByLength.get(textLength).guessedCount += 1;
+      }
+    };
+  };
+
+  const sortedWordsByLength = new Map([...groupedWordsByLength.entries()].sort(([a], [b]) => b - a));
+  const totalGuessedCount = [...groupedWordsByLength.values()].reduce((total, group) => total + group.guessedCount, 0);
 
   return (
     <div className={styles.allWords}>
-      {Array.from(validWordsMap.entries()).map(([value, words]) => {
-        const wordsArray = Array.from(words.entries());
-        const guessCount = wordsArray.reduce(
-          (guessedWords, [, subset]) =>
-            guessedWords + (subset.isGuessed ? 1 : 0),
-          0,
-        );
+      {[...sortedWordsByLength].map(([length, data]) => {
+        const sectionWordCount = data.words.size;
+        const guessCount = data.guessedCount;
 
         return (
-          <section className={styles.pointsSection}>
+          <section key={length} className={styles.pointsSection}>
             <p className={styles.pointSectionHeader}>
-              {value} points ({guessCount}/{wordsArray.length})
+              {length} letters ({guessCount}/{sectionWordCount})
             </p>
             <ul className={styles.wordList}>
-              {wordsArray.map(([text, subset]) => {
+              {[...data.words].map(([text, isGuessed]) => {
                 return (
-                  <li key={text} className={`${subset.isGuessed && styles.guessed}`}>
+                  <li key={text} className={`${isGuessed ? styles.guessed : ""}`}>
                     {shouldHideSpoilers ? "..." : text}
                   </li>
                 );
