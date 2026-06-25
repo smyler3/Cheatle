@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import type { UseTimerType } from "./useTimer";
 import type { UseHintType } from "./useHints";
 import type { UseValidWordsType } from "./useValidWords";
-import type { GameStateSaveType, ValidWordsMap } from "../types/types";
+import type { GameStateSaveType, SavedGameStateType, ValidWordsMap } from "../types/types";
 
 type useSaveGameOnCloseProps = {
+    puzzleDate: string,
     boardKey: string,
     apiVersion: number,
     validWordsData: UseValidWordsType,
@@ -22,9 +23,16 @@ const convertValidWordsMapToJson = (validWordsMap: ValidWordsMap) => {
 };
 
 // Save game data before exiting the app
-export default function useSaveGameOnClose({ boardKey, apiVersion, validWordsData, timerData, hintData }: useSaveGameOnCloseProps) {
+export default function useSaveGameOnClose({ puzzleDate, boardKey, apiVersion, validWordsData, timerData, hintData }: useSaveGameOnCloseProps) {
     useEffect(() => {
         const updateLocalStorage = () => {
+            const currentDate = new Date().toLocaleDateString('en-AU', { timeZone: 'Australia/Melbourne' });
+
+            // Try to prevent a bug where old data never clears
+            if (puzzleDate !== currentDate) {
+                localStorage.clear();
+            }
+
             const combinedState: GameStateSaveType = {
                 apiVersion,
 
@@ -41,7 +49,8 @@ export default function useSaveGameOnClose({ boardKey, apiVersion, validWordsDat
                 hintsUsed: hintData.hintsUsed,
             }
 
-            const saveData = {
+            const saveData: SavedGameStateType = {
+                savedPuzzleDate: puzzleDate,
                 savedBoardKey: boardKey,
                 savedGameState: combinedState,
             };
@@ -65,5 +74,5 @@ export default function useSaveGameOnClose({ boardKey, apiVersion, validWordsDat
             window.removeEventListener("beforeunload", handleSave);
             document.removeEventListener("visibilitychange", visibilityHandler);
         };
-    }, [boardKey, apiVersion, validWordsData.validWordsMap, validWordsData.topGuesses, validWordsData.correctGuessCount, hintData.hintPoints, hintData.hintsUsed, timerData.isTimerStarted, timerData.isTimerPaused, timerData.timeRemaining, timerData.isTimerDone]);
+    }, [puzzleDate, boardKey, apiVersion, validWordsData.validWordsMap, validWordsData.topGuesses, validWordsData.correctGuessCount, hintData.hintPoints, hintData.hintsUsed, timerData.isTimerStarted, timerData.isTimerPaused, timerData.timeRemaining, timerData.isTimerDone]);
 }

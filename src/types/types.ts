@@ -56,4 +56,10 @@ export type GameStateSaveType = BaseGameStateType & {
     validWordsMap: (number | [string, WordSubset][])[][];
 }
 
+export type SavedGameStateType = {
+    savedPuzzleDate: string;
+    savedBoardKey: string;
+    savedGameState: GameStateSaveType;
+}
+
 export type GuessErrorsType = (typeof GUESS_ERRORS)[keyof typeof GUESS_ERRORS];

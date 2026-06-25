@@ -10,8 +10,13 @@ const convertValidWordsMapFromJson = (entries: [number, [string, WordSubset][]][
     );
 };
 
-export default function getSavedGameState(boardKey: string) {
+type GetSavedGameStateProps = {
+    boardKey: string;
+};
+
+export default function getSavedGameState({ boardKey }: GetSavedGameStateProps): { savedGameState: GameStateType | null } {
     const rawData: string | null = localStorage.getItem("gameState");
+    let savedPuzzleDate: string | null = null;
     let savedBoardKey: string | null = null;
     let savedGameState: GameStateType | null = null;
 
@@ -20,11 +25,20 @@ export default function getSavedGameState(boardKey: string) {
     }
 
     try {
+        const currentDate = new Date().toLocaleDateString('en-AU', { timeZone: 'Australia/Melbourne' });
         const parsedData = JSON.parse(rawData);
+
+        savedPuzzleDate = parsedData?.savedPuzzleDate;
         savedBoardKey = parsedData?.savedBoardKey;
         savedGameState = parsedData?.savedGameState;
 
-        if (savedBoardKey !== boardKey) {
+        // Data not found
+        if (!savedPuzzleDate || !savedBoardKey || !savedGameState) {
+            return { savedGameState: null };
+        }
+
+        // Try to prevent a bug where old data never clears
+        if (savedPuzzleDate !== currentDate || savedBoardKey !== boardKey) {
             return { savedGameState: null };
         };
 
