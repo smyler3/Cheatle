@@ -12,7 +12,7 @@ type GameDataProviderProps = {
 };
 
 export const GameStateProvider = ({ children }: GameDataProviderProps) => {
-    const { apiVersion, puzzleDate, boardKey } = useFetchedData();
+    const { apiVersion, boardKey } = useFetchedData();
     const { savedGameState } = getSavedGameState({ boardKey });
 
     if (!savedGameState) {
@@ -24,7 +24,7 @@ export const GameStateProvider = ({ children }: GameDataProviderProps) => {
     const hintData = useHints({ savedGameState, isTimerDone: timerData.isTimerDone, setValidWordsMap: validWordsData.setValidWordsMap });
 
     // Every time the user quits, their data will be saved for when they rejoin
-    useSaveGameOnClose({ puzzleDate, boardKey, apiVersion, validWordsData, timerData, hintData });
+    useSaveGameOnClose({ apiVersion, validWordsData, timerData, hintData });
 
     const value = useMemo(() => ({
         ...validWordsData,
