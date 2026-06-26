@@ -43,7 +43,7 @@ const createValidWordsMap = (validWords: Word[]) => {
 };
 
 export default function useValidWords({ savedGameState }: UseValidWordsProps) {
-    const { validWords } = useFetchedData();
+    const { validWords, puzzleDate, boardKey } = useFetchedData();
     const [validWordsMap, setValidWordsMap] = useState<ValidWordsMap>(
         savedGameState?.validWordsMap ??
         createValidWordsMap(validWords)
@@ -78,5 +78,7 @@ export default function useValidWords({ savedGameState }: UseValidWordsProps) {
         correctGuessCount,
         setCorrectGuessCount,
         score,
+        puzzleDate,
+        boardKey,
     }
 }
