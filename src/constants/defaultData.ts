@@ -156,7 +156,7 @@ const defaultData: Awaited<ReturnType<typeof fetchCheatleData>> = {
     maxPossibleScore: 67,
     minTopWordValue: 12,
     puzzleCount: 141,
-    puzzleDate: "11/05/2026",
+    puzzleDate: new Date().toLocaleDateString('en-AU', { timeZone: 'Australia/Melbourne' }),
     apiVersion: 2,
 };
 

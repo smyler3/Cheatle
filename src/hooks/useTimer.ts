@@ -21,15 +21,24 @@ export type UseTimerType = {
 };
 
 export const useTimer = ({ savedGameState }: UseTimerProps): UseTimerType => {
-    const [isTimerStarted, setIsTimerStarted] = useState(savedGameState?.isTimerStarted ?? false);
-    const [isTimerPaused, setIsTimerPaused] = useState(savedGameState?.isTimerPaused ?? false);
-    const [timeRemaining, setTimeRemaining] = useState(savedGameState?.timeRemaining ?? SECONDS_IN_A_MINUTE * MINUTES_IN_A_GAME);
-    const [isTimerDone, setIsTimerDone] = useState(savedGameState?.isTimerDone ?? false);
+    const [isTimerStarted, setIsTimerStarted] = useState(false);
+    const [isTimerPaused, setIsTimerPaused] = useState(false);
+    const [timeRemaining, setTimeRemaining] = useState(SECONDS_IN_A_MINUTE * MINUTES_IN_A_GAME);
+    const [isTimerDone, setIsTimerDone] = useState(false);
     
     const minutesRemaining = String(Math.floor(timeRemaining / SECONDS_IN_A_MINUTE));
     const secondsRemaining = String(timeRemaining % SECONDS_IN_A_MINUTE).padStart(2, '0');
     const minutesUsed = String(Math.floor(((SECONDS_IN_A_MINUTE * MINUTES_IN_A_GAME) - timeRemaining) / 60));
     const secondsUsed = String(((SECONDS_IN_A_MINUTE * MINUTES_IN_A_GAME) - timeRemaining) % 60).padStart(2, '0');
+
+    useEffect(() => {
+        if (!savedGameState) return;
+
+        setIsTimerStarted(savedGameState.isTimerStarted);
+        setIsTimerPaused(savedGameState.isTimerPaused);
+        setTimeRemaining(savedGameState.timeRemaining);
+        setIsTimerDone(savedGameState.isTimerDone);
+    }, [savedGameState]);
 
     const startTimer = () => {
         if (!isTimerDone) {

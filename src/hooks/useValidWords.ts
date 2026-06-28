@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Word } from "../schema/CheatleSchema";
 import type { GameStateType, StateSetter, ValidWordsMap,  WordSubset } from "../types/types";
 import { useFetchedData } from "./fetchedData/useFetchedData";
@@ -15,6 +15,8 @@ export type UseValidWordsType = {
     correctGuessCount: number;
     setCorrectGuessCount: StateSetter<number>;
     score: number;
+    puzzleDate: string;
+    boardKey: string;
 };
 
 const createValidWordsMap = (validWords: Word[]) => {
@@ -43,20 +45,24 @@ const createValidWordsMap = (validWords: Word[]) => {
 };
 
 export default function useValidWords({ savedGameState }: UseValidWordsProps) {
-    const { validWords } = useFetchedData();
-    const [validWordsMap, setValidWordsMap] = useState<ValidWordsMap>(
-        savedGameState?.validWordsMap ??
-        createValidWordsMap(validWords)
-    );
-    const [topGuesses, setTopGuesses] = useState<number[]>(
-        savedGameState?.topGuesses ??
-        new Array(5).fill(0)
-    );
+    const { validWords, puzzleDate, boardKey } = useFetchedData();
+
+    const [validWordsMap, setValidWordsMap] = useState<ValidWordsMap>(() => createValidWordsMap(validWords));
+    const [topGuesses, setTopGuesses] = useState<number[]>(() => new Array(5).fill(0));
     const [correctGuessCount, setCorrectGuessCount] = useState(0);
+
     const score = useMemo(
         () => topGuesses.reduce((score, value) => score += value, 0),
         [topGuesses]
     );
+
+    useEffect(() => {
+        if (!savedGameState) return;
+
+        setValidWordsMap(savedGameState.validWordsMap);
+        setTopGuesses(savedGameState.topGuesses);
+        setCorrectGuessCount(savedGameState.correctGuessCount ?? 0);
+    }, [savedGameState]);
 
     // Ensures only the top 5 words are used
     const handleAddTopGuesses = (newValue: number) => {
@@ -78,5 +84,7 @@ export default function useValidWords({ savedGameState }: UseValidWordsProps) {
         correctGuessCount,
         setCorrectGuessCount,
         score,
+        puzzleDate,
+        boardKey,
     }
 }

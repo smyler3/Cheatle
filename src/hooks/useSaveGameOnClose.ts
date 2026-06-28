@@ -5,8 +5,6 @@ import type { UseValidWordsType } from "./useValidWords";
 import type { GameStateSaveType, SavedGameStateType, ValidWordsMap } from "../types/types";
 
 type useSaveGameOnCloseProps = {
-    puzzleDate: string,
-    boardKey: string,
     apiVersion: number,
     validWordsData: UseValidWordsType,
     timerData: UseTimerType,
@@ -23,14 +21,18 @@ const convertValidWordsMapToJson = (validWordsMap: ValidWordsMap) => {
 };
 
 // Save game data before exiting the app
-export default function useSaveGameOnClose({ puzzleDate, boardKey, apiVersion, validWordsData, timerData, hintData }: useSaveGameOnCloseProps) {
+export default function useSaveGameOnClose({ apiVersion, validWordsData, timerData, hintData }: useSaveGameOnCloseProps) {
+
+    const { puzzleDate, boardKey } = validWordsData;
+
     useEffect(() => {
         const updateLocalStorage = () => {
             const currentDate = new Date().toLocaleDateString('en-AU', { timeZone: 'Australia/Melbourne' });
 
             // Try to prevent a bug where old data never clears
             if (puzzleDate !== currentDate) {
-                localStorage.clear();
+                localStorage.removeItem("gameState");
+                return;
             }
 
             const combinedState: GameStateSaveType = {

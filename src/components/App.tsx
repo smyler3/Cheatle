@@ -8,22 +8,25 @@ import FetchedDataProvider from '../hooks/fetchedData/FetchedDataProvider';
 import ScreenManager from './ScreenManager';
 import ScreenProvider from '../hooks/setScreen/ScreenProvider';
 import LoadingScreen from './loadingScreen/LoadingScreen';
+import { useFetchedData } from '../hooks/fetchedData/useFetchedData';
 
 const queryClient = new QueryClient();
 
 export default function App() {
     return (
         <QueryClientProvider client={queryClient}>
-            <AppContent />
+            <OuterAppContent />
         </QueryClientProvider>
-    )
-}
+    );
+};
 
-function AppContent() {
+function OuterAppContent() {
     const query = useQuery({
         queryKey: ["cheatle"],
         queryFn: () => fetchCheatleData(),
         refetchOnWindowFocus: false,
+        staleTime: 0,
+        gcTime: 0,
     });
 
     const { isLoading, isError, data } = query;
@@ -36,15 +39,23 @@ function AppContent() {
 
     return (
         <FetchedDataProvider isError={isError} data={data}>
-            <GameStateProvider>
-                <ModalProvider>
-                    <ScreenProvider>
-                        <ScreenManager />
-                    </ScreenProvider>
-                </ModalProvider>
-            </GameStateProvider>
+            <InnerAppContent />
         </FetchedDataProvider>
-    )
+    );
+};
+
+function InnerAppContent() {
+    const { boardKey } = useFetchedData();
+
+    return (
+        <GameStateProvider key={boardKey}>
+            <ModalProvider>
+                <ScreenProvider>
+                    <ScreenManager />
+                </ScreenProvider>
+            </ModalProvider>
+        </GameStateProvider>
+    );
 };
 
 

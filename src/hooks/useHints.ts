@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HINT_POINTS_REQUIRED } from "../constants";
 import type { GameStateType, StateSetter, ValidWordsMap, WordSubset } from "../types/types";
 type UseHintProps = {
@@ -15,8 +15,15 @@ export type UseHintType = {
 };
 
 export default function useHints({ savedGameState, isTimerDone, setValidWordsMap } : UseHintProps): UseHintType {
-    const [hintPoints, setHintPoints] = useState(savedGameState?.hintPoints ?? 0);
-    const [hintsUsed, setHintsUsed] = useState(savedGameState?.hintsUsed ?? 0);
+    const [hintPoints, setHintPoints] = useState(0);
+    const [hintsUsed, setHintsUsed] = useState(0);
+
+    useEffect(() => {
+        if (!savedGameState) return;
+
+        setHintPoints(savedGameState.hintPoints ?? 0);
+        setHintsUsed(savedGameState.hintsUsed ?? 0);
+    }, [savedGameState]);
 
     const handleUseHint = (value: number, wordIndex: number) => {
         if (isTimerDone) {
